@@ -5,13 +5,11 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
-# This silences the Node.js warning
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
-    # Locking to Ubuntu 22.04 prevents "Exit code 100" package errors
     runs-on: ubuntu-22.04
     steps:
     - name: Checkout Code
@@ -26,7 +24,8 @@ jobs:
 
     - name: Download Pico SDK
       run: |
-        git clone https://github.com/raspberrypi/pico-sdk.git
+        # CHANGED LINE BELOW: Locking to version 1.5.1
+        git clone -b 1.5.1 https://github.com/raspberrypi/pico-sdk.git
         cd pico-sdk
         git submodule update --init
         echo "PICO_SDK_PATH=$(pwd)" >> $GITHUB_ENV
