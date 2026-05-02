@@ -5,9 +5,14 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
+# This silences the Node.js warning
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # Locking to Ubuntu 22.04 prevents "Exit code 100" package errors
+    runs-on: ubuntu-22.04
     steps:
     - name: Checkout Code
       uses: actions/checkout@v4
@@ -17,7 +22,7 @@ jobs:
     - name: Install ARM Toolchain
       run: |
         sudo apt-get update
-        sudo apt-get install -y cmake gcc-arm-none-eabi g++-arm-none-eabi libnewlib-arm-none-eabi build-essential
+        sudo apt-get install -y cmake gcc-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib build-essential
 
     - name: Download Pico SDK
       run: |
