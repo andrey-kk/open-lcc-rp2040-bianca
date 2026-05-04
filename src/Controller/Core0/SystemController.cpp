@@ -117,8 +117,8 @@ void SystemController::loop() {
     }
 
     // --- HIJACK PART 2: THE TICKER TAPE ---
-    // Dividing by 30 means it changes once every 3 seconds
-    int slow_index = (bailCounter / 30) % 18; 
+    // Dividing by 10 means it changes once every 1 second!
+    int slow_index = (bailCounter / 10) % 18; 
 
     SystemControllerStatusMessage message = {
             .timestamp = get_absolute_time(),
