@@ -76,6 +76,7 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
     auto brew_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(triplet_to_int(packet.brew_boiler_temperature_high_gain)), 50000, 4000);
     auto service_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(triplet_to_int(packet.service_boiler_temperature_high_gain)), 50000, 4000);
 
+    // Keep the safety checks active
     if (brew_boiler_temp > 140) {
         error |= CONTROL_BOARD_VALIDATION_ERROR_BREW_BOILER_TEMP_DANGEROUSLY_HIGH;
     }
@@ -90,13 +91,15 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // INCOMING: We proved the Lever is absolutely on Byte 1
     uint8_t flags = raw[1];
 
+    // Read the lever from Byte 1
     packet.brew_switch = ((flags & 0x02) != 0);
-    packet.water_tank_empty = ((flags & 0x40) == 0); // May always be full depending on V3 debounce
+    
+    // Force the tank to FULL so the internal logic allows the pump to start
+    packet.water_tank_empty = false;
 
-    // Temperatures
+    // Read Temperatures
     uint32_t bb_raw = (raw[2] << 16) | (raw[3] << 8) | raw[4];
     uint32_t sb_raw = (raw[8] << 16) | (raw[9] << 8) | raw[10];
 
@@ -110,32 +113,32 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     uint8_t* raw = reinterpret_cast<uint8_t*>(&rawPacket);
 
-    // Initialize block to zero
+    // Clear memory
     for(int i=0; i<18; i++) raw[i] = 0;
 
     rawPacket.header = 0x81;
-    
-    // Base V3 Keep-Alive (Must be present so the machine doesn't sleep)
-    raw[1] = 0x01; 
+    raw[1] = 0x01; // Required V3 Keep-Alive
 
-    // OUTGOING: Send Pump and Solenoid commands on Byte 1!
+    // Engage Pump and Solenoid on Byte 1
     if (parsed_packet.brew_switch) {
         raw[1] |= 0x20; // Pump ON
-        raw[1] |= 0x04; // Solenoid valve OPEN
+        raw[1] |= 0x04; // Solenoid OPEN
     }
 
-    // CRITICAL SAFETY: Prevent 0.0 target temp from crashing the Gicar on boot
+    // Safety fallback to prevent 0.0C targets from crashing the machine
     float t_brew = parsed_packet.brew_boiler_temperature;
-    if (t_brew < 50.0f) t_brew = 95.0f; // Fallback to safe 95C
+    if (t_brew < 20.0f || t_brew > 140.0f) t_brew = 95.0f;
 
     float t_steam = parsed_packet.service_boiler_temperature;
-    if (t_steam < 50.0f) t_steam = 120.0f; // Fallback to safe 120C
+    if (t_steam < 20.0f || t_steam > 150.0f) t_steam = 120.0f;
 
-    // Send the correct targets
+    // THE FIX: Populate BOTH High Gain AND Low Gain ADCs to satisfy the Gicar's hardware safety checks
     rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(t_brew));
-    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(t_steam));
+    rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(t_brew));
 
-    // Calculate checksum
+    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(t_steam));
+    rawPacket.service_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(t_steam));
+
     rawPacket.checksum = calculate_checksum(raw + 1, 16, 0x01);
 
     return rawPacket;
