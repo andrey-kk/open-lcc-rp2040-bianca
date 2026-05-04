@@ -1,5 +1,6 @@
 //
 // Created by Magnus Nordlander on 2021-06-27.
+// Modified to force V2 Protocol Handshake
 //
 
 #include <cstdio>
@@ -68,29 +69,24 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
         error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_HEADER;
     }
 
-    // DIRECT MEMORY ACCESS: Bypass the struct names
-    const uint8_t* raw = reinterpret_cast<const uint8_t*>(&packet);
-    uint8_t version_byte = raw[1];
-    uint8_t flag_byte = raw[10];
-
-    // Detection: V1 always has version 1 and flag 127
-    bool is_v1 = (version_byte == 0x01 || flag_byte == 127);
-
-    if (!is_v1) {
-        // Only run V2 checksum for V2 machines
-        uint8_t calculated_checksum = calculate_checksum(((uint8_t *) &packet + 1), sizeof(packet) - 2, 0x01);
-        if (calculated_checksum != packet.checksum) {
-            error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_CHECKSUM;
-        }
+    // Force V2 Validation: This expects a 19-byte V2 packet once the handshake is accepted
+    uint8_t calculated_checksum = calculate_checksum(((uint8_t *) &packet + 1), sizeof(packet) - 2, 0x01);
+    if (calculated_checksum != packet.checksum) {
+        error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_CHECKSUM;
     }
 
-    // Safety: Use the raw buffer to calculate safety temps to avoid struct padding errors
-    // Brew Temp Triplet starts at raw[3], Service at raw[6]
-    uint32_t bb_raw = (raw[3] << 16) | (raw[4] << 8) | raw[5];
-    auto brew_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bb_raw), 50000, 4000);
+    auto bbInt = triplet_to_int(packet.brew_boiler_temperature_high_gain);
+    auto brew_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bbInt), 50000, 4018);
 
-    if (brew_temp > 140) {
+    auto sbInt = triplet_to_int(packet.service_boiler_temperature_high_gain);
+    auto service_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sbInt), 50000, 4018);
+
+    if (brew_boiler_temp > 140) {
         error |= CONTROL_BOARD_VALIDATION_ERROR_BREW_BOILER_TEMP_DANGEROUSLY_HIGH;
+    }
+
+    if (service_boiler_temp > 150) {
+        error |= CONTROL_BOARD_VALIDATION_ERROR_SERVICE_BOILER_TEMP_DANGEROUSLY_HIGH;
     }
 
     return error;
@@ -98,36 +94,16 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
 
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
-    
-    // We know flag 127 is IDLE. Let's look at the bits: 0111 1111
-    bool is_v1 = (raw_packet.flags == 127 || raw_packet.flags == 125 || raw_packet.flags == 63);
 
-    if (is_v1) {
-        // V1 REVISED MAPPING
-        // Brew Switch: Bit 1 (value 2). 1=Idle, 0=Brew.
-        packet.brew_switch = ((raw_packet.flags & 0x02) == 0);
-        
-        // Water Tank: In V1, this is often Bit 6 (0x40) OR Bit 0 (0x01).
-        // Let's check both. If either bit is 0, we treat it as empty for safety.
-        if (((raw_packet.flags & 0x40) == 0) || ((raw_packet.flags & 0x01) == 0)) {
-            packet.water_tank_empty = true;
-        } else {
-            packet.water_tank_empty = false;
-        }
+    // V2 MAPPING: Once handshake is accepted, flags and triplets align here
+    packet.brew_switch = raw_packet.flags & 0x02;
+    packet.water_tank_empty = raw_packet.flags & 0x40;
+    packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
 
-        // Keep this false until we find the real refill bit to prevent startup pumping.
-        packet.service_boiler_low = false; 
-    } else {
-        // Standard V2 Logic
-        packet.brew_switch = raw_packet.flags & 0x02;
-        packet.water_tank_empty = raw_packet.flags & 0x40;
-        packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
-    }
-
-    // Temperature Math (Verified working in your logs!)
     auto bbInt = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
-    auto sbInt = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
     packet.brew_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bbInt), 50000, 4018);
+
+    auto sbInt = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
     packet.service_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sbInt), 50000, 4018);
 
     return packet;
@@ -135,7 +111,9 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
 
 ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPacket parsed_packet) {
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
-    rawPacket.header = 0x81;
+    
+    // Master Header for V2 Handshake
+    rawPacket.header = 0x81; 
 
     rawPacket.flags = 0x0;
     if (parsed_packet.water_tank_empty) {
@@ -144,8 +122,6 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     if (parsed_packet.brew_switch) {
         rawPacket.flags |= 0x02;
     }
-
-    /* @fixme This needs to use the new NTC calculation. We just need the numbers for high-to-low gain */
 
     uint16_t smallCoffee = float_to_low_gain_adc(parsed_packet.brew_boiler_temperature);
     uint16_t smallService = float_to_low_gain_adc(parsed_packet.service_boiler_temperature);
@@ -158,7 +134,11 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     rawPacket.service_boiler_temperature_high_gain = int_to_triplet(largeService);
 
     rawPacket.service_boiler_level = int_to_triplet(parsed_packet.service_boiler_low ? 650 : 90);
-    rawPacket.checksum = calculate_checksum(reinterpret_cast<uint8_t*>(&rawPacket + 1), sizeof(rawPacket) - 2, 0x01);
+
+    // CRITICAL: Force V2 Seed 0x01 on ALL outgoing packets
+    // This tells the Gicar we are a V2 device and stops the 'Bailed' watchdog timer.
+    uint8_t* checksum_data = reinterpret_cast<uint8_t*>(&rawPacket) + 1;
+    rawPacket.checksum = calculate_checksum(checksum_data, sizeof(rawPacket) - 2, 0x01);
 
     return rawPacket;
 }
