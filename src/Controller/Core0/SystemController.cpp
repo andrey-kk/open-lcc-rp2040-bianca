@@ -533,13 +533,13 @@ void SystemController::setAutoSleepMinutes(float minutes) {
     resetPlannedSleep();*/
 }
 
-void SystemController::updatePlannedAutoSleep() {
-/*    if (settings->getAutoSleepMin() > 0) {
-        uint32_t ms = (uint32_t)settings->getAutoSleepMin() * 60 * 1000;
-        plannedAutoSleepAt = delayed_by_ms(get_absolute_time(), ms);
-    } else {
-        plannedAutoSleepAt.reset();
-    }*/
+void SystemController::setAutoSleepMinutes(float minutes) {
+    (void)minutes; // <-- ADD THIS LINE to bypass the strict compiler warning
+
+/*  auto autoSleepMinutes = (uint16_t)minutes;
+    settings->setAutoSleepMin(autoSleepMinutes);
+
+    resetPlannedSleep();*/
 }
 
 void SystemController::onSleepModeEntered() {
