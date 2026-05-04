@@ -116,6 +116,8 @@ void SystemController::loop() {
         sleepSeconds = 0.f;
     }
 
+    int slow_index = (bailCounter / 10) % 18;
+        
     SystemControllerStatusMessage message = {
             .timestamp = get_absolute_time(),
             // DASHBOARD WILL SHOW: Index Number (0.0 to 17.0)
