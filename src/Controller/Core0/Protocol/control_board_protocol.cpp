@@ -96,19 +96,13 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // Standard V2 Protocol Flags are at Index 15
-    uint8_t flags = raw[15];
+    // DIAGNOSTIC: Dump Flag Bytes directly to your dashboard
+    packet.brew_boiler_temperature = (float)raw[15];
+    packet.service_boiler_temperature = (float)raw[16];
 
-    // Standard V2 Logic (0 = Active/Empty)
-    packet.brew_switch = ((flags & 0x02) == 0);
-    packet.water_tank_empty = ((flags & 0x40) == 0);
-
-    // Standard V2 Temperature Locations
-    uint32_t bb_raw = (raw[2] << 16) | (raw[3] << 8) | raw[4];
-    uint32_t sb_raw = (raw[8] << 16) | (raw[9] << 8) | raw[10];
-
-    packet.brew_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bb_raw), 50000, 4018);
-    packet.service_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sb_raw), 50000, 4018);
+    // SAFETY: Force switches false so the pump cannot turn on
+    packet.brew_switch = false;
+    packet.water_tank_empty = false;
 
     return packet;
 }
@@ -116,20 +110,13 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
 ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPacket parsed_packet) {
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     rawPacket.header = 0x81;
-
-    // FIX: Send 0x01 to keep the V3 Gicar AWAKE. 
-    // This stops it from entering Standby and faking a lever lift.
+    
+    // Send 0x01 to keep the V3 hardware awake and talking
     rawPacket.flags = 0x01; 
 
-    if (parsed_packet.brew_switch) {
-        rawPacket.flags |= 0x20; // Pump ON
-        rawPacket.flags |= 0x04; // Solenoid valve OPEN
-    }
-
-    uint16_t largeCoffee = float_to_high_gain_adc(parsed_packet.brew_boiler_temperature);
-    uint16_t largeService = float_to_high_gain_adc(parsed_packet.service_boiler_temperature);
-    rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(largeCoffee);
-    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(largeService);
+    // SAFETY: Send zero heat targets so the machine sits quietly
+    rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(0);
+    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(0);
 
     uint8_t* data = reinterpret_cast<uint8_t*>(&rawPacket) + 1;
     rawPacket.checksum = calculate_checksum(data, sizeof(rawPacket) - 2, 0x01); 
