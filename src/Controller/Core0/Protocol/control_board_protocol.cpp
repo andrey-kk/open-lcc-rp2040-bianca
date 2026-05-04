@@ -1,6 +1,5 @@
 //
 // Created by Magnus Nordlander on 2021-06-27.
-// Modified to force V2 Protocol Handshake
 //
 
 #include <cstdio>
@@ -69,17 +68,18 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
         error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_HEADER;
     }
 
-    // Force V2 Validation: This expects a 19-byte V2 packet once the handshake is accepted
+    static_assert(sizeof(packet) == 18, "Packet size weird");
+    
+    // Checksum verified against 0x01 seed
     uint8_t calculated_checksum = calculate_checksum(((uint8_t *) &packet + 1), sizeof(packet) - 2, 0x01);
     if (calculated_checksum != packet.checksum) {
         error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_CHECKSUM;
     }
 
-    auto bbInt = triplet_to_int(packet.brew_boiler_temperature_high_gain);
-    auto brew_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bbInt), 50000, 4018);
+    // REMOVED the 0xBD flag check here, as V2/V3 flags exceed this mask
 
-    auto sbInt = triplet_to_int(packet.service_boiler_temperature_high_gain);
-    auto service_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sbInt), 50000, 4018);
+    auto brew_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(triplet_to_int(packet.brew_boiler_temperature_high_gain)), 50000, 4000);
+    auto service_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(triplet_to_int(packet.service_boiler_temperature_high_gain)), 50000, 4000);
 
     if (brew_boiler_temp > 140) {
         error |= CONTROL_BOARD_VALIDATION_ERROR_BREW_BOILER_TEMP_DANGEROUSLY_HIGH;
@@ -96,19 +96,16 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // Verified: Flags are at Index 10
-    uint8_t flags = raw[10];
+    // Standard V2 Protocol Flags are at Index 15
+    uint8_t flags = raw[15];
 
-    // Verified for 9600125: Bit 1 is the Lever. 
-    // In your dump, it went high when you moved it.
-    packet.brew_switch = (flags & 0x02); 
-    
-    // Tank logic: Bit 6. 0 is Empty.
+    // Standard V2 Logic (0 = Active/Empty)
+    packet.brew_switch = ((flags & 0x02) == 0);
     packet.water_tank_empty = ((flags & 0x40) == 0);
 
-    // Verified: Temperatures are shifted. Skip Byte 1 (55) and start at Byte 2.
+    // Standard V2 Temperature Locations
     uint32_t bb_raw = (raw[2] << 16) | (raw[3] << 8) | raw[4];
-    uint32_t sb_raw = (raw[5] << 16) | (raw[6] << 8) | raw[7];
+    uint32_t sb_raw = (raw[8] << 16) | (raw[9] << 8) | raw[10];
 
     packet.brew_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bb_raw), 50000, 4018);
     packet.service_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sb_raw), 50000, 4018);
@@ -120,21 +117,22 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     rawPacket.header = 0x81;
 
-    // V3 units need Bit 0 for Power/Ready
+    // V3 units still need Bit 0 for Power/Ready
     rawPacket.flags = 0x01; 
 
     if (parsed_packet.brew_switch) {
-        rawPacket.flags |= 0x20; // Engage Pump
-        rawPacket.flags |= 0x04; // Open E61 Solenoid Valve
+        rawPacket.flags |= 0x20; // Pump ON
+        rawPacket.flags |= 0x04; // Solenoid valve OPEN
     }
 
-    // Set boiler targets (Triplets)
-    rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(parsed_packet.brew_boiler_temperature));
-    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(parsed_packet.service_boiler_temperature));
+    uint16_t largeCoffee = float_to_high_gain_adc(parsed_packet.brew_boiler_temperature);
+    uint16_t largeService = float_to_high_gain_adc(parsed_packet.service_boiler_temperature);
+    rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(largeCoffee);
+    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(largeService);
 
-    // Force Seed 0x01 for the 9600125 watchdog
+    // V2 Checksum seed (0x01)
     uint8_t* data = reinterpret_cast<uint8_t*>(&rawPacket) + 1;
-    rawPacket.checksum = calculate_checksum(data, 16, 0x01); 
+    rawPacket.checksum = calculate_checksum(data, sizeof(rawPacket) - 2, 0x01); 
 
     return rawPacket;
 }
