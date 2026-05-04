@@ -62,6 +62,15 @@ uint32_t celsius_to_ntc_ohm(float celsius, uint32_t r25, uint32_t b) {
 }
 
 uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
+    // --- WIRETAP START ---
+    printf("RAW V1 DUMP: ");
+    uint8_t* raw_bytes = (uint8_t*)&packet;
+    for (size_t i = 0; i < sizeof(packet); i++) {
+        printf("%02X ", raw_bytes[i]);
+    }
+    printf("\n");
+    // --- WIRETAP END ---
+
     uint16_t error = CONTROL_BOARD_VALIDATION_ERROR_NONE;
 
     if (packet.header != 0x81) {
