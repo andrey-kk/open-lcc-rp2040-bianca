@@ -96,17 +96,13 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // Because the unit is speaking V1 Dialect at Index 10:
+    // 1. FLAGS: V1/Legacy location is Index 10
     uint8_t flags = raw[10];
+    packet.brew_switch = ((flags & 0x02) == 0);      // Lever Bit
+    packet.water_tank_empty = ((flags & 0x40) == 0); // Tank Bit
 
-    // V3 Gicar in V1 mode usually needs these bits flipped:
-    // Brew Lever (Bit 1): If it's 0, it's ACTIVE (Lever up)
-    packet.brew_switch = ((flags & 0x02) == 0);
-    
-    // Tank (Bit 6): If it's 0, it's EMPTY
-    packet.water_tank_empty = ((flags & 0x40) == 0);
-
-    // Re-align Temperatures (V1 shift)
+    // 2. TEMPERATURES: In V1, Index 1 is the 'Version' byte, shifting everything.
+    // We must offset the read by 1 byte to skip that Version byte.
     uint32_t bb_raw = (raw[3] << 16) | (raw[4] << 8) | raw[5];
     uint32_t sb_raw = (raw[6] << 16) | (raw[7] << 8) | raw[8];
 
@@ -120,18 +116,24 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     rawPacket.header = 0x81;
 
-    // V3 units often won't pump unless Bit 0 (Power LED) is ON
-    rawPacket.flags = 0x01; 
+    // Bit 0 (0x01) = System Power/Ready
+    // Bit 2 (0x04) = Group Solenoid (Crucial for water flow!)
+    // Bit 5 (0x20) = Pump
+    
+    rawPacket.flags = 0x01; // System ON
 
     if (parsed_packet.brew_switch) {
-        rawPacket.flags |= 0x20; // Pump Bit
+        rawPacket.flags |= 0x20; // Pump ON
+        rawPacket.flags |= 0x04; // OPEN VALVE (Solenoid)
     }
-    
-    // ... (Keep the rest of your temperature triplet logic here) ...
 
-    // CRITICAL: Calculate checksum with 0x01 seed to keep the heaters alive
+    // Set standard setpoints (e.g., 93C and 125C)
+    rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(parsed_packet.brew_boiler_temperature));
+    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(parsed_packet.service_boiler_temperature));
+
+    // Seed 0x01 is required for V3 hardware even in V1 mode
     uint8_t* data = reinterpret_cast<uint8_t*>(&rawPacket) + 1;
-    rawPacket.checksum = calculate_checksum(data, sizeof(rawPacket) - 2, 0x01);
+    rawPacket.checksum = calculate_checksum(data, 16, 0x01); 
 
     return rawPacket;
 }
