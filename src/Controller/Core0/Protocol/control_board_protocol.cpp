@@ -91,14 +91,16 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // 1. INCOMING SWITCHES (Perfectly verified on Byte 1)
     uint8_t flags = raw[1];
+
+    // 1. LEVER (Perfectly mapped)
     packet.brew_switch = ((flags & 0x02) != 0);
     
-    // THE FINAL FIX: The bit is an ALARM. It goes to 1 (not 0) when the tank is empty!
+    // 2. THE TANK (Perfectly mapped as an ALARM bit, proven by your timer test)
+    // It is 0 when full, and jumps to 1 (0x40) when empty.
     packet.water_tank_empty = ((flags & 0x40) != 0); 
 
-    // 2. REAL TEMPERATURES (Restored from the diagnostic hack)
+    // 3. REAL TEMPERATURES
     uint32_t bb_raw = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     uint32_t sb_raw = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
 
@@ -118,17 +120,20 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     rawPacket.header = 0x81;
     raw[1] = 0x01; // Required V3 Keep-Alive
 
-    // 3. OUTGOING COMMANDS (Pump works perfectly on Byte 15)
+    // 4. PUMP (Works perfectly on Byte 15)
     if (parsed_packet.brew_switch) {
         raw[15] |= 0x20; // Pump ON
         raw[15] |= 0x04; // Solenoid OPEN
     }
 
-    // 4. REAL TARGETS (Allow Home Assistant Eco Mode to work)
+    // 5. THE MISSING FAILSAFES (This is what killed your pump last time!)
     float t_brew = parsed_packet.brew_boiler_temperature;
     float t_steam = parsed_packet.service_boiler_temperature;
 
-    // Send both High and Low gain ADCs to satisfy the Gicar's hardware safety checks
+    // If HA sends 0.0 on boot, intercept it so the Gicar doesn't lock the pump
+    if (t_brew < 20.0f || t_brew > 140.0f) t_brew = 95.0f;
+    if (t_steam < 0.0f || t_steam > 150.0f) t_steam = 120.0f;
+
     rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(t_brew));
     rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(t_brew));
 
