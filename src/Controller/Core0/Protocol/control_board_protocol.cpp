@@ -91,14 +91,12 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // 1. INCOMING SWITCHES (Perfectly verified on Byte 1)
+    // 1. INCOMING SWITCHES (Untouched, perfectly verified)
     uint8_t flags = raw[1];
     packet.brew_switch = ((flags & 0x02) != 0);
-    
-    // ONLY THIS LINE IS DIFFERENT: == 0 changed to != 0 based on your timer test
     packet.water_tank_empty = ((flags & 0x40) != 0); 
 
-    // 2. REAL TEMPERATURES (Restored from the diagnostic hack)
+    // 2. REAL TEMPERATURES (Untouched)
     uint32_t bb_raw = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     uint32_t sb_raw = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
 
@@ -118,17 +116,21 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     rawPacket.header = 0x81;
     raw[1] = 0x01; // Required V3 Keep-Alive
 
-    // 3. OUTGOING COMMANDS (Pump works perfectly on Byte 15)
-    if (parsed_packet.brew_switch) {
+    // THE FIX: We must echo the alarm back to the Gicar so it physically cuts the heaters!
+    if (parsed_packet.water_tank_empty) {
+        raw[1] |= 0x40;
+    }
+
+    // 3. OUTGOING COMMANDS (Software-blocked so the pump cannot fire if the tank is empty)
+    if (parsed_packet.brew_switch && !parsed_packet.water_tank_empty) {
         raw[15] |= 0x20; // Pump ON
         raw[15] |= 0x04; // Solenoid OPEN
     }
 
-    // 4. REAL TARGETS (Allow Home Assistant Eco Mode to work)
+    // 4. REAL TARGETS
     float t_brew = parsed_packet.brew_boiler_temperature;
     float t_steam = parsed_packet.service_boiler_temperature;
 
-    // Send both High and Low gain ADCs to satisfy the Gicar's hardware safety checks
     rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(t_brew));
     rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(t_brew));
 
