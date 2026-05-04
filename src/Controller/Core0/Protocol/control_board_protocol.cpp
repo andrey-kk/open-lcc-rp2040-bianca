@@ -62,10 +62,15 @@ uint32_t celsius_to_ntc_ohm(float celsius, uint32_t r25, uint32_t b) {
 }
 
 uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
-    // --- V1 PROTOCOL BYPASS ---
-    // Instantly accept the packet without checking the V2 version byte or V2 checksum
-    return 0; 
-    
+    // --- V1 INTERCEPT ---
+    // If the second byte is 0x01, it's a V1 machine. 
+    // Accept it instantly and bypass the strict V2 checksums and flag checks.
+    uint8_t* raw = reinterpret_cast<uint8_t*>(&packet);
+    if (raw[1] == 0x01) {
+        return CONTROL_BOARD_VALIDATION_ERROR_NONE; 
+    }
+
+    // --- V2 VALIDATION (Original) ---
     uint16_t error = CONTROL_BOARD_VALIDATION_ERROR_NONE;
 
     if (packet.header != 0x81) {
@@ -117,7 +122,26 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
 
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
+    uint8_t* raw = reinterpret_cast<uint8_t*>(&raw_packet);
 
+    // --- V1 PARSER ---
+    if (raw[1] == 0x01) {
+        // Read the literal Celsius values from the bytes we mapped!
+        packet.brew_boiler_temperature = static_cast<float>(raw[3]);
+        packet.service_boiler_temperature = static_cast<float>(raw[6]);
+
+        // Flags are at Byte 10 (0x7F in your dump). 
+        // We will assume they use the same bit logic as V2 for now.
+        packet.brew_switch = raw[10] & 0x02;
+        packet.water_tank_empty = raw[10] & 0x40;
+        
+        // Byte 9 was 46-48 in your dump. If it spikes to 255, the boiler is empty.
+        packet.service_boiler_low = (raw[9] > 100); 
+
+        return packet;
+    }
+
+    // --- V2 PARSER (Original) ---
     packet.brew_switch = raw_packet.flags & 0x02;
     packet.water_tank_empty = raw_packet.flags & 0x40;
     packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
