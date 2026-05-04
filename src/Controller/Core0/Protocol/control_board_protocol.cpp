@@ -62,15 +62,12 @@ uint32_t celsius_to_ntc_ohm(float celsius, uint32_t r25, uint32_t b) {
 }
 
 uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
-    // --- NEW WIRETAP START ---
-    // This prints to the UART line that the ESP32 is listening to
-    printf("V1_DUMP:"); 
-    uint8_t* b = (uint8_t*)&packet;
-    for (size_t i = 0; i < sizeof(packet); i++) {
-        printf("%02X", b[i]);
-    }
+    // --- EMERGENCY DUMP START ---
+    const char* label = "DUMP:";
+    fwrite(label, 1, 5, stdout);
+    fwrite(&packet, 1, sizeof(packet), stdout);
     printf("\n");
-    // --- WIRETAP END ---
+    // --- EMERGENCY DUMP END ---
 
     uint16_t error = CONTROL_BOARD_VALIDATION_ERROR_NONE;
 
