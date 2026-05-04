@@ -98,29 +98,31 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
 
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
-    const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
     
-    uint8_t version_byte = raw[1];
-    uint8_t flag_byte = raw[10];
-    bool is_v1 = (version_byte == 0x01 || flag_byte == 127);
+    // 1. V1 Detection by Flags
+    // Your dump shows 127 is the IDLE state for V1.
+    bool is_v1 = (raw_packet.flags == 127 || raw_packet.flags == 125);
 
     if (is_v1) {
-        // V1 Inverted Logic: Bit 1 is Brew, Bit 6 is Tank
-        packet.brew_switch = ((flag_byte & 0x02) == 0);
-        packet.water_tank_empty = ((flag_byte & 0x40) == 0);
-        packet.service_boiler_low = false; // Safety override
+        // V1 Logic: If flags is 127, the lever is DOWN.
+        // We only want brew_switch to be true if the lever is UP (bit 1 becomes 0).
+        packet.brew_switch = ((raw_packet.flags & 0x02) == 0);
+        packet.water_tank_empty = ((raw_packet.flags & 0x40) == 0);
+        packet.service_boiler_low = false; // Safety override to stop start-up pumping
     } else {
-        packet.brew_switch = flag_byte & 0x02;
-        packet.water_tank_empty = flag_byte & 0x40;
+        // Standard V2 Logic
+        packet.brew_switch = raw_packet.flags & 0x02;
+        packet.water_tank_empty = raw_packet.flags & 0x40;
         packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
     }
 
-    // Temperature math using direct index to avoid padding shifts
-    uint32_t bb_int = (raw[3] << 16) | (raw[4] << 8) | raw[5];
-    uint32_t sb_int = (raw[6] << 16) | (raw[7] << 8) | raw[8];
+    // 2. Temperature Math (Restored to the version that gave you 23C)
+    // Using triplet_to_int directly as it was previously successful.
+    auto bbInt = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
+    auto sbInt = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
 
-    packet.brew_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bb_int), 50000, 4018);
-    packet.service_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sb_int), 50000, 4018);
+    packet.brew_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bbInt), 50000, 4018);
+    packet.service_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sbInt), 50000, 4018);
 
     return packet;
 }
