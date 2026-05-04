@@ -91,14 +91,14 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // 1. INCOMING SWITCHES (Untouched: Lever perfectly verified on Byte 1)
-    uint8_t flags = raw[1];
-    packet.brew_switch = ((flags & 0x02) != 0);
+    // DIAGNOSTIC 1: Watch Byte 1 (0x40) on the Brew Timer
+    // If this bit drops when you pull the tank, the timer will reset to 0s.
+    packet.brew_switch = ((raw[1] & 0x40) != 0);
     
-    // ONLY THIS LINE CHANGED: Hunting the tank bit instantly on Byte 15
+    // DIAGNOSTIC 2: Watch Byte 15 (0x40) on the Tank Sensor
     packet.water_tank_empty = ((raw[15] & 0x40) == 0); 
 
-    // 2. REAL TEMPERATURES (Untouched)
+    // Keep real temperatures so the machine stays happy and doesn't bail
     uint32_t bb_raw = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     uint32_t sb_raw = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
 
@@ -112,23 +112,22 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     uint8_t* raw = reinterpret_cast<uint8_t*>(&rawPacket);
 
-    // Clear memory (Untouched)
+    // Clear memory
     for(int i=0; i<18; i++) raw[i] = 0;
 
     rawPacket.header = 0x81;
-    raw[1] = 0x01; // Required V3 Keep-Alive (Untouched)
+    raw[1] = 0x01; // Required V3 Keep-Alive
 
-    // 3. OUTGOING COMMANDS (Untouched: Pump works perfectly on Byte 15)
-    if (parsed_packet.brew_switch) {
-        raw[15] |= 0x20; // Pump ON
-        raw[15] |= 0x04; // Solenoid OPEN
-    }
+    // SAFETY OVERRIDE: Physical pump commands are completely DISABLED for this test.
+    // if (parsed_packet.brew_switch) {
+    //     raw[15] |= 0x20; 
+    //     raw[15] |= 0x04; 
+    // }
 
-    // 4. REAL TARGETS (Untouched: Allow Home Assistant Eco Mode to work)
+    // Echo real targets so the heaters work normally
     float t_brew = parsed_packet.brew_boiler_temperature;
     float t_steam = parsed_packet.service_boiler_temperature;
 
-    // Send both High and Low gain ADCs to satisfy the Gicar's hardware safety checks (Untouched)
     rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(t_brew));
     rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(t_brew));
 
