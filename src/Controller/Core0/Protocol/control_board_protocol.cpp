@@ -91,12 +91,14 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // 1. INCOMING SWITCHES (Untouched, perfectly verified)
+    // 1. INCOMING SWITCHES (Byte 1)
     uint8_t flags = raw[1];
     packet.brew_switch = ((flags & 0x02) != 0);
+    
+    // Tank is empty if 0x40 is present (Alarm bit)
     packet.water_tank_empty = ((flags & 0x40) != 0); 
 
-    // 2. REAL TEMPERATURES (Untouched)
+    // 2. REAL TEMPERATURES
     uint32_t bb_raw = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     uint32_t sb_raw = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
 
@@ -116,13 +118,14 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     rawPacket.header = 0x81;
     raw[1] = 0x01; // Required V3 Keep-Alive
 
-    // THE FIX: We must echo the alarm back to the Gicar so it physically cuts the heaters!
+    // --- ONLY TANK CHANGE BELOW ---
     if (parsed_packet.water_tank_empty) {
-        raw[1] |= 0x40;
+        raw[1] |= 0x40; // Echo the alarm back to the Gicar
     }
+    // ------------------------------
 
-    // 3. OUTGOING COMMANDS (Software-blocked so the pump cannot fire if the tank is empty)
-    if (parsed_packet.brew_switch && !parsed_packet.water_tank_empty) {
+    // 3. OUTGOING COMMANDS (Byte 15)
+    if (parsed_packet.brew_switch) {
         raw[15] |= 0x20; // Pump ON
         raw[15] |= 0x04; // Solenoid OPEN
     }
