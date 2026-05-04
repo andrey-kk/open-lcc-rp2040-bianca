@@ -91,13 +91,10 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    uint8_t flags = raw[1];
-
-    // 1. SWITCHES (Perfectly mapped to Byte 1)
-    packet.brew_switch = ((flags & 0x02) != 0);
-    
-    // Tank is 0x40 (64). It drops to 0x00 when empty.
-    packet.water_tank_empty = ((flags & 0x40) == 0); 
+    // 1. THE TRUE SWITCHES (Mapped to Byte 15)
+    // Escaping the "Byte 1 Trap" stops the ghost timer and allows the pump to work flawlessly.
+    packet.brew_switch = ((raw[15] & 0x02) != 0);
+    packet.water_tank_empty = ((raw[15] & 0x40) == 0); 
 
     // 2. REAL TEMPERATURES
     uint32_t bb_raw = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
