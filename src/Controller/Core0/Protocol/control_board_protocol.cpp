@@ -94,51 +94,44 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
 
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
+    const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // V2 MAPPING: Once handshake is accepted, flags and triplets align here
-    packet.brew_switch = raw_packet.flags & 0x02;
-    packet.water_tank_empty = raw_packet.flags & 0x40;
-    packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
+    // Because the unit is speaking V1 Dialect at Index 10:
+    uint8_t flags = raw[10];
 
-    auto bbInt = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
-    packet.brew_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bbInt), 50000, 4018);
+    // V3 Gicar in V1 mode usually needs these bits flipped:
+    // Brew Lever (Bit 1): If it's 0, it's ACTIVE (Lever up)
+    packet.brew_switch = ((flags & 0x02) == 0);
+    
+    // Tank (Bit 6): If it's 0, it's EMPTY
+    packet.water_tank_empty = ((flags & 0x40) == 0);
 
-    auto sbInt = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
-    packet.service_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sbInt), 50000, 4018);
+    // Re-align Temperatures (V1 shift)
+    uint32_t bb_raw = (raw[3] << 16) | (raw[4] << 8) | raw[5];
+    uint32_t sb_raw = (raw[6] << 16) | (raw[7] << 8) | raw[8];
+
+    packet.brew_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bb_raw), 50000, 4018);
+    packet.service_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sb_raw), 50000, 4018);
 
     return packet;
 }
 
 ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPacket parsed_packet) {
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
-    
-    // Master Header for V2 Handshake
-    rawPacket.header = 0x81; 
+    rawPacket.header = 0x81;
 
-    rawPacket.flags = 0x0;
-    if (parsed_packet.water_tank_empty) {
-        rawPacket.flags |= 0x40;
-    }
+    // V3 units often won't pump unless Bit 0 (Power LED) is ON
+    rawPacket.flags = 0x01; 
+
     if (parsed_packet.brew_switch) {
-        rawPacket.flags |= 0x02;
+        rawPacket.flags |= 0x20; // Pump Bit
     }
+    
+    // ... (Keep the rest of your temperature triplet logic here) ...
 
-    uint16_t smallCoffee = float_to_low_gain_adc(parsed_packet.brew_boiler_temperature);
-    uint16_t smallService = float_to_low_gain_adc(parsed_packet.service_boiler_temperature);
-    uint16_t largeCoffee = float_to_high_gain_adc(parsed_packet.brew_boiler_temperature);
-    uint16_t largeService = float_to_high_gain_adc(parsed_packet.service_boiler_temperature);
-
-    rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(smallCoffee);
-    rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(largeCoffee);
-    rawPacket.service_boiler_temperature_low_gain = int_to_triplet(smallService);
-    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(largeService);
-
-    rawPacket.service_boiler_level = int_to_triplet(parsed_packet.service_boiler_low ? 650 : 90);
-
-    // CRITICAL: Force V2 Seed 0x01 on ALL outgoing packets
-    // This tells the Gicar we are a V2 device and stops the 'Bailed' watchdog timer.
-    uint8_t* checksum_data = reinterpret_cast<uint8_t*>(&rawPacket) + 1;
-    rawPacket.checksum = calculate_checksum(checksum_data, sizeof(rawPacket) - 2, 0x01);
+    // CRITICAL: Calculate checksum with 0x01 seed to keep the heaters alive
+    uint8_t* data = reinterpret_cast<uint8_t*>(&rawPacket) + 1;
+    rawPacket.checksum = calculate_checksum(data, sizeof(rawPacket) - 2, 0x01);
 
     return rawPacket;
 }
