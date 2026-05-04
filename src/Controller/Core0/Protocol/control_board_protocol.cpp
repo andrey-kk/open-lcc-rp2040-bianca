@@ -91,10 +91,12 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // 1. THE TRUE SWITCHES (Mapped to Byte 15)
-    // Escaping the "Byte 1 Trap" stops the ghost timer and allows the pump to work flawlessly.
-    packet.brew_switch = ((raw[15] & 0x02) != 0);
-    packet.water_tank_empty = ((raw[15] & 0x40) == 0); 
+    // 1. INCOMING: Back to exactly what worked. 
+    // Lever is solid on Byte 1.
+    packet.brew_switch = ((raw[1] & 0x02) != 0);
+    
+    // Tank logic (Proved by the lie detector test dropping Byte 1 to 0)
+    packet.water_tank_empty = ((raw[1] & 0x40) == 0); 
 
     // 2. REAL TEMPERATURES
     uint32_t bb_raw = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
@@ -115,18 +117,17 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     rawPacket.header = 0x81;
     raw[1] = 0x01; // Required V3 Keep-Alive
 
-    // 3. OUTGOING COMMANDS (Proven to work perfectly on Byte 15)
+    // 3. OUTGOING: Back to exactly what worked. Pump triggers perfectly on Byte 15.
     if (parsed_packet.brew_switch) {
         raw[15] |= 0x20; // Pump ON
         raw[15] |= 0x04; // Solenoid OPEN
     }
 
-    // 4. THERMAL FAILSAFE (Prevents the "Silent Pump Lockout")
+    // 4. FAILSAFES: Prevents the silent thermal lockout that disabled your pump earlier
     float t_brew = parsed_packet.brew_boiler_temperature;
     if (t_brew < 20.0f || t_brew > 140.0f) t_brew = 95.0f;
 
     float t_steam = parsed_packet.service_boiler_temperature;
-    // We allow 0.0 for the steam boiler ONLY so your Eco Mode can still turn it off!
     if (t_steam < 0.0f || t_steam > 150.0f) t_steam = 120.0f;
 
     rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(t_brew));
