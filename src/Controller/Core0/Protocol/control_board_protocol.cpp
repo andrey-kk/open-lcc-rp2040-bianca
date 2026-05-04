@@ -64,41 +64,37 @@ uint32_t celsius_to_ntc_ohm(float celsius, uint32_t r25, uint32_t b) {
 uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
     uint16_t error = CONTROL_BOARD_VALIDATION_ERROR_NONE;
 
-    // 1. Header check (Shared by all Bianca versions)
     if (packet.header != 0x81) {
         error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_HEADER;
     }
 
-    // 2. Identify Version
+    // Access raw memory to identify protocol version
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&packet);
     bool is_v1 = (raw[1] == 0x01 || packet.flags == 127);
 
-    // 3. Dual Checksum Calculation
     if (is_v1) {
-        // V1 Checksum: Uses V1-specific seed (0x00 or version-based)
-        // We calculate it but remain flexible to avoid the "Bailed" state
+        // V1 CHECKUP: Using the 0x00 seed for V1 hardware
         uint8_t calc_v1 = calculate_checksum(((uint8_t *) &packet + 1), sizeof(packet) - 2, 0x00);
-        if (calc_v1 != packet.checksum) {
-            // If even the V1 check fails, we flag it, but keep it distinct from V2 errors
+        
+        // We allow the packet if it matches V1 math or our known idle flag
+        if (calc_v1 != packet.checksum && packet.flags != 127) {
             error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_CHECKSUM;
         }
     } else {
-        // V2 Checksum: Uses the original seed from the GitHub repo
+        // V2 CHECKUP: Original GitHub logic
         uint8_t calc_v2 = calculate_checksum(((uint8_t *) &packet + 1), sizeof(packet) - 2, 0x01);
         if (calc_v2 != packet.checksum) {
             error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_CHECKSUM;
         }
 
-        // Strict V2-only flag check
         if (packet.flags & 0xBD) {
             error |= CONTROL_BOARD_VALIDATION_ERROR_UNEXPECTED_FLAGS;
         }
     }
 
-    // 4. Universal Safety: Temperature logic
+    // Universal Temperature Safety (Protects both V1 and V2 hardware)
     auto bbInt = triplet_to_int(packet.brew_boiler_temperature_high_gain);
     auto sbInt = triplet_to_int(packet.service_boiler_temperature_high_gain);
-    
     auto brew_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bbInt), 50000, 4000);
     auto serv_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sbInt), 50000, 4000);
 
