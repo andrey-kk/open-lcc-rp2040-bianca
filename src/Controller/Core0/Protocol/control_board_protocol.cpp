@@ -62,30 +62,44 @@ uint32_t celsius_to_ntc_ohm(float celsius, uint32_t r25, uint32_t b) {
 }
 
 uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
-    // --- V1 INTERCEPT ---
-    // If the second byte is 0x01, it's a V1 machine. 
-    // Accept it instantly and bypass the strict V2 checksums and flag checks.
-    uint8_t* raw = reinterpret_cast<uint8_t*>(&packet);
-    if (raw[1] == 0x01) {
-        return CONTROL_BOARD_VALIDATION_ERROR_NONE; 
-    }
-
-    // --- V2 VALIDATION (Original) ---
     uint16_t error = CONTROL_BOARD_VALIDATION_ERROR_NONE;
 
     if (packet.header != 0x81) {
         error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_HEADER;
     }
 
+    // Keep the strict mathematical checksum check!
     static_assert(sizeof(packet) == 18, "Packet size weird");
     uint8_t calculated_checksum = calculate_checksum(((uint8_t *) &packet + 1), sizeof(packet) - 2, 0x01);
     if (calculated_checksum != packet.checksum) {
         error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_CHECKSUM;
     }
 
-    if (packet.flags & 0xBD) {
-        error |= CONTROL_BOARD_VALIDATION_ERROR_UNEXPECTED_FLAGS;
+    // Identify if it's a V1 machine (Byte 1 = 0x01)
+    uint8_t* raw = reinterpret_cast<uint8_t*>(&packet);
+    bool is_v1 = (raw[1] == 0x01);
+
+    // V2 strictly checks for 0s in the flags byte. 
+    // V1 uses inverted flags (e.g., 127 / 0x7F), which would trigger this error falsely.
+    if (!is_v1) {
+        if (packet.flags & 0xBD) {
+            error |= CONTROL_BOARD_VALIDATION_ERROR_UNEXPECTED_FLAGS;
+        }
     }
+
+    auto brew_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(triplet_to_int(packet.brew_boiler_temperature_high_gain)), 50000, 4000);
+    auto service_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(triplet_to_int(packet.service_boiler_temperature_high_gain)), 50000, 4000);
+
+    if (brew_boiler_temp > 140) {
+        error |= CONTROL_BOARD_VALIDATION_ERROR_BREW_BOILER_TEMP_DANGEROUSLY_HIGH;
+    }
+
+    if (service_boiler_temp > 150) {
+        error |= CONTROL_BOARD_VALIDATION_ERROR_SERVICE_BOILER_TEMP_DANGEROUSLY_HIGH;
+    }
+
+    return error;
+}
 
 //    auto brew_boiler_temp = high_gain_adc_to_float(triplet_to_int(packet.brew_boiler_temperature_high_gain));
     auto brew_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(triplet_to_int(packet.brew_boiler_temperature_high_gain)), 50000, 4000);
@@ -123,29 +137,22 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     uint8_t* raw = reinterpret_cast<uint8_t*>(&raw_packet);
+    bool is_v1 = (raw[1] == 0x01);
 
-    // --- V1 PARSER ---
-    if (raw[1] == 0x01) {
-        // Read the literal Celsius values from the bytes we mapped!
-        packet.brew_boiler_temperature = static_cast<float>(raw[3]);
-        packet.service_boiler_temperature = static_cast<float>(raw[6]);
-
-        // Flags are at Byte 10 (0x7F in your dump). 
-        // We will assume they use the same bit logic as V2 for now.
-        packet.brew_switch = raw[10] & 0x02;
-        packet.water_tank_empty = raw[10] & 0x40;
-        
-        // Byte 9 was 46-48 in your dump. If it spikes to 255, the boiler is empty.
-        packet.service_boiler_low = (raw[9] > 100); 
-
-        return packet;
+    // Switch/Flag Logic
+    if (is_v1) {
+        // V1 uses inverted logic (Active Low). The "!" flips the 1s back to 0s.
+        packet.brew_switch = !(raw_packet.flags & 0x02);
+        packet.water_tank_empty = !(raw_packet.flags & 0x40);
+        packet.service_boiler_low = false; // Force it to allow heating
+    } else {
+        // Standard V2 Logic
+        packet.brew_switch = raw_packet.flags & 0x02;
+        packet.water_tank_empty = raw_packet.flags & 0x40;
+        packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
     }
 
-    // --- V2 PARSER (Original) ---
-    packet.brew_switch = raw_packet.flags & 0x02;
-    packet.water_tank_empty = raw_packet.flags & 0x40;
-    packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
-
+    // Use the original complex math for temperatures!
     auto bbInt = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     auto bbOhm = high_gain_adc_to_ohm(bbInt);
     auto bbC = ntc_ohm_to_celsius(bbOhm, 50000, 4018);
@@ -154,14 +161,8 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     auto sbOhm = high_gain_adc_to_ohm(sbInt);
     auto sbC = ntc_ohm_to_celsius(sbOhm, 50000, 4018);
 
-//    printf("BB int: %u, ohm: %lu, c: %f, SB int: %u, ohm: %lu, c: %f\n", bbInt, bbOhm, bbC, sbInt, sbOhm, sbC);
-
     packet.brew_boiler_temperature = bbC;
     packet.service_boiler_temperature = sbC;
-    /*packet.brew_boiler_temperature = high_gain_adc_to_float(
-            triplet_to_int(raw_packet.brew_boiler_temperature_high_gain));
-    packet.service_boiler_temperature = high_gain_adc_to_float(
-            triplet_to_int(raw_packet.service_boiler_temperature_high_gain));*/
 
     return packet;
 }
