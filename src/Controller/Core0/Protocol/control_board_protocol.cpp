@@ -62,11 +62,12 @@ uint32_t celsius_to_ntc_ohm(float celsius, uint32_t r25, uint32_t b) {
 }
 
 uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
-    // --- WIRETAP START ---
-    printf("RAW V1 DUMP: ");
-    uint8_t* raw_bytes = (uint8_t*)&packet;
+    // --- NEW WIRETAP START ---
+    // This prints to the UART line that the ESP32 is listening to
+    printf("V1_DUMP:"); 
+    uint8_t* b = (uint8_t*)&packet;
     for (size_t i = 0; i < sizeof(packet); i++) {
-        printf("%02X ", raw_bytes[i]);
+        printf("%02X", b[i]);
     }
     printf("\n");
     // --- WIRETAP END ---
