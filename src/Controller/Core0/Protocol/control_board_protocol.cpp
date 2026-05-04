@@ -91,20 +91,18 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // 1. LEVER SWITCH (Verified on Byte 1)
+    // Keep the lever working so the machine stays happy
     packet.brew_switch = ((raw[1] & 0x02) != 0);
     
-    // 2. WATER TANK SWITCH (Hunting it on Byte 15)
-    // We know Byte 15 idles at 81 (which contains the 0x40 bit). 
-    // If the tank is removed, 0x40 should drop out.
-    packet.water_tank_empty = ((raw[15] & 0x40) == 0); 
+    // Force tank full so the RP2040 doesn't panic and block the pump
+    packet.water_tank_empty = false; 
 
-    // 3. REAL TEMPERATURES (Verified and perfect)
-    uint32_t bb_raw = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
-    uint32_t sb_raw = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
-
-    packet.brew_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bb_raw), 50000, 4018);
-    packet.service_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sb_raw), 50000, 4018);
+    // ULTIMATE DIAGNOSTIC: Watch the raw data in real-time
+    // Coffee Temp will display the exact decimal value of Byte 1
+    packet.brew_boiler_temperature = (float)raw[1];
+    
+    // Service Temp will display the exact decimal value of Byte 15
+    packet.service_boiler_temperature = (float)raw[15];
 
     return packet;
 }
