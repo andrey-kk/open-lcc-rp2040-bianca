@@ -96,11 +96,11 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // DIAGNOSTIC: Dump Flag Bytes directly to your dashboard
-    packet.brew_boiler_temperature = (float)raw[15];
+    // DIAGNOSTIC ROUND 2: Hunting the Lever
+    packet.brew_boiler_temperature = (float)raw[14];
     packet.service_boiler_temperature = (float)raw[16];
 
-    // SAFETY: Force switches false so the pump cannot turn on
+    // SAFETY: Keep pump off
     packet.brew_switch = false;
     packet.water_tank_empty = false;
 
@@ -111,12 +111,12 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     rawPacket.header = 0x81;
     
-    // Send 0x01 to keep the V3 hardware awake and talking
+    // Keep V3 awake
     rawPacket.flags = 0x01; 
 
-    // SAFETY: Send zero heat targets so the machine sits quietly
-    rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(0);
-    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(0);
+    // SAFETY: Send "warm" targets so the Gicar doesn't lock out the lever
+    rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(10000);
+    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(10000);
 
     uint8_t* data = reinterpret_cast<uint8_t*>(&rawPacket) + 1;
     rawPacket.checksum = calculate_checksum(data, sizeof(rawPacket) - 2, 0x01); 
