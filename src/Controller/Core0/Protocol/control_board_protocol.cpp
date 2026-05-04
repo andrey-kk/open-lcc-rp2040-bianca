@@ -71,13 +71,15 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
     static_assert(sizeof(packet) == 18, "Packet size weird");
     uint8_t calculated_checksum = calculate_checksum(((uint8_t *) &packet + 1), sizeof(packet) - 2, 0x01);
     
-    // V1 Check: Look at the first byte of the first triplet
-    bool is_v1 = (packet.brew_boiler_temperature_high_gain.b0 == 0x01);
-
     if (calculated_checksum != packet.checksum) {
         error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_CHECKSUM;
     }
 
+    // DIRECT MEMORY CHECK: Look at the 2nd byte (index 1) for the V1 flag
+    uint8_t* raw = (uint8_t*)&packet;
+    bool is_v1 = (raw[1] == 0x01);
+
+    // Skip the V2 flag bouncer for V1 machines
     if (!is_v1) {
         if (packet.flags & 0xBD) {
             error |= CONTROL_BOARD_VALIDATION_ERROR_UNEXPECTED_FLAGS;
@@ -100,20 +102,24 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     
-    bool is_v1 = (raw_packet.brew_boiler_temperature_high_gain.b0 == 0x01);
+    // DIRECT MEMORY CHECK: Index 1 is our Protocol Version
+    uint8_t* raw = (uint8_t*)&raw_packet;
+    bool is_v1 = (raw[1] == 0x01);
 
     if (is_v1) {
-        // V1 INVERTED SWITCH LOGIC
+        // V1 INVERTED SWITCH LOGIC (Active Low)
         packet.brew_switch = ((raw_packet.flags & 0x02) == 0);
         packet.water_tank_empty = ((raw_packet.flags & 0x40) == 0);
-        packet.service_boiler_low = false; 
     } else {
-        // V2 STANDARD SWITCH LOGIC
+        // V2 STANDARD SWITCH LOGIC (Active High)
         packet.brew_switch = raw_packet.flags & 0x02;
         packet.water_tank_empty = raw_packet.flags & 0x40;
-        packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
     }
 
+    // Use V2 logic for level sensor as a test
+    packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
+
+    // Standard Temperature Math
     auto bbInt = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     auto bbOhm = high_gain_adc_to_ohm(bbInt);
     packet.brew_boiler_temperature = ntc_ohm_to_celsius(bbOhm, 50000, 4018);
