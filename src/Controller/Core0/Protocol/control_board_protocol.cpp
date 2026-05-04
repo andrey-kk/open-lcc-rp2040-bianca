@@ -117,9 +117,10 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     rawPacket.header = 0x81;
 
-    // V3 units still need Bit 0 for Power/Ready
-    rawPacket.flags = 0x01; 
+    // SAFETY FIRST: Idle state must be 0x00. No pump, no solenoid.
+    rawPacket.flags = 0x00; 
 
+    // Only engage hardware when the lever is actually lifted
     if (parsed_packet.brew_switch) {
         rawPacket.flags |= 0x20; // Pump ON
         rawPacket.flags |= 0x04; // Solenoid valve OPEN
