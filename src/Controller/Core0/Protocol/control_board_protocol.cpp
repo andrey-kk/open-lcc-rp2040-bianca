@@ -96,16 +96,17 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // Byte 10 is your confirmed Flag Byte
+    // Verified: Flags are at Index 10
     uint8_t flags = raw[10];
 
-    // LEVER: Your dump showed 127 (Bit 1 ON) when active. 
+    // Verified for 9600125: Bit 1 is the Lever. 
+    // In your dump, it went high when you moved it.
     packet.brew_switch = (flags & 0x02); 
     
-    // TANK: Standard Bianca logic - 0 means Empty.
+    // Tank logic: Bit 6. 0 is Empty.
     packet.water_tank_empty = ((flags & 0x40) == 0);
 
-    // TEMPERATURES: Skip Byte 1 (Value 55) and read triplets starting at Byte 2.
+    // Verified: Temperatures are shifted. Skip Byte 1 (55) and start at Byte 2.
     uint32_t bb_raw = (raw[2] << 16) | (raw[3] << 8) | raw[4];
     uint32_t sb_raw = (raw[5] << 16) | (raw[6] << 8) | raw[7];
 
@@ -119,21 +120,19 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     rawPacket.header = 0x81;
 
-    // Bit 0: Power/Ready (Required for 9600125)
+    // V3 units need Bit 0 for Power/Ready
     rawPacket.flags = 0x01; 
 
     if (parsed_packet.brew_switch) {
-        rawPacket.flags |= 0x20; // Pump ON
-        rawPacket.flags |= 0x04; // Solenoid Valve OPEN
+        rawPacket.flags |= 0x20; // Engage Pump
+        rawPacket.flags |= 0x04; // Open E61 Solenoid Valve
     }
 
-    // Standard Temperature Triplet Logic (Magnus V2 Original)
-    uint16_t largeCoffee = float_to_high_gain_adc(parsed_packet.brew_boiler_temperature);
-    uint16_t largeService = float_to_high_gain_adc(parsed_packet.service_boiler_temperature);
-    rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(largeCoffee);
-    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(largeService);
+    // Set boiler targets (Triplets)
+    rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(parsed_packet.brew_boiler_temperature));
+    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(parsed_packet.service_boiler_temperature));
 
-    // Final Checksum with forced Seed 0x01
+    // Force Seed 0x01 for the 9600125 watchdog
     uint8_t* data = reinterpret_cast<uint8_t*>(&rawPacket) + 1;
     rawPacket.checksum = calculate_checksum(data, 16, 0x01); 
 
