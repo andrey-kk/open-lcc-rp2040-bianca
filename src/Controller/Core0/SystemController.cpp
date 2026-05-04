@@ -61,16 +61,6 @@ void SystemController::loop() {
 
     uint16_t cbValidation = validate_raw_packet(currentControlBoardRawPacket);
 
-    // --- HIJACK PART 1: SAVE THE REJECTED PACKET (STRICT C++) ---
-    static uint8_t hijacked_packet[18] = {0};
-    if (cbValidation != 0) {
-        uint8_t* raw_ptr = reinterpret_cast<uint8_t*>(&currentControlBoardRawPacket);
-        for(int i = 0; i < 18; i++) {
-            hijacked_packet[i] = raw_ptr[i];
-        }
-    }
-    // ------------------------------------------------------------
-        
     if (success && cbValidation != CONTROL_BOARD_VALIDATION_ERROR_NONE ) {
         USB_PRINTF("Received packet, validation: %u:\n", cbValidation);
         USB_PRINT_BUF(reinterpret_cast<uint8_t *>(&currentControlBoardRawPacket), sizeof(currentControlBoardRawPacket));
@@ -116,23 +106,16 @@ void SystemController::loop() {
         sleepSeconds = 0.f;
     }
 
-    // --- HIJACK PART 2: THE TICKER TAPE ---
-    // Dividing by 10 means it changes once every 1 second!
-    int slow_index = (bailCounter / 10) % 18; 
-
     SystemControllerStatusMessage message = {
             .timestamp = get_absolute_time(),
-            // DASHBOARD WILL SHOW: Index Number (0.0 to 17.0)
-            .brewTemperature = static_cast<float>(slow_index), 
-            // OVERWRITE THE OFFSET SO IT SHOWS ON THE SCREEN!
-            .offsetBrewTemperature = static_cast<float>(slow_index),
+            .brewTemperature = static_cast<float>(brewTempAverage.average()),
+            .offsetBrewTemperature = static_cast<float>(brewTempAverage.average()) + settings->getBrewTemperatureOffset(),
             .brewTemperatureOffset = settings->getBrewTemperatureOffset(),
             .brewSetPoint = settings->getTargetBrewTemp(),
             .offsetBrewSetPoint = settings->getTargetBrewTemp() + settings->getBrewTemperatureOffset(),
             .brewPidSettings = settings->getBrewPidParameters(),
             .brewPidParameters = brewPidRuntimeParameters,
-            // DASHBOARD WILL SHOW: Raw V1 Byte Value (0.0 to 255.0)
-            .serviceTemperature = static_cast<float>(hijacked_packet[slow_index]),
+            .serviceTemperature = static_cast<float>(serviceTempAverage.average()),
             .serviceSetPoint = settings->getTargetServiceTemp(),
             .servicePidSettings = settings->getServicePidParameters(),
             .servicePidParameters = servicePidRuntimeParameters,
@@ -532,12 +515,19 @@ void SystemController::onBrewEnded() {
 }
 
 void SystemController::setAutoSleepMinutes(float minutes) {
-    (void)minutes; // <-- ADD THIS LINE to bypass the strict compiler warning
-
-/*  auto autoSleepMinutes = (uint16_t)minutes;
+/*    auto autoSleepMinutes = (uint16_t)minutes;
     settings->setAutoSleepMin(autoSleepMinutes);
 
     resetPlannedSleep();*/
+}
+
+void SystemController::updatePlannedAutoSleep() {
+/*    if (settings->getAutoSleepMin() > 0) {
+        uint32_t ms = (uint32_t)settings->getAutoSleepMin() * 60 * 1000;
+        plannedAutoSleepAt = delayed_by_ms(get_absolute_time(), ms);
+    } else {
+        plannedAutoSleepAt.reset();
+    }*/
 }
 
 void SystemController::onSleepModeEntered() {
