@@ -61,12 +61,15 @@ void SystemController::loop() {
 
     uint16_t cbValidation = validate_raw_packet(currentControlBoardRawPacket);
 
-    // --- HIJACK PART 1: SAVE THE REJECTED PACKET ---
+    // --- HIJACK PART 1: SAVE THE REJECTED PACKET (FIXED) ---
     static uint8_t hijacked_packet[18] = {0};
     if (cbValidation != 0) {
-        memcpy(hijacked_packet, &currentControlBoardRawPacket, 18);
+        uint8_t* raw_ptr = (uint8_t*)&currentControlBoardRawPacket;
+        for(int i = 0; i < 18; i++) {
+            hijacked_packet[i] = raw_ptr[i];
+        }
     }
-    // -----------------------------------------------
+    // -------------------------------------------------------
         
     if (success && cbValidation != CONTROL_BOARD_VALIDATION_ERROR_NONE ) {
         USB_PRINTF("Received packet, validation: %u:\n", cbValidation);
