@@ -110,16 +110,18 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     uint8_t* raw = reinterpret_cast<uint8_t*>(&rawPacket);
 
-    // Initialize block
+    // Initialize block to zero
     for(int i=0; i<18; i++) raw[i] = 0;
 
     rawPacket.header = 0x81;
-    rawPacket.flags = 0x01; // Byte 1 MUST remain exactly 0x01
+    
+    // Base V3 Keep-Alive (Must be present so the machine doesn't sleep)
+    raw[1] = 0x01; 
 
-    // OUTGOING: Send Pump and Solenoid commands on Byte 15
+    // OUTGOING: Send Pump and Solenoid commands on Byte 1!
     if (parsed_packet.brew_switch) {
-        raw[15] |= 0x20; // Pump ON
-        raw[15] |= 0x04; // Solenoid valve OPEN
+        raw[1] |= 0x20; // Pump ON
+        raw[1] |= 0x04; // Solenoid valve OPEN
     }
 
     // CRITICAL SAFETY: Prevent 0.0 target temp from crashing the Gicar on boot
