@@ -96,15 +96,21 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // DUMP RAW BYTES INTO LOGS:
-    // We put Byte 1 into Brew Temp and Byte 10 into Service Temp
-    // so you can read them in your Home Assistant/Log dashboard.
-    packet.brew_boiler_temperature = (float)raw[1]; 
-    packet.service_boiler_temperature = (float)raw[10];
+    // Byte 10 is your confirmed Flag Byte
+    uint8_t flags = raw[10];
 
-    // Disable all switch detection for now to stop the ghost brew timer
-    packet.brew_switch = false;
-    packet.water_tank_empty = false;
+    // LEVER: Your dump showed 127 (Bit 1 ON) when active. 
+    packet.brew_switch = (flags & 0x02); 
+    
+    // TANK: Standard Bianca logic - 0 means Empty.
+    packet.water_tank_empty = ((flags & 0x40) == 0);
+
+    // TEMPERATURES: Skip Byte 1 (Value 55) and read triplets starting at Byte 2.
+    uint32_t bb_raw = (raw[2] << 16) | (raw[3] << 8) | raw[4];
+    uint32_t sb_raw = (raw[5] << 16) | (raw[6] << 8) | raw[7];
+
+    packet.brew_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bb_raw), 50000, 4018);
+    packet.service_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sb_raw), 50000, 4018);
 
     return packet;
 }
@@ -113,17 +119,23 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     rawPacket.header = 0x81;
 
-    // SAFETY: FORCE ALL OUTPUTS OFF
-    // No heaters, no pump, no solenoid.
-    rawPacket.flags = 0x00; 
+    // Bit 0: Power/Ready (Required for 9600125)
+    rawPacket.flags = 0x01; 
 
-    // Send dummy triplets
-    rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(0);
-    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(0);
+    if (parsed_packet.brew_switch) {
+        rawPacket.flags |= 0x20; // Pump ON
+        rawPacket.flags |= 0x04; // Solenoid Valve OPEN
+    }
 
-    // Keep the V2 seed (0x01) so the Gicar stays in the "listening" state
+    // Standard Temperature Triplet Logic (Magnus V2 Original)
+    uint16_t largeCoffee = float_to_high_gain_adc(parsed_packet.brew_boiler_temperature);
+    uint16_t largeService = float_to_high_gain_adc(parsed_packet.service_boiler_temperature);
+    rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(largeCoffee);
+    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(largeService);
+
+    // Final Checksum with forced Seed 0x01
     uint8_t* data = reinterpret_cast<uint8_t*>(&rawPacket) + 1;
-    rawPacket.checksum = calculate_checksum(data, sizeof(rawPacket) - 2, 0x01);
+    rawPacket.checksum = calculate_checksum(data, 16, 0x01); 
 
     return rawPacket;
 }
