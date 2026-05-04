@@ -116,13 +116,16 @@ void SystemController::loop() {
         sleepSeconds = 0.f;
     }
 
-    int slow_index = (bailCounter / 10) % 18;
-        
+    // --- HIJACK PART 2: THE TICKER TAPE ---
+    // Dividing by 30 means it changes once every 3 seconds
+    int slow_index = (bailCounter / 30) % 18; 
+
     SystemControllerStatusMessage message = {
             .timestamp = get_absolute_time(),
             // DASHBOARD WILL SHOW: Index Number (0.0 to 17.0)
             .brewTemperature = static_cast<float>(slow_index), 
-            .offsetBrewTemperature = static_cast<float>(brewTempAverage.average()) + settings->getBrewTemperatureOffset(),
+            // OVERWRITE THE OFFSET SO IT SHOWS ON THE SCREEN!
+            .offsetBrewTemperature = static_cast<float>(slow_index),
             .brewTemperatureOffset = settings->getBrewTemperatureOffset(),
             .brewSetPoint = settings->getTargetBrewTemp(),
             .offsetBrewSetPoint = settings->getTargetBrewTemp() + settings->getBrewTemperatureOffset(),
