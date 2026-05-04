@@ -117,10 +117,10 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     rawPacket.header = 0x81;
 
-    // SAFETY FIRST: Idle state must be 0x00. No pump, no solenoid.
-    rawPacket.flags = 0x00; 
+    // FIX: Send 0x01 to keep the V3 Gicar AWAKE. 
+    // This stops it from entering Standby and faking a lever lift.
+    rawPacket.flags = 0x01; 
 
-    // Only engage hardware when the lever is actually lifted
     if (parsed_packet.brew_switch) {
         rawPacket.flags |= 0x20; // Pump ON
         rawPacket.flags |= 0x04; // Solenoid valve OPEN
@@ -131,7 +131,6 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(largeCoffee);
     rawPacket.service_boiler_temperature_high_gain = int_to_triplet(largeService);
 
-    // V2 Checksum seed (0x01)
     uint8_t* data = reinterpret_cast<uint8_t*>(&rawPacket) + 1;
     rawPacket.checksum = calculate_checksum(data, sizeof(rawPacket) - 2, 0x01); 
 
