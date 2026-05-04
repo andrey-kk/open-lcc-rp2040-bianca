@@ -87,18 +87,17 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
     return error;
 }
 
+// 1. INCOMING DATA (From Gicar to RP2040)
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // 1. INCOMING SWITCHES (Byte 1)
     uint8_t flags = raw[1];
     packet.brew_switch = ((flags & 0x02) != 0);
     
-    // Tank is empty if 0x40 is present (Alarm bit)
+    // Tank logic: Proved by your timer test to be an alarm on 0x40
     packet.water_tank_empty = ((flags & 0x40) != 0); 
 
-    // 2. REAL TEMPERATURES
     uint32_t bb_raw = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     uint32_t sb_raw = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
 
@@ -108,29 +107,27 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     return packet;
 }
 
+// 2. OUTGOING COMMANDS (From RP2040 to Gicar)
 ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPacket parsed_packet) {
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     uint8_t* raw = reinterpret_cast<uint8_t*>(&rawPacket);
 
-    // Clear memory
     for(int i=0; i<18; i++) raw[i] = 0;
 
     rawPacket.header = 0x81;
-    raw[1] = 0x01; // Required V3 Keep-Alive
-
-    // --- ONLY TANK CHANGE BELOW ---
+    
+    // THE "SAFETY TRUST" LOGIC:
+    raw[1] = 0x01; // Base V3 mode
     if (parsed_packet.water_tank_empty) {
-        raw[1] |= 0x40; // Echo the alarm back to the Gicar
-    }
-    // ------------------------------
-
-    // 3. OUTGOING COMMANDS (Byte 15)
-    if (parsed_packet.brew_switch) {
-        raw[15] |= 0x20; // Pump ON
-        raw[15] |= 0x04; // Solenoid OPEN
+        raw[1] |= 0x40; // Echo the Alarm back so the Gicar cuts the heaters
     }
 
-    // 4. REAL TARGETS
+    // Pump control (Only if lever is up AND tank is NOT empty)
+    if (parsed_packet.brew_switch && !parsed_packet.water_tank_empty) {
+        raw[15] |= 0x20; 
+        raw[15] |= 0x04; 
+    }
+
     float t_brew = parsed_packet.brew_boiler_temperature;
     float t_steam = parsed_packet.service_boiler_temperature;
 
