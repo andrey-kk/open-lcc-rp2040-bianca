@@ -61,6 +61,13 @@ void SystemController::loop() {
 
     uint16_t cbValidation = validate_raw_packet(currentControlBoardRawPacket);
 
+    // --- HIJACK PART 1: SAVE THE REJECTED PACKET ---
+    static uint8_t hijacked_packet[18] = {0};
+    if (cbValidation != 0) {
+        memcpy(hijacked_packet, &currentControlBoardRawPacket, 18);
+    }
+    // -----------------------------------------------
+        
     if (success && cbValidation != CONTROL_BOARD_VALIDATION_ERROR_NONE ) {
         USB_PRINTF("Received packet, validation: %u:\n", cbValidation);
         USB_PRINT_BUF(reinterpret_cast<uint8_t *>(&currentControlBoardRawPacket), sizeof(currentControlBoardRawPacket));
@@ -108,14 +115,16 @@ void SystemController::loop() {
 
     SystemControllerStatusMessage message = {
             .timestamp = get_absolute_time(),
-            .brewTemperature = static_cast<float>(brewTempAverage.average()),
+            // DASHBOARD WILL SHOW: Index Number (0.0 to 17.0)
+            .brewTemperature = static_cast<float>(slow_index), 
             .offsetBrewTemperature = static_cast<float>(brewTempAverage.average()) + settings->getBrewTemperatureOffset(),
             .brewTemperatureOffset = settings->getBrewTemperatureOffset(),
             .brewSetPoint = settings->getTargetBrewTemp(),
             .offsetBrewSetPoint = settings->getTargetBrewTemp() + settings->getBrewTemperatureOffset(),
             .brewPidSettings = settings->getBrewPidParameters(),
             .brewPidParameters = brewPidRuntimeParameters,
-            .serviceTemperature = static_cast<float>(serviceTempAverage.average()),
+            // DASHBOARD WILL SHOW: Raw V1 Byte Value (0.0 to 255.0)
+            .serviceTemperature = static_cast<float>(hijacked_packet[slow_index]),
             .serviceSetPoint = settings->getTargetServiceTemp(),
             .servicePidSettings = settings->getServicePidParameters(),
             .servicePidParameters = servicePidRuntimeParameters,
