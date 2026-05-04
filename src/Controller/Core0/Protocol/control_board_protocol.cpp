@@ -91,18 +91,18 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // Keep the lever working so the machine stays happy
-    packet.brew_switch = ((raw[1] & 0x02) != 0);
-    
-    // Force tank full so the RP2040 doesn't panic and block the pump
-    packet.water_tank_empty = false; 
+    uint8_t flags = raw[1];
 
-    // ULTIMATE DIAGNOSTIC: Watch the raw data in real-time
-    // Coffee Temp will display the exact decimal value of Byte 1
-    packet.brew_boiler_temperature = (float)raw[1];
-    
-    // Service Temp will display the exact decimal value of Byte 15
-    packet.service_boiler_temperature = (float)raw[15];
+    // 1. SWITCHES (Perfectly mapped to Byte 1)
+    packet.brew_switch = ((flags & 0x02) != 0);
+    packet.water_tank_empty = ((flags & 0x40) == 0); 
+
+    // 2. REAL TEMPERATURES (Restored)
+    uint32_t bb_raw = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
+    uint32_t sb_raw = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
+
+    packet.brew_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bb_raw), 50000, 4018);
+    packet.service_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sb_raw), 50000, 4018);
 
     return packet;
 }
@@ -111,19 +111,18 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     uint8_t* raw = reinterpret_cast<uint8_t*>(&rawPacket);
 
-    // Clear memory
     for(int i=0; i<18; i++) raw[i] = 0;
 
     rawPacket.header = 0x81;
     raw[1] = 0x01; // Required V3 Keep-Alive
 
-    // 3. OUTGOING COMMANDS (Pump works perfectly on Byte 15)
+    // 3. OUTGOING COMMANDS (Byte 15)
     if (parsed_packet.brew_switch) {
         raw[15] |= 0x20; // Pump ON
         raw[15] |= 0x04; // Solenoid OPEN
     }
 
-    // 4. REAL TARGETS (Allow Home Assistant Eco Mode to work)
+    // 4. REAL TARGETS (Allows Eco-Mode to work)
     float t_brew = parsed_packet.brew_boiler_temperature;
     float t_steam = parsed_packet.service_boiler_temperature;
 
