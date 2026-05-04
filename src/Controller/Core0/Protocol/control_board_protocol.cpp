@@ -102,30 +102,38 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     
-    // Direct memory check for V1 Protocol (Byte 1 == 0x01)
-    uint8_t* raw = (uint8_t*)&raw_packet;
-    bool is_v1 = (raw[1] == 0x01);
+    // Identify V1 by looking at the first byte of the first triplet
+    bool is_v1 = (raw_packet.brew_boiler_temperature_high_gain.b0 == 0x01);
 
     if (is_v1) {
-        // V1 IDLE: flags = 127 (0x7F / 0111 1111)
-        // Bit 1 (value 2) is Brew Switch. If it's 1, lever is DOWN.
-        // We only want brew_switch to be TRUE if that bit is 0.
-        packet.brew_switch = !(raw_packet.flags & 0x02);
+        // --- V1 BITWISE ANALYSIS ---
+        // Your dump showed flags = 127 (0x7F) when IDLE.
+        // Bit 1 (value 2) is Brew Switch. 
+        // Logic: (127 & 2) is 2. So 'Idle' returns a positive number.
+        // We only want the pump ON if the result is 0.
         
-        // Bit 6 (value 64) is Tank. If it's 1, tank is FULL.
-        // We only want water_tank_empty to be TRUE if that bit is 0.
-        packet.water_tank_empty = !(raw_packet.flags & 0x40);
-        
-        // V1 Boiler level: For now, we keep this as false to allow heating
+        if ((raw_packet.flags & 0x02) == 0) {
+            packet.brew_switch = true;  // Lever is UP (0)
+        } else {
+            packet.brew_switch = false; // Lever is DOWN (2)
+        }
+
+        // Apply same explicit logic to the Water Tank (Bit 6 / Value 64)
+        if ((raw_packet.flags & 0x40) == 0) {
+            packet.water_tank_empty = true;
+        } else {
+            packet.water_tank_empty = false;
+        }
+
         packet.service_boiler_low = false; 
     } else {
-        // V2 Standard Logic (Active High)
+        // Standard V2 Logic
         packet.brew_switch = raw_packet.flags & 0x02;
         packet.water_tank_empty = raw_packet.flags & 0x40;
         packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
     }
 
-    // Standard Temperature Math (confirmed working in your logs)
+    // Shared Temperature Math
     auto bbInt = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     auto bbOhm = high_gain_adc_to_ohm(bbInt);
     packet.brew_boiler_temperature = ntc_ohm_to_celsius(bbOhm, 50000, 4018);
