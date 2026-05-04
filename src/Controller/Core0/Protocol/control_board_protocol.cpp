@@ -62,22 +62,53 @@ uint32_t celsius_to_ntc_ohm(float celsius, uint32_t r25, uint32_t b) {
 }
 
 uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
-    // DIAGNOSTIC OVERRIDE: NEVER BAIL. 
-    // This guarantees the dashboard stays alive while we test the physical switches.
-    return CONTROL_BOARD_VALIDATION_ERROR_NONE;
+    uint16_t error = CONTROL_BOARD_VALIDATION_ERROR_NONE;
+
+    if (packet.header != 0x81) {
+        error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_HEADER;
+    }
+
+    static_assert(sizeof(packet) == 18, "Packet size weird");
+    
+    // Checksum verified against 0x01 seed
+    uint8_t calculated_checksum = calculate_checksum(((uint8_t *) &packet + 1), sizeof(packet) - 2, 0x01);
+    if (calculated_checksum != packet.checksum) {
+        error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_CHECKSUM;
+    }
+
+    // Safety bails for extreme temperatures are active again
+    auto brew_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(triplet_to_int(packet.brew_boiler_temperature_high_gain)), 50000, 4000);
+    auto service_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(triplet_to_int(packet.service_boiler_temperature_high_gain)), 50000, 4000);
+
+    if (brew_boiler_temp > 140) {
+        error |= CONTROL_BOARD_VALIDATION_ERROR_BREW_BOILER_TEMP_DANGEROUSLY_HIGH;
+    }
+    if (service_boiler_temp > 150) {
+        error |= CONTROL_BOARD_VALIDATION_ERROR_SERVICE_BOILER_TEMP_DANGEROUSLY_HIGH;
+    }
+
+    return error;
 }
 
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // Watch Byte 15 and Byte 1 to find the Lever and Tank
-    packet.brew_boiler_temperature = (float)raw[15];
-    packet.service_boiler_temperature = (float)raw[1];
+    // BINGO: The V3 switches are hiding in Byte 1!
+    uint8_t flags = raw[1];
 
-    // Keep pump off
-    packet.brew_switch = false;
-    packet.water_tank_empty = false;
+    // V3 Logic: Lifting lever adds 0x02. 
+    packet.brew_switch = ((flags & 0x02) != 0);
+    
+    // V3 Logic: 0x40 is present when tank is full, drops to 0 when empty.
+    packet.water_tank_empty = ((flags & 0x40) == 0);
+
+    // Standard Temperature Locations
+    uint32_t bb_raw = (raw[2] << 16) | (raw[3] << 8) | raw[4];
+    uint32_t sb_raw = (raw[8] << 16) | (raw[9] << 8) | raw[10];
+
+    packet.brew_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bb_raw), 50000, 4018);
+    packet.service_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sb_raw), 50000, 4018);
 
     return packet;
 }
@@ -85,15 +116,23 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
 ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPacket parsed_packet) {
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     rawPacket.header = 0x81;
-    
-    // Keep V3 hardware awake
+
+    // Send 0x01 to keep the V3 hardware awake and out of Standby
     rawPacket.flags = 0x01; 
 
-    // Send a perfectly safe 20°C (room temp) so nothing panics
-    uint16_t safe_temp = float_to_high_gain_adc(20.0f);
-    rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(safe_temp);
-    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(safe_temp);
+    // Engage pump and solenoid when lever is lifted
+    if (parsed_packet.brew_switch) {
+        rawPacket.flags |= 0x20; // Pump ON
+        rawPacket.flags |= 0x04; // Solenoid valve OPEN
+    }
 
+    // Send actual target temperatures
+    uint16_t largeCoffee = float_to_high_gain_adc(parsed_packet.brew_boiler_temperature);
+    uint16_t largeService = float_to_high_gain_adc(parsed_packet.service_boiler_temperature);
+    rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(largeCoffee);
+    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(largeService);
+
+    // Calculate checksum
     uint8_t* data = reinterpret_cast<uint8_t*>(&rawPacket) + 1;
     rawPacket.checksum = calculate_checksum(data, sizeof(rawPacket) - 2, 0x01); 
 
