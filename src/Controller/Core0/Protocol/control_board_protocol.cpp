@@ -91,20 +91,19 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
+    // 1. INCOMING SWITCHES (Perfectly verified on Byte 1)
     uint8_t flags = raw[1];
-
-    // Lever is perfectly mapped
     packet.brew_switch = ((flags & 0x02) != 0);
     
-    // Force tank full so the RP2040 always allows the pump to start
-    packet.water_tank_empty = false;
+    // Tank is ON if 0x40 drops to 0. (Requires ~10-15 seconds of physical removal to trigger)
+    packet.water_tank_empty = ((flags & 0x40) == 0); 
 
-    // DIAGNOSTIC: Hijack dashboard to find the Water Tank
-    // Coffee Temp will show the decimal value of Byte 14
-    packet.brew_boiler_temperature = (float)raw[14];
-    
-    // Service Temp will show the decimal value of Byte 16
-    packet.service_boiler_temperature = (float)raw[16];
+    // 2. REAL TEMPERATURES (Restored from the diagnostic hack)
+    uint32_t bb_raw = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
+    uint32_t sb_raw = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
+
+    packet.brew_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bb_raw), 50000, 4018);
+    packet.service_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sb_raw), 50000, 4018);
 
     return packet;
 }
@@ -117,18 +116,19 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     for(int i=0; i<18; i++) raw[i] = 0;
 
     rawPacket.header = 0x81;
-    raw[1] = 0x01; // Keep-alive stays clean and uncorrupted
+    raw[1] = 0x01; // Required V3 Keep-Alive
 
-    // THE PUMP FIX: Move commands back to Byte 15 where they belong
+    // 3. OUTGOING COMMANDS (Pump works perfectly on Byte 15)
     if (parsed_packet.brew_switch) {
         raw[15] |= 0x20; // Pump ON
         raw[15] |= 0x04; // Solenoid OPEN
     }
 
-    // SAFETY OVERRIDE: Hardcode perfect temperatures so the Gicar NEVER locks out while we test
-    float t_brew = 95.0f;
-    float t_steam = 120.0f;
+    // 4. REAL TARGETS (Allow Home Assistant Eco Mode to work)
+    float t_brew = parsed_packet.brew_boiler_temperature;
+    float t_steam = parsed_packet.service_boiler_temperature;
 
+    // Send both High and Low gain ADCs to satisfy the Gicar's hardware safety checks
     rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(t_brew));
     rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(t_brew));
 
