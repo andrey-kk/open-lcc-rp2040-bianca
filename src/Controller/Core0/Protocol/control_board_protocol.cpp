@@ -70,20 +70,18 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
 
     static_assert(sizeof(packet) == 18, "Packet size weird");
     uint8_t calculated_checksum = calculate_checksum(((uint8_t *) &packet + 1), sizeof(packet) - 2, 0x01);
-    
     if (calculated_checksum != packet.checksum) {
         error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_CHECKSUM;
     }
 
-    // DIRECT MEMORY CHECK: Look at the 2nd byte (index 1) for the V1 flag
+    // V1 Check: The first temperature triplet starts with 0x01
+    // We use a raw byte check to be safe against struct naming
     uint8_t* raw = (uint8_t*)&packet;
     bool is_v1 = (raw[1] == 0x01);
 
-    // Skip the V2 flag bouncer for V1 machines
-    if (!is_v1) {
-        if (packet.flags & 0xBD) {
-            error |= CONTROL_BOARD_VALIDATION_ERROR_UNEXPECTED_FLAGS;
-        }
+    // Only V2 has strict flag requirements
+    if (!is_v1 && (packet.flags & 0xBD)) {
+        error |= CONTROL_BOARD_VALIDATION_ERROR_UNEXPECTED_FLAGS;
     }
 
     auto brew_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(triplet_to_int(packet.brew_boiler_temperature_high_gain)), 50000, 4000);
@@ -102,32 +100,19 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     
-    // Identify V1 by looking at the first byte of the first triplet
-    bool is_v1 = (raw_packet.brew_boiler_temperature_high_gain.b0 == 0x01);
+    uint8_t* raw = (uint8_t*)&raw_packet;
+    bool is_v1 = (raw[1] == 0x01);
 
     if (is_v1) {
-        // --- V1 BITWISE ANALYSIS ---
-        // Your dump showed flags = 127 (0x7F) when IDLE.
-        // Bit 1 (value 2) is Brew Switch. 
-        // Logic: (127 & 2) is 2. So 'Idle' returns a positive number.
-        // We only want the pump ON if the result is 0.
+        // V1 IDLE is 127 (0111 1111). 
+        // We only trigger if the bit is 0 (pulled to ground by switch)
+        packet.brew_switch = ((raw_packet.flags & 0x02) == 0);
+        packet.water_tank_empty = ((raw_packet.flags & 0x40) == 0);
         
-        if ((raw_packet.flags & 0x02) == 0) {
-            packet.brew_switch = true;  // Lever is UP (0)
-        } else {
-            packet.brew_switch = false; // Lever is DOWN (2)
-        }
-
-        // Apply same explicit logic to the Water Tank (Bit 6 / Value 64)
-        if ((raw_packet.flags & 0x40) == 0) {
-            packet.water_tank_empty = true;
-        } else {
-            packet.water_tank_empty = false;
-        }
-
+        // IMPORTANT: In V1, the refill logic might be on a different bit.
+        // We force this to false to stop the pump from running at start.
         packet.service_boiler_low = false; 
     } else {
-        // Standard V2 Logic
         packet.brew_switch = raw_packet.flags & 0x02;
         packet.water_tank_empty = raw_packet.flags & 0x40;
         packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
