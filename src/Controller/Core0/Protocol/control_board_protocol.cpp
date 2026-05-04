@@ -91,13 +91,16 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // 1. Switches (Verified on Byte 1)
     uint8_t flags = raw[1];
-    packet.brew_switch = ((flags & 0x02) != 0);
-    packet.water_tank_empty = false; // Always full to allow pump
 
-    // 2. Temperatures (Using the proper Triplet-to-Int conversion)
-    // This is what fixes the -121.4 C error
+    // INCOMING: Verify Lever (0x02) and Tank (0x40)
+    packet.brew_switch = ((flags & 0x02) != 0);
+    
+    // Magnus: Bit 0x40 is 'ON if 0'. If raw is 64 (0x40), the bit is 1, meaning NOT empty.
+    // If you lift the tank and wait 5 seconds, this should drop to 0.
+    packet.water_tank_empty = ((flags & 0x40) == 0); 
+
+    // TEMPERATURE READS: Use proper triplet conversion to stop -121.4 C error
     uint32_t bb_raw = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     uint32_t sb_raw = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
 
@@ -110,27 +113,21 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
 ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPacket parsed_packet) {
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     uint8_t* raw = reinterpret_cast<uint8_t*>(&rawPacket);
-
-    // Clear memory
     for(int i=0; i<18; i++) raw[i] = 0;
 
     rawPacket.header = 0x81;
-    raw[1] = 0x01; // Required V3 Keep-Alive
+    raw[1] = 0x01; // V3 Handshake
 
-    // Engage Pump and Solenoid on Byte 1
     if (parsed_packet.brew_switch) {
-        raw[1] |= 0x20; // Pump ON
-        raw[1] |= 0x04; // Solenoid OPEN
+        raw[1] |= 0x20; // Pump command
+        raw[1] |= 0x04; // Solenoid command
     }
 
-    // Safety fallback to prevent 0.0C targets from crashing the machine
-    float t_brew = parsed_packet.brew_boiler_temperature;
-    if (t_brew < 20.0f || t_brew > 140.0f) t_brew = 95.0f;
+    // Set targets (fallback to safe defaults if undefined)
+    float t_brew = (parsed_packet.brew_boiler_temperature > 20) ? parsed_packet.brew_boiler_temperature : 95.0f;
+    float t_steam = (parsed_packet.service_boiler_temperature > 20) ? parsed_packet.service_boiler_temperature : 120.0f;
 
-    float t_steam = parsed_packet.service_boiler_temperature;
-    if (t_steam < 20.0f || t_steam > 150.0f) t_steam = 120.0f;
-
-    // THE FIX: Populate BOTH High Gain AND Low Gain ADCs to satisfy the Gicar's hardware safety checks
+    // OUTGOING: Satisfy the Gicar by sending BOTH high and low gain ADCs
     rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(t_brew));
     rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(t_brew));
 
@@ -138,6 +135,5 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     rawPacket.service_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(t_steam));
 
     rawPacket.checksum = calculate_checksum(raw + 1, 16, 0x01);
-
     return rawPacket;
 }
