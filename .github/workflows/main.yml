@@ -34,7 +34,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -DHARDWARE_REVISION=R2C ..
+        cmake -HARDWARE_REVISION_OPENLCC_R2C ..
         make smart_lcc
         make smart_lcc_combined
 
