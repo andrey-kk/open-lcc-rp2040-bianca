@@ -30,7 +30,7 @@ jobs:
         git submodule update --init
         echo "PICO_SDK_PATH=$(pwd)" >> $GITHUB_ENV
 
-- name: Compile Firmware
+    - name: Compile Firmware
       run: |
         mkdir build
         cd build
