@@ -91,14 +91,15 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // 1. INCOMING SWITCHES (Perfectly verified on Byte 1)
-    uint8_t flags = raw[1];
-    packet.brew_switch = ((flags & 0x02) != 0);
+    // 1. LEVER SWITCH (Verified on Byte 1)
+    packet.brew_switch = ((raw[1] & 0x02) != 0);
     
-    // Tank is ON if 0x40 drops to 0. (Requires ~10-15 seconds of physical removal to trigger)
-    packet.water_tank_empty = ((flags & 0x40) == 0); 
+    // 2. WATER TANK SWITCH (Hunting it on Byte 15)
+    // We know Byte 15 idles at 81 (which contains the 0x40 bit). 
+    // If the tank is removed, 0x40 should drop out.
+    packet.water_tank_empty = ((raw[15] & 0x40) == 0); 
 
-    // 2. REAL TEMPERATURES (Restored from the diagnostic hack)
+    // 3. REAL TEMPERATURES (Verified and perfect)
     uint32_t bb_raw = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     uint32_t sb_raw = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
 
