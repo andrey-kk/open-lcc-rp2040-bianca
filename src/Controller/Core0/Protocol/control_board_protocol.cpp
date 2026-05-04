@@ -99,16 +99,24 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     
-    // 1. V1 Detection by Flags
-    // Your dump shows 127 is the IDLE state for V1.
-    bool is_v1 = (raw_packet.flags == 127 || raw_packet.flags == 125);
+    // We know flag 127 is IDLE. Let's look at the bits: 0111 1111
+    bool is_v1 = (raw_packet.flags == 127 || raw_packet.flags == 125 || raw_packet.flags == 63);
 
     if (is_v1) {
-        // V1 Logic: If flags is 127, the lever is DOWN.
-        // We only want brew_switch to be true if the lever is UP (bit 1 becomes 0).
+        // V1 REVISED MAPPING
+        // Brew Switch: Bit 1 (value 2). 1=Idle, 0=Brew.
         packet.brew_switch = ((raw_packet.flags & 0x02) == 0);
-        packet.water_tank_empty = ((raw_packet.flags & 0x40) == 0);
-        packet.service_boiler_low = false; // Safety override to stop start-up pumping
+        
+        // Water Tank: In V1, this is often Bit 6 (0x40) OR Bit 0 (0x01).
+        // Let's check both. If either bit is 0, we treat it as empty for safety.
+        if (((raw_packet.flags & 0x40) == 0) || ((raw_packet.flags & 0x01) == 0)) {
+            packet.water_tank_empty = true;
+        } else {
+            packet.water_tank_empty = false;
+        }
+
+        // Keep this false until we find the real refill bit to prevent startup pumping.
+        packet.service_boiler_low = false; 
     } else {
         // Standard V2 Logic
         packet.brew_switch = raw_packet.flags & 0x02;
@@ -116,11 +124,9 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
         packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
     }
 
-    // 2. Temperature Math (Restored to the version that gave you 23C)
-    // Using triplet_to_int directly as it was previously successful.
+    // Temperature Math (Verified working in your logs!)
     auto bbInt = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     auto sbInt = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
-
     packet.brew_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bbInt), 50000, 4018);
     packet.service_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sbInt), 50000, 4018);
 
