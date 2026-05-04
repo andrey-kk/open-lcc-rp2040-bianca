@@ -71,15 +71,13 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
     static_assert(sizeof(packet) == 18, "Packet size weird");
     uint8_t calculated_checksum = calculate_checksum(((uint8_t *) &packet + 1), sizeof(packet) - 2, 0x01);
     
-    // V1 Check: If the version byte is 0x01, we accept it.
-    // In the raw struct, the version byte is the first byte of the brew_boiler triplet.
-    bool is_v1 = (packet.brew_boiler_temperature_high_gain.low == 0x01);
+    // V1 Check: Look at the first byte of the first triplet
+    bool is_v1 = (packet.brew_boiler_temperature_high_gain.b0 == 0x01);
 
     if (calculated_checksum != packet.checksum) {
         error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_CHECKSUM;
     }
 
-    // Only check for strict V2 flags if it is NOT a V1 machine
     if (!is_v1) {
         if (packet.flags & 0xBD) {
             error |= CONTROL_BOARD_VALIDATION_ERROR_UNEXPECTED_FLAGS;
@@ -102,12 +100,10 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     
-    // V1 detection: Byte 1 is 0x01
-    bool is_v1 = (raw_packet.brew_boiler_temperature_high_gain.low == 0x01);
+    bool is_v1 = (raw_packet.brew_boiler_temperature_high_gain.b0 == 0x01);
 
     if (is_v1) {
         // V1 INVERTED SWITCH LOGIC
-        // We check if the bit is 0 (Active Low)
         packet.brew_switch = ((raw_packet.flags & 0x02) == 0);
         packet.water_tank_empty = ((raw_packet.flags & 0x40) == 0);
         packet.service_boiler_low = false; 
@@ -118,7 +114,6 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
         packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
     }
 
-    // Temperature math (Works for both V1 and V2)
     auto bbInt = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     auto bbOhm = high_gain_adc_to_ohm(bbInt);
     packet.brew_boiler_temperature = ntc_ohm_to_celsius(bbOhm, 50000, 4018);
