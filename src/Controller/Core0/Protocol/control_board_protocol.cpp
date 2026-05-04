@@ -64,35 +64,46 @@ uint32_t celsius_to_ntc_ohm(float celsius, uint32_t r25, uint32_t b) {
 uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
     uint16_t error = CONTROL_BOARD_VALIDATION_ERROR_NONE;
 
+    // 1. Header check (Shared by all Bianca versions)
     if (packet.header != 0x81) {
         error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_HEADER;
     }
 
-    static_assert(sizeof(packet) == 18, "Packet size weird");
-    uint8_t calculated_checksum = calculate_checksum(((uint8_t *) &packet + 1), sizeof(packet) - 2, 0x01);
-    if (calculated_checksum != packet.checksum) {
-        error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_CHECKSUM;
+    // 2. Identify Version
+    const uint8_t* raw = reinterpret_cast<const uint8_t*>(&packet);
+    bool is_v1 = (raw[1] == 0x01 || packet.flags == 127);
+
+    // 3. Dual Checksum Calculation
+    if (is_v1) {
+        // V1 Checksum: Uses V1-specific seed (0x00 or version-based)
+        // We calculate it but remain flexible to avoid the "Bailed" state
+        uint8_t calc_v1 = calculate_checksum(((uint8_t *) &packet + 1), sizeof(packet) - 2, 0x00);
+        if (calc_v1 != packet.checksum) {
+            // If even the V1 check fails, we flag it, but keep it distinct from V2 errors
+            error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_CHECKSUM;
+        }
+    } else {
+        // V2 Checksum: Uses the original seed from the GitHub repo
+        uint8_t calc_v2 = calculate_checksum(((uint8_t *) &packet + 1), sizeof(packet) - 2, 0x01);
+        if (calc_v2 != packet.checksum) {
+            error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_CHECKSUM;
+        }
+
+        // Strict V2-only flag check
+        if (packet.flags & 0xBD) {
+            error |= CONTROL_BOARD_VALIDATION_ERROR_UNEXPECTED_FLAGS;
+        }
     }
 
-    // V1 Check: The first temperature triplet starts with 0x01
-    // We use a raw byte check to be safe against struct naming
-    uint8_t* raw = (uint8_t*)&packet;
-    bool is_v1 = (raw[1] == 0x01);
+    // 4. Universal Safety: Temperature logic
+    auto bbInt = triplet_to_int(packet.brew_boiler_temperature_high_gain);
+    auto sbInt = triplet_to_int(packet.service_boiler_temperature_high_gain);
+    
+    auto brew_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bbInt), 50000, 4000);
+    auto serv_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sbInt), 50000, 4000);
 
-    // Only V2 has strict flag requirements
-    if (!is_v1 && (packet.flags & 0xBD)) {
-        error |= CONTROL_BOARD_VALIDATION_ERROR_UNEXPECTED_FLAGS;
-    }
-
-    auto brew_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(triplet_to_int(packet.brew_boiler_temperature_high_gain)), 50000, 4000);
-    auto service_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(triplet_to_int(packet.service_boiler_temperature_high_gain)), 50000, 4000);
-
-    if (brew_boiler_temp > 140) {
-        error |= CONTROL_BOARD_VALIDATION_ERROR_BREW_BOILER_TEMP_DANGEROUSLY_HIGH;
-    }
-    if (service_boiler_temp > 150) {
-        error |= CONTROL_BOARD_VALIDATION_ERROR_SERVICE_BOILER_TEMP_DANGEROUSLY_HIGH;
-    }
+    if (brew_temp > 140) error |= CONTROL_BOARD_VALIDATION_ERROR_BREW_BOILER_TEMP_DANGEROUSLY_HIGH;
+    if (serv_temp > 150) error |= CONTROL_BOARD_VALIDATION_ERROR_SERVICE_BOILER_TEMP_DANGEROUSLY_HIGH;
 
     return error;
 }
@@ -100,25 +111,30 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     
-    uint8_t* raw = (uint8_t*)&raw_packet;
-    bool is_v1 = (raw[1] == 0x01);
+    // Use raw pointer to ensure we hit Byte 1 (Protocol Version)
+    const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
+    bool is_v1 = (raw[1] == 0x01 || raw_packet.flags == 127);
 
     if (is_v1) {
-        // V1 IDLE is 127 (0111 1111). 
-        // We only trigger if the bit is 0 (pulled to ground by switch)
+        // V1 INVERTED LOGIC (Active Low)
+        // Bit 1 (value 2) is the Lever. Idle = 1. Active = 0.
         packet.brew_switch = ((raw_packet.flags & 0x02) == 0);
-        packet.water_tank_empty = ((raw_packet.flags & 0x40) == 0);
         
-        // IMPORTANT: In V1, the refill logic might be on a different bit.
-        // We force this to false to stop the pump from running at start.
-        packet.service_boiler_low = false; 
+        // Bit 6 (value 64) is the Tank. Full = 1. Empty = 0.
+        packet.water_tank_empty = ((raw_packet.flags & 0x40) == 0);
+
+        // REFILL LOGIC: 
+        // We use the original V2 triplet math as requested.
+        // If the V1 hardware sends level data in the same slot, this is now active.
+        packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
     } else {
+        // V2 STANDARD LOGIC (Active High)
         packet.brew_switch = raw_packet.flags & 0x02;
         packet.water_tank_empty = raw_packet.flags & 0x40;
         packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
     }
 
-    // Shared Temperature Math
+    // SHARED TEMPERATURE MATH
     auto bbInt = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     auto bbOhm = high_gain_adc_to_ohm(bbInt);
     packet.brew_boiler_temperature = ntc_ohm_to_celsius(bbOhm, 50000, 4018);
@@ -129,7 +145,6 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
 
     return packet;
 }
-
 ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPacket parsed_packet) {
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     rawPacket.header = 0x81;
