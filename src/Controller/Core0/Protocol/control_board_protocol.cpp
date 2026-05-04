@@ -91,17 +91,15 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
+    // 1. Switches (Verified on Byte 1)
     uint8_t flags = raw[1];
-
-    // Read the lever from Byte 1
     packet.brew_switch = ((flags & 0x02) != 0);
-    
-    // Force the tank to FULL so the internal logic allows the pump to start
-    packet.water_tank_empty = false;
+    packet.water_tank_empty = false; // Always full to allow pump
 
-    // Read Temperatures
-    uint32_t bb_raw = (raw[2] << 16) | (raw[3] << 8) | raw[4];
-    uint32_t sb_raw = (raw[8] << 16) | (raw[9] << 8) | raw[10];
+    // 2. Temperatures (Using the proper Triplet-to-Int conversion)
+    // This is what fixes the -121.4 C error
+    uint32_t bb_raw = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
+    uint32_t sb_raw = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
 
     packet.brew_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bb_raw), 50000, 4018);
     packet.service_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sb_raw), 50000, 4018);
