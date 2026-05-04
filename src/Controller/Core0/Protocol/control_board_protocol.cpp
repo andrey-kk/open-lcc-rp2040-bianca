@@ -101,39 +101,6 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
     return error;
 }
 
-//    auto brew_boiler_temp = high_gain_adc_to_float(triplet_to_int(packet.brew_boiler_temperature_high_gain));
-    auto brew_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(triplet_to_int(packet.brew_boiler_temperature_high_gain)), 50000, 4000);
-/*
-    if (std::fabs(
-            brew_boiler_temp
-            -
-            low_gain_adc_to_float(triplet_to_int(packet.brew_boiler_temperature_low_gain))
-            ) > 3.0f ) {
-        error |= CONTROL_BOARD_VALIDATION_ERROR_HIGH_AND_LOW_GAIN_BREW_BOILER_TEMP_TOO_DIFFERENT;
-    }*/
-
-    //auto service_boiler_temp = high_gain_adc_to_float(triplet_to_int(packet.service_boiler_temperature_high_gain));
-    auto service_boiler_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(triplet_to_int(packet.service_boiler_temperature_high_gain)), 50000, 4000);
-
-/*    if (std::fabs(
-            service_boiler_temp
-            -
-            low_gain_adc_to_float(triplet_to_int(packet.service_boiler_temperature_low_gain))
-    ) > 3.0f ) {
-        error |= CONTROL_BOARD_VALIDATION_ERROR_HIGH_AND_LOW_GAIN_SERVICE_BOILER_TEMP_TOO_DIFFERENT;
-    }*/
-
-    if (brew_boiler_temp > 140) {
-        error |= CONTROL_BOARD_VALIDATION_ERROR_BREW_BOILER_TEMP_DANGEROUSLY_HIGH;
-    }
-
-if (service_boiler_temp > 150) {
-        error |= CONTROL_BOARD_VALIDATION_ERROR_SERVICE_BOILER_TEMP_DANGEROUSLY_HIGH;
-    }
-
-    return error;
-}
-
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     uint8_t* raw = reinterpret_cast<uint8_t*>(&raw_packet);
