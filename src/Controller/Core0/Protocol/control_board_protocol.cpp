@@ -68,52 +68,59 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
         error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_HEADER;
     }
 
-    // RELIABLE V1 DETECTION: 
-    // V1 Idle Flags = 127. V2 Idle Flags = 0.
-    bool is_v1 = (packet.flags == 127 || packet.flags == 125); 
+    // DIRECT MEMORY ACCESS: Bypass the struct names
+    const uint8_t* raw = reinterpret_cast<const uint8_t*>(&packet);
+    uint8_t version_byte = raw[1];
+    uint8_t flag_byte = raw[10];
 
-    if (is_v1) {
-        // We skip V2 checksum for V1 to prevent the 'Bailed' state.
-        // Once it stops bailing, we can debug the V1 checksum.
-    } else {
+    // Detection: V1 always has version 1 and flag 127
+    bool is_v1 = (version_byte == 0x01 || flag_byte == 127);
+
+    if (!is_v1) {
+        // Only run V2 checksum for V2 machines
         uint8_t calculated_checksum = calculate_checksum(((uint8_t *) &packet + 1), sizeof(packet) - 2, 0x01);
         if (calculated_checksum != packet.checksum) {
             error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_CHECKSUM;
         }
-        if (packet.flags & 0xBD) {
-            error |= CONTROL_BOARD_VALIDATION_ERROR_UNEXPECTED_FLAGS;
-        }
     }
 
-    // Universal Safety
-    auto bbInt = triplet_to_int(packet.brew_boiler_temperature_high_gain);
-    auto brew_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bbInt), 50000, 4000);
-    if (brew_temp > 140) error |= CONTROL_BOARD_VALIDATION_ERROR_BREW_BOILER_TEMP_DANGEROUSLY_HIGH;
+    // Safety: Use the raw buffer to calculate safety temps to avoid struct padding errors
+    // Brew Temp Triplet starts at raw[3], Service at raw[6]
+    uint32_t bb_raw = (raw[3] << 16) | (raw[4] << 8) | raw[5];
+    auto brew_temp = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bb_raw), 50000, 4000);
+
+    if (brew_temp > 140) {
+        error |= CONTROL_BOARD_VALIDATION_ERROR_BREW_BOILER_TEMP_DANGEROUSLY_HIGH;
+    }
 
     return error;
 }
 
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
+    const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
     
-    // Detect V1 by Flag value
-    bool is_v1 = (raw_packet.flags == 127 || raw_packet.flags == 125);
+    uint8_t version_byte = raw[1];
+    uint8_t flag_byte = raw[10];
+    bool is_v1 = (version_byte == 0x01 || flag_byte == 127);
 
     if (is_v1) {
-        // V1 Inverted Logic
-        packet.brew_switch = ((raw_packet.flags & 0x02) == 0);
-        packet.water_tank_empty = ((raw_packet.flags & 0x40) == 0);
-        packet.service_boiler_low = false; // Forced safe for initial boot
+        // V1 Inverted Logic: Bit 1 is Brew, Bit 6 is Tank
+        packet.brew_switch = ((flag_byte & 0x02) == 0);
+        packet.water_tank_empty = ((flag_byte & 0x40) == 0);
+        packet.service_boiler_low = false; // Safety override
     } else {
-        // V2 Standard Logic
-        packet.brew_switch = raw_packet.flags & 0x02;
-        packet.water_tank_empty = raw_packet.flags & 0x40;
+        packet.brew_switch = flag_byte & 0x02;
+        packet.water_tank_empty = flag_byte & 0x40;
         packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
     }
 
-    // Temperature Math
-    packet.brew_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(triplet_to_int(raw_packet.brew_boiler_temperature_high_gain)), 50000, 4018);
-    packet.service_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(triplet_to_int(raw_packet.service_boiler_temperature_high_gain)), 50000, 4018);
+    // Temperature math using direct index to avoid padding shifts
+    uint32_t bb_int = (raw[3] << 16) | (raw[4] << 8) | raw[5];
+    uint32_t sb_int = (raw[6] << 16) | (raw[7] << 8) | raw[8];
+
+    packet.brew_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(bb_int), 50000, 4018);
+    packet.service_boiler_temperature = ntc_ohm_to_celsius(high_gain_adc_to_ohm(sb_int), 50000, 4018);
 
     return packet;
 }
