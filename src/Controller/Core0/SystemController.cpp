@@ -527,13 +527,6 @@ void SystemController::onBrewEnded() {
 }
 
 void SystemController::setAutoSleepMinutes(float minutes) {
-/*    auto autoSleepMinutes = (uint16_t)minutes;
-    settings->setAutoSleepMin(autoSleepMinutes);
-
-    resetPlannedSleep();*/
-}
-
-void SystemController::setAutoSleepMinutes(float minutes) {
     (void)minutes; // <-- ADD THIS LINE to bypass the strict compiler warning
 
 /*  auto autoSleepMinutes = (uint16_t)minutes;
