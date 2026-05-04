@@ -30,11 +30,11 @@ jobs:
         git submodule update --init
         echo "PICO_SDK_PATH=$(pwd)" >> $GITHUB_ENV
 
-    - name: Compile Firmware
+- name: Compile Firmware
       run: |
         mkdir build
         cd build
-        cmake -DHARDWARE_REVISION_OPENLCC_R2B=1 ..
+        cmake -DCMAKE_C_FLAGS="-DHARDWARE_REVISION_OPENLCC_R2B=1" -DCMAKE_CXX_FLAGS="-DHARDWARE_REVISION_OPENLCC_R2B=1" ..
         make smart_lcc
         make smart_lcc_combined
 
