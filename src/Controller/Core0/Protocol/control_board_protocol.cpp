@@ -68,20 +68,17 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
         error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_HEADER;
     }
 
-    // Keep the strict mathematical checksum check!
     static_assert(sizeof(packet) == 18, "Packet size weird");
     uint8_t calculated_checksum = calculate_checksum(((uint8_t *) &packet + 1), sizeof(packet) - 2, 0x01);
     if (calculated_checksum != packet.checksum) {
         error |= CONTROL_BOARD_VALIDATION_ERROR_INVALID_CHECKSUM;
     }
 
-    // Identify if it's a V1 machine (Byte 1 = 0x01)
-    uint8_t* raw = reinterpret_cast<uint8_t*>(&packet);
-    bool is_v1 = (raw[1] == 0x01);
-
-    // V2 strictly checks for 0s in the flags byte. 
-    // V1 uses inverted flags (e.g., 127 / 0x7F), which would trigger this error falsely.
-    if (!is_v1) {
+    // Safely check for V1 Protocol using pointer math
+    uint8_t protocol_version = *((uint8_t*)&packet + 1);
+    
+    // Only check for strict V2 flags if it is NOT a V1 machine
+    if (protocol_version != 0x01) {
         if (packet.flags & 0xBD) {
             error |= CONTROL_BOARD_VALIDATION_ERROR_UNEXPECTED_FLAGS;
         }
@@ -103,23 +100,24 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
 
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
-    uint8_t* raw = reinterpret_cast<uint8_t*>(&raw_packet);
-    bool is_v1 = (raw[1] == 0x01);
+    
+    // Safely check for V1 Protocol
+    uint8_t protocol_version = *((uint8_t*)&raw_packet + 1);
 
-    // Switch/Flag Logic
-    if (is_v1) {
-        // V1 uses inverted logic (Active Low). The "!" flips the 1s back to 0s.
-        packet.brew_switch = !(raw_packet.flags & 0x02);
-        packet.water_tank_empty = !(raw_packet.flags & 0x40);
-        packet.service_boiler_low = false; // Force it to allow heating
+    if (protocol_version == 0x01) {
+        // --- V1 INVERTED SWITCH LOGIC ---
+        // V1 bits are 0 when active, and 1 when idle. 
+        packet.brew_switch = ((raw_packet.flags & 0x02) == 0);
+        packet.water_tank_empty = ((raw_packet.flags & 0x40) == 0);
+        packet.service_boiler_low = false; // Force true to allow heating
     } else {
-        // Standard V2 Logic
+        // --- V2 STANDARD SWITCH LOGIC ---
         packet.brew_switch = raw_packet.flags & 0x02;
         packet.water_tank_empty = raw_packet.flags & 0x40;
         packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
     }
 
-    // Use the original complex math for temperatures!
+    // --- SHARED TEMPERATURE MATH ---
     auto bbInt = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     auto bbOhm = high_gain_adc_to_ohm(bbInt);
     auto bbC = ntc_ohm_to_celsius(bbOhm, 50000, 4018);
