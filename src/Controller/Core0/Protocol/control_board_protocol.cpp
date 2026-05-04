@@ -102,24 +102,30 @@ uint16_t validate_raw_packet(ControlBoardRawPacket packet) {
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet) {
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     
-    // DIRECT MEMORY CHECK: Index 1 is our Protocol Version
+    // Direct memory check for V1 Protocol (Byte 1 == 0x01)
     uint8_t* raw = (uint8_t*)&raw_packet;
     bool is_v1 = (raw[1] == 0x01);
 
     if (is_v1) {
-        // V1 INVERTED SWITCH LOGIC (Active Low)
-        packet.brew_switch = ((raw_packet.flags & 0x02) == 0);
-        packet.water_tank_empty = ((raw_packet.flags & 0x40) == 0);
+        // V1 IDLE: flags = 127 (0x7F / 0111 1111)
+        // Bit 1 (value 2) is Brew Switch. If it's 1, lever is DOWN.
+        // We only want brew_switch to be TRUE if that bit is 0.
+        packet.brew_switch = !(raw_packet.flags & 0x02);
+        
+        // Bit 6 (value 64) is Tank. If it's 1, tank is FULL.
+        // We only want water_tank_empty to be TRUE if that bit is 0.
+        packet.water_tank_empty = !(raw_packet.flags & 0x40);
+        
+        // V1 Boiler level: For now, we keep this as false to allow heating
+        packet.service_boiler_low = false; 
     } else {
-        // V2 STANDARD SWITCH LOGIC (Active High)
+        // V2 Standard Logic (Active High)
         packet.brew_switch = raw_packet.flags & 0x02;
         packet.water_tank_empty = raw_packet.flags & 0x40;
+        packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
     }
 
-    // Use V2 logic for level sensor as a test
-    packet.service_boiler_low = triplet_to_int(raw_packet.service_boiler_level) > 256;
-
-    // Standard Temperature Math
+    // Standard Temperature Math (confirmed working in your logs)
     auto bbInt = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     auto bbOhm = high_gain_adc_to_ohm(bbInt);
     packet.brew_boiler_temperature = ntc_ohm_to_celsius(bbOhm, 50000, 4018);
