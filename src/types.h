@@ -157,3 +157,4 @@ struct SystemControllerCommand {
 
 
 #endif //FIRMWARE_TYPES_H
+
