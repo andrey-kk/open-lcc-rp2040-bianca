@@ -177,13 +177,17 @@ bool EspFirmware::sendStatus(
             .currentlyBrewing = systemControllerStatusMessage->currentlyBrewing,
             .currentlyFillingServiceBoiler = systemControllerStatusMessage->currentlyFillingServiceBoiler,
             .ecoMode = systemControllerStatusMessage->ecoMode,
-            .standbyMode = systemControllerStatusMessage->standbyMode,
+            
+            // --- THESE MUST BE IN THIS EXACT ORDER ---
             .sleepMode = systemControllerStatusMessage->sleepMode,
+            .standbyMode = systemControllerStatusMessage->standbyMode,
             .waterTankLow = systemControllerStatusMessage->waterTankLow,
+            // -----------------------------------------
+
             .plannedAutoSleepInSeconds = autosleepIn,
             .rp2040Temperature = 0,
             .numBails = systemControllerStatusMessage->bailCounter,
-            .rp2040UptimeSeconds = to_ms_since_boot(systemControllerStatusMessage->timestamp) / 1000,
+            .rp2040UptimeSeconds = static_cast<uint32_t>(to_ms_since_boot(systemControllerStatusMessage->timestamp) / 1000),
             .sbRawHi = systemControllerStatusMessage->sbRawHi,
             .sbRawLo = systemControllerStatusMessage->sbRawLo,
             .externalTemperature1 = externalTemperature1,
@@ -240,6 +244,7 @@ void EspFirmware::loop() {
                         return handleCommand(&header);
 //                    case ESP_MESSAGE_ESP_STATUS:
 //                        return handleESPStatus(&header);
+                    case ESP_MESSAGE_PING:
                     case ESP_MESSAGE_POLL_STATUS:
                     case ESP_MESSAGE_ADD_COMMAND_TO_ROUTINE_STEP:
                     case ESP_MESSAGE_ADD_EXIT_CONDITION_TO_ROUTINE_STEP:
@@ -366,6 +371,11 @@ void EspFirmware::handleCommand(ESPMessageHeader *header) {
                         break;
                     case ESP_SYSTEM_COMMAND_CLEAR_ROUTINE:
                         automations->cancelRoutine();
+                        break;
+                    case ESP_SYSTEM_COMMAND_CANCEL_ROUTINE:
+                        break; // Silences the warning
+                    default:
+                        break;
                 }
 
                 sendAck(header->id);

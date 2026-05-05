@@ -123,6 +123,7 @@ void SystemController::loop() {
             .serviceSSRActive = currentLccParsedPacket.service_boiler_ssr_on,
             .ecoMode = settings->getEcoMode(),
             .sleepMode = settings->getSleepMode(),
+            .standbyMode = settings->getStandbyMode(),
             .internalState = internalState,
             .runState = runState,
             .coalescedState = externalState(),
@@ -148,13 +149,6 @@ void SystemController::loop() {
 }
 
 void SystemController::sendLccPacket() {
-    // This ensures the protocol file actually knows the tank is empty
-    currentLccParsedPacket.water_tank_empty = currentControlBoardParsedPacket.water_tank_empty;
-    currentLccParsedPacket.standby_mode = settings->getStandbyMode();
-    currentLccParsedPacket.eco_mode = settings->getEcoMode();
-    currentLccParsedPacket.sleep_mode = settings->getSleepMode();
-    // ------------------------------------------
-    
     LccRawPacket rawLccPacket = convert_lcc_parsed_to_raw(currentLccParsedPacket);
 
     uint16_t lccValidation = validate_lcc_raw_packet(rawLccPacket);
@@ -197,39 +191,29 @@ LccParsedPacket SystemController::handleControlBoardPacket(ControlBoardParsedPac
 
     bool brewing = false;
 
-    // If we're not already brewing, don't start a brew or fill the service boiler if there is no water in the tank
+    // Pump Logic: Remains untouched so the pump works whenever the tank has water
     if (!brewStartedAt.has_value()) {
         if (!waterTankEmptyLatch.get()) {
             if (latestParsedPacket.brew_switch) {
                 updateForFlowMode(&lcc);
-
                 brewing = true;
-
                 onBrewStarted();
-            } else if (serviceBoilerLowLatch.get()) { // Starting a brew has priority over filling the service boiler
+            } else if (serviceBoilerLowLatch.get()) {
                 lcc.pump_on = true;
                 lcc.water_line_solenoid_open = true;
                 lcc.service_boiler_solenoid_open = true;
             }
         }
-    } else { // If we are brewing, keep brewing even if there is no water in the tank
+    } else {
         if (latestParsedPacket.brew_switch) {
             updateForFlowMode(&lcc);
             brewing = true;
-        } else { // Filling the service boiler is not an option while brewing
+        } else {
             onBrewEnded();
         }
     }
 
-    /*
-     * New algorithm:
-     *
-     * Cap BB and SB at 25 respectively. Divide time into 25 x 100 ms slots.
-     *
-     * If BB + SB < 25: Both get what they want.
-     * Else: They get a proportional share of what they want.
-     *   I.e. if BB = 17 and SB = 13, BB gets round((17/(17+13))*25) = 14 and SB gets round((13/(17+13))*25) = 11.
-     */
+    // SSR Queue Logic: We let this run normally to keep the system timing stable
     if (ssrStateQueue.isEmpty()) {
         float feedForward = 0.0f;
         if (brewStartedAt.has_value()) {
@@ -243,17 +227,12 @@ LccParsedPacket SystemController::handleControlBoardPacket(ControlBoardParsedPac
                 );
         uint8_t sbSignal = serviceBoilerController.getControlSignal(serviceTempAverage.average());
 
-//        printf("Raw signals. BB: %u SB: %u\n", bbSignal, sbSignal);
-
         if (settings->getEcoMode()) {
             sbSignal = 0;
         }
 
-        // Power-sharing
         if (bbSignal + sbSignal > 25) {
             if (!brewing) {
-                // If we're brewing, prioritize the brew boiler fully
-                // Otherwise, give the brew boiler slightly less than 75% priority
                 bbSignal = floor((float)bbSignal * 0.75);
             }
             sbSignal = 25 - bbSignal;
@@ -261,18 +240,14 @@ LccParsedPacket SystemController::handleControlBoardPacket(ControlBoardParsedPac
 
         uint8_t noSignal = 25 - bbSignal - sbSignal;
 
-        //printf("Adding new controls to the queue. BB: %u SB: %u NB: %u\n", bbSignal, sbSignal, noSignal);
-
         for (uint8_t i = 0; i < bbSignal; ++i) {
             SsrState state = BREW_BOILER_SSR_ON;
             ssrStateQueue.tryAdd(&state);
         }
-
         for (uint8_t i = 0; i < sbSignal; ++i) {
             SsrState state = SERVICE_BOILER_SSR_ON;
             ssrStateQueue.tryAdd(&state);
         }
-
         for (uint8_t i = 0; i < noSignal; ++i) {
             SsrState state = BOTH_SSRS_OFF;
             ssrStateQueue.tryAdd(&state);
@@ -285,6 +260,7 @@ LccParsedPacket SystemController::handleControlBoardPacket(ControlBoardParsedPac
         return lcc;
     }
 
+    // Assign the calculated state
     if (state == BREW_BOILER_SSR_ON) {
         lcc.brew_boiler_ssr_on = true;
     } else if (state == SERVICE_BOILER_SSR_ON) {
@@ -292,7 +268,15 @@ LccParsedPacket SystemController::handleControlBoardPacket(ControlBoardParsedPac
     }
 
     brewPidRuntimeParameters = brewBoilerController.getRuntimeParameters();
-    //servicePidRuntimeParameters = serviceBoilerController.getRuntimeParameters();
+
+    // --- THE FIX: FINAL HEATER OVERRIDE ---
+    // If standby is on OR the tank is removed, force SSRs to false.
+    // This happens AFTER the queue is handled, so the pump and timing stay perfect.
+    if (settings->getStandbyMode() || latestParsedPacket.water_tank_empty) {
+        lcc.brew_boiler_ssr_on = false;
+        lcc.service_boiler_ssr_on = false;
+    }
+    // --------------------------------------
 
     return lcc;
 }
