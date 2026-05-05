@@ -98,7 +98,7 @@ function(bootloader_build_combined NAME)
     # TODO: The hard-coded 16k here is a bit nasty
     add_custom_target(${APP}_bin DEPENDS ${APP_BIN})
     add_custom_command(OUTPUT ${APP_BIN} DEPENDS ${NAME}.bin
-            COMMAND dd ibs=1k iseek=32 if=${NAME}.bin of=${APP_BIN}
+            COMMAND dd ibs=1k skip=32 if=${NAME}.bin of=${APP_BIN}
     )
 
     # TODO: The hard-coded address here is a bit nasty

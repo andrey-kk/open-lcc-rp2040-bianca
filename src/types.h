@@ -81,6 +81,7 @@ struct SettingStruct {
     float brewTemperatureOffset = -10;
     bool sleepMode = false;
     bool ecoMode = false;
+    bool standbyMode = false;
     float brewTemperatureTarget = 105;
     float serviceTemperatureTarget = 120;
     uint16_t autoSleepMin = 0;
@@ -105,6 +106,7 @@ struct SystemControllerStatusMessage{
     bool serviceSSRActive{};
     bool ecoMode{};
     bool sleepMode{};
+    bool standbyMode{};
     SystemControllerInternalState internalState{};
     SystemControllerRunState runState{};
     SystemControllerCoalescedState coalescedState{};
@@ -130,6 +132,7 @@ typedef enum {
     COMMAND_SET_SERVICE_PID_PARAMETERS,
     COMMAND_SET_ECO_MODE,
     COMMAND_SET_SLEEP_MODE,
+    COMMAND_SET_STANDBY_MODE,
     COMMAND_SET_AUTO_SLEEP_MINUTES,
     COMMAND_UNBAIL,
     COMMAND_TRIGGER_FIRST_RUN,
@@ -154,3 +157,4 @@ struct SystemControllerCommand {
 
 
 #endif //FIRMWARE_TYPES_H
+

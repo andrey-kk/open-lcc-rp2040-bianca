@@ -1,5 +1,6 @@
 //
 // Created by Magnus Nordlander on 2021-06-27.
+// Revised for Bianca V3 Power Modes
 //
 
 #ifndef LCC_RELAY_CONTROL_BOARD_PROTOCOL_H

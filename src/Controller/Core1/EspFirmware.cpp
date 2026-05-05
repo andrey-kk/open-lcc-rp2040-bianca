@@ -177,6 +177,7 @@ bool EspFirmware::sendStatus(
             .currentlyBrewing = systemControllerStatusMessage->currentlyBrewing,
             .currentlyFillingServiceBoiler = systemControllerStatusMessage->currentlyFillingServiceBoiler,
             .ecoMode = systemControllerStatusMessage->ecoMode,
+            .standbyMode = systemControllerStatusMessage->standbyMode,
             .sleepMode = systemControllerStatusMessage->sleepMode,
             .waterTankLow = systemControllerStatusMessage->waterTankLow,
             .plannedAutoSleepInSeconds = autosleepIn,
@@ -322,6 +323,9 @@ void EspFirmware::handleCommand(ESPMessageHeader *header) {
                         break;
                     case ESP_SYSTEM_COMMAND_SET_ECO_MODE:
                         settingsManager->setEcoMode(message.payload.bool1);
+                        break;
+                    case ESP_SYSTEM_COMMAND_SET_STANDBY_MODE:
+                        settingsManager->setStandbyMode(message.payload.bool1);
                         break;
                     case ESP_SYSTEM_COMMAND_SET_AUTO_SLEEP_MINUTES:
                         settingsManager->setAutoSleepMin(message.payload.float1);

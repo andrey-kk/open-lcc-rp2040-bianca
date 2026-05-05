@@ -21,6 +21,7 @@ const SettingStruct defaultSettings{
         .brewTemperatureOffset = -10,
         .sleepMode = false,
         .ecoMode = false,
+        .standbyMode = false,
         .brewTemperatureTarget = 105,
         .serviceTemperatureTarget = 120,
         .autoSleepMin = 0,
@@ -51,6 +52,15 @@ void SettingsManager::setEcoMode(bool ecoMode)
     sendMessage(SystemControllerCommand{
             .type = COMMAND_SET_ECO_MODE,
             .bool1 = ecoMode,
+    });
+}
+
+void SettingsManager::setStandbyMode(bool standbyMode)
+{
+    currentSettings.standbyMode = standbyMode;
+    sendMessage(SystemControllerCommand{
+            .type = COMMAND_SET_STANDBY_MODE,
+            .bool1 = standbyMode,
     });
 }
 
@@ -117,6 +127,15 @@ void SettingsManager::setSleepMode(bool sleepMode)
     sendMessage(SystemControllerCommand{
         .type = COMMAND_SET_SLEEP_MODE,
         .bool1 = sleepMode
+    });
+}
+
+void SettingsManager::setStandbyMode(bool standbyMode)
+{
+    currentSettings.standbyMode = standbyMode;
+    sendMessage(SystemControllerCommand{
+        .type = COMMAND_SET_STANDBY_MODE,
+        .bool1 = standbyMode
     });
 }
 
@@ -214,6 +233,7 @@ void SettingsManager::writeToFlash() {
 void SettingsManager::sendAllSettings() {
     setBrewTemperatureOffset(currentSettings.brewTemperatureOffset);
     setEcoMode(currentSettings.ecoMode);
+    setStandbyMode(currentSettings.standbyMode);
     setTargetBrewTemp(currentSettings.brewTemperatureTarget);
     setAutoSleepMin(currentSettings.autoSleepMin);
     setTargetServiceTemp(currentSettings.serviceTemperatureTarget);

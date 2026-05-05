@@ -1,0 +1,45 @@
+name: Compile RP2040 Firmware
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Install ARM Toolchain
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake gcc-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib build-essential
+
+    - name: Download Pico SDK
+      run: |
+        # CHANGED LINE BELOW: Locking to version 1.5.1
+        git clone -b 1.5.1 https://github.com/raspberrypi/pico-sdk.git
+        cd pico-sdk
+        git submodule update --init
+        echo "PICO_SDK_PATH=$(pwd)" >> $GITHUB_ENV
+
+    - name: Compile Firmware
+      run: |
+        mkdir build
+        cd build
+        cmake -DCMAKE_C_FLAGS="-DHARDWARE_REVISION_OPENLCC_R2B=1" -DCMAKE_CXX_FLAGS="-DHARDWARE_REVISION_OPENLCC_R2B=1" ..
+        make smart_lcc
+        make smart_lcc_combined
+
+    - name: Upload UF2 Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: OpenLCC-Firmware
+        path: build/smart_lcc_combined.uf2

@@ -104,6 +104,7 @@ struct __attribute__((packed)) ESPSystemStatusMessage {
     bool currentlyFillingServiceBoiler;
     bool ecoMode;
     bool sleepMode;
+    bool standbyMode;
     bool waterTankLow;
     uint16_t plannedAutoSleepInSeconds;
     float rp2040Temperature;
@@ -133,6 +134,7 @@ enum ESPSystemCommandType: uint32_t {
     ESP_SYSTEM_COMMAND_SET_SERVICE_PID_PARAMETERS,
     ESP_SYSTEM_COMMAND_SET_ECO_MODE,
     ESP_SYSTEM_COMMAND_SET_SLEEP_MODE,
+    ESP_SYSTEM_COMMAND_SET_STANDBY_MODE,
     ESP_SYSTEM_COMMAND_SET_AUTO_SLEEP_MINUTES,
     ESP_SYSTEM_COMMAND_SET_FLOW_MODE,
     ESP_SYSTEM_COMMAND_ENQUEUE_ROUTINE,

@@ -25,6 +25,7 @@ public:
     inline void setBrewTemperatureOffset(float offset) { currentSettings.brewTemperatureOffset = offset; };
     inline void setEcoMode(bool ecoMode) { currentSettings.ecoMode = ecoMode; };
     inline void setSleepMode(bool sleepMode) { currentSettings.sleepMode = sleepMode; };
+    inline void setStandbyMode(bool standbyMode) { currentSettings.standbyMode = standbyMode; };
     inline void setTargetBrewTemp(float targetBrewTemp) { currentSettings.brewTemperatureTarget = targetBrewTemp; };
     inline void setAutoSleepMin(uint16_t minutes) { currentSettings.autoSleepMin = minutes; };
     inline void setOffsetTargetBrewTemp(float offsetTargetBrewTemp) { setTargetBrewTemp(offsetTargetBrewTemp - currentSettings.brewTemperatureOffset); };
