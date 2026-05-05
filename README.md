@@ -41,3 +41,7 @@ As I do not have a native V3 machine, this firmware was developed and tested on 
 | **Standby State Data** | Not implemented | `bool standbyMode;` implemented | **1 Byte allocated** (uses 1 bit) |
 | **Command Enum Space** | Max value 6 (`0b00000110`) | New value 7 (`0b00000111`) | **0 Bytes added** (uses unassigned int) |
 | **Command Argument** | N/A | Argument 1 (ON) or 0 (OFF) | **0 Bytes added** (reuses `bool1` byte) |
+
+## Contributors
+* **Magnus Nordlander**: Original Creator.
+* **Andrey K.**: V3 Protocol implementation and stability fixes (2026-05-05).
