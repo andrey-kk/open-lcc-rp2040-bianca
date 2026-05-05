@@ -81,6 +81,7 @@ struct SettingStruct {
     float brewTemperatureOffset = -10;
     bool sleepMode = false;
     bool ecoMode = false;
+    bool standbyMode = false;
     float brewTemperatureTarget = 105;
     float serviceTemperatureTarget = 120;
     uint16_t autoSleepMin = 0;
@@ -105,6 +106,7 @@ struct SystemControllerStatusMessage{
     bool serviceSSRActive{};
     bool ecoMode{};
     bool sleepMode{};
+    bool standbyMode{};
     SystemControllerInternalState internalState{};
     SystemControllerRunState runState{};
     SystemControllerCoalescedState coalescedState{};
