@@ -1,0 +1,3 @@
+/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/pioasm/CMakeFiles/pioasm.dir
+/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/pioasm/CMakeFiles/edit_cache.dir
+/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/pioasm/CMakeFiles/rebuild_cache.dir

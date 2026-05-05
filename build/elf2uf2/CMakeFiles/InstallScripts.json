@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/elf2uf2/cmake_install.cmake",
+		"/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/elf2uf2/boot_uf2_headers/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

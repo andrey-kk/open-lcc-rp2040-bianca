@@ -1,2 +1,3 @@
+.DS_Store
 cmake-build-*
-CMakeFiles
+CMakeFiles.DS_Store
