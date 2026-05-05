@@ -240,7 +240,10 @@ void EspFirmware::loop() {
                         return handleCommand(&header);
 //                    case ESP_MESSAGE_ESP_STATUS:
 //                        return handleESPStatus(&header);
-                    case ESP_MESSAGE_PING:
+                    case ESP_MESSAGE_POLL_STATUS:
+                    case ESP_MESSAGE_ADD_COMMAND_TO_ROUTINE_STEP:
+                    case ESP_MESSAGE_ADD_EXIT_CONDITION_TO_ROUTINE_STEP:
+                    case ESP_MESSAGE_NOT_USED:
                     case ESP_MESSAGE_PONG:
                     case ESP_MESSAGE_ACK:
                     case ESP_MESSAGE_NACK:

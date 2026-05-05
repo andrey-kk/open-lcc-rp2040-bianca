@@ -165,6 +165,9 @@ CMAKE_OBJCOPY:FILEPATH=/opt/homebrew/bin/arm-none-eabi-objcopy
 
 CMAKE_OBJDUMP:FILEPATH=/opt/homebrew/bin/arm-none-eabi-objdump
 
+//Override policy version for cmake_minimum_required calls.
+CMAKE_POLICY_VERSION_MINIMUM:STRING=3.5
+
 //Value Computed by CMake
 CMAKE_PROJECT_COMPAT_VERSION:STATIC=
 
@@ -461,6 +464,8 @@ CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 CMAKE_OBJDUMP-ADVANCED:INTERNAL=1
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_POLICY_VERSION_MINIMUM
+CMAKE_POLICY_VERSION_MINIMUM-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_RANLIB
 CMAKE_RANLIB-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_READELF
@@ -510,7 +515,7 @@ PICO_BOOT_STAGE2_DIR:INTERNAL=/Users/andreykislitsyn/pico-sdk/src/rp2_common/boo
 PICO_CMAKE_PRELOAD_PLATFORM_DIR:INTERNAL=/Users/andreykislitsyn/pico-sdk/cmake/preload/platforms
 PICO_CMAKE_PRELOAD_PLATFORM_FILE:INTERNAL=/Users/andreykislitsyn/pico-sdk/cmake/preload/platforms/rp2040.cmake
 PICO_COMPILER_ASM:INTERNAL=/opt/homebrew/bin/arm-none-eabi-gcc
-PICO_DOXYGEN_EXCLUDE_PATHS:INTERNAL= /Users/andreykislitsyn/pico-sdk/src/rp2_common/cmsis /Users/andreykislitsyn/pico-sdk/src/rp2040/hardware_regs
+PICO_DOXYGEN_EXCLUDE_PATHS:INTERNAL= /Users/andreykislitsyn/pico-sdk/src/rp2_common/cmsis /Users/andreykislitsyn/pico-sdk/src/rp2040/hardware_regs /Users/andreykislitsyn/pico-sdk/src/rp2_common/cmsis /Users/andreykislitsyn/pico-sdk/src/rp2040/hardware_regs
 PICO_DOXYGEN_PATHS:INTERNAL= /Users/andreykislitsyn/pico-sdk/src/common /Users/andreykislitsyn/pico-sdk/lib/cyw43-driver/src /Users/andreykislitsyn/pico-sdk/src/rp2_common /Users/andreykislitsyn/pico-sdk/src/rp2040
 PICO_NO_HARDWARE:INTERNAL=0
 PICO_ON_DEVICE:INTERNAL=1

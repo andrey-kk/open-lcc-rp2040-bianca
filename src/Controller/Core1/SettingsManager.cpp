@@ -130,15 +130,6 @@ void SettingsManager::setSleepMode(bool sleepMode)
     });
 }
 
-void SettingsManager::setStandbyMode(bool standbyMode)
-{
-    currentSettings.standbyMode = standbyMode;
-    sendMessage(SystemControllerCommand{
-        .type = COMMAND_SET_STANDBY_MODE,
-        .bool1 = standbyMode
-    });
-}
-
 void SettingsManager::initialize() {
     readSettings();
 
