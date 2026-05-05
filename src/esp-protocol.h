@@ -104,6 +104,7 @@ struct __attribute__((packed)) ESPSystemStatusMessage {
     bool currentlyFillingServiceBoiler;
     bool ecoMode;
     bool sleepMode;
+    bool standbyMode;
     bool waterTankLow;
     uint16_t plannedAutoSleepInSeconds;
     float rp2040Temperature;
