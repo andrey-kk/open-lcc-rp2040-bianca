@@ -148,6 +148,13 @@ void SystemController::loop() {
 }
 
 void SystemController::sendLccPacket() {
+    // This ensures the protocol file actually knows the tank is empty
+    currentLccParsedPacket.water_tank_empty = currentControlBoardParsedPacket.water_tank_empty;
+    currentLccParsedPacket.standby_mode = settings->getStandbyMode();
+    currentLccParsedPacket.eco_mode = settings->getEcoMode();
+    currentLccParsedPacket.sleep_mode = settings->getSleepMode();
+    // ------------------------------------------
+    
     LccRawPacket rawLccPacket = convert_lcc_parsed_to_raw(currentLccParsedPacket);
 
     uint16_t lccValidation = validate_lcc_raw_packet(rawLccPacket);

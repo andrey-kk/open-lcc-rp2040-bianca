@@ -50,6 +50,10 @@ struct LccParsedPacket {
     bool brew_boiler_ssr_on = false;
     bool minus_button_pressed = false;
     bool plus_button_pressed = false;
+    bool water_tank_empty;
+    bool standby_mode;
+    bool eco_mode;
+    bool sleep_mode;
 };
 
 LccRawPacket convert_lcc_parsed_to_raw(LccParsedPacket parsed);

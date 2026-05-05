@@ -14,6 +14,7 @@ public:
     [[nodiscard]] inline float getBrewTemperatureOffset() const { return currentSettings.brewTemperatureOffset; };
     inline bool getEcoMode() const { return currentSettings.ecoMode; };
     inline bool getSleepMode() const { return currentSettings.sleepMode; };
+    inline bool getStandbyMode() const { return currentSettings.standbyMode; };
     inline float getTargetBrewTemp() const { return currentSettings.brewTemperatureTarget; };
     [[nodiscard]] inline uint16_t getAutoSleepMin() const { return currentSettings.autoSleepMin; };
     inline float getOffsetTargetBrewTemp() const { return currentSettings.brewTemperatureTarget + currentSettings.brewTemperatureOffset; };

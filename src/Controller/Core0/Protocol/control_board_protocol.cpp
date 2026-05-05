@@ -140,30 +140,53 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
 
 ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPacket parsed_packet) {
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
+    uint8_t* raw = reinterpret_cast<uint8_t*>(&rawPacket);
+
+    // Initialize the entire packet memory to 0
+    for(int i=0; i<18; i++) raw[i] = 0;
+
+    // Set Header
     rawPacket.header = 0x81;
 
-    rawPacket.flags = 0x0;
-    if (parsed_packet.water_tank_empty) {
-        rawPacket.flags |= 0x40;
-    }
+    // 1. FLAGS (The Pump/Lever Logic)
+    // We must ensure the brew_switch flag is set so the Gicar knows the lever is up
     if (parsed_packet.brew_switch) {
         rawPacket.flags |= 0x02;
     }
+    // Mirror the tank state back to the Gicar
+    if (parsed_packet.water_tank_empty) {
+        rawPacket.flags |= 0x40;
+    }
 
-    /* @fixme This needs to use the new NTC calculation. We just need the numbers for high-to-low gain */
+    // 2. HEATER CONTROL (Zero Bypass)
+    // If Standby is ON or Tank is Empty, we send hard zeros to kill the heaters.
+    if (parsed_packet.standby_mode || parsed_packet.water_tank_empty) {
+        rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(0);
+        rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(0);
+        rawPacket.service_boiler_temperature_low_gain = int_to_triplet(0);
+        rawPacket.service_boiler_temperature_high_gain = int_to_triplet(0);
+    } else {
+        // Normal Brew Boiler Heating
+        rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(parsed_packet.brew_boiler_temperature));
+        rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(parsed_packet.brew_boiler_temperature));
 
-    uint16_t smallCoffee = float_to_low_gain_adc(parsed_packet.brew_boiler_temperature);
-    uint16_t smallService = float_to_low_gain_adc(parsed_packet.service_boiler_temperature);
-    uint16_t largeCoffee = float_to_high_gain_adc(parsed_packet.brew_boiler_temperature);
-    uint16_t largeService = float_to_high_gain_adc(parsed_packet.service_boiler_temperature);
+        // Service Boiler Eco/Sleep Logic
+        if (parsed_packet.eco_mode || parsed_packet.sleep_mode) {
+            rawPacket.service_boiler_temperature_low_gain = int_to_triplet(0);
+            rawPacket.service_boiler_temperature_high_gain = int_to_triplet(0);
+        } else {
+            rawPacket.service_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(parsed_packet.service_boiler_temperature));
+            rawPacket.service_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(parsed_packet.service_boiler_temperature));
+        }
+    }
 
-    rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(smallCoffee);
-    rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(largeCoffee);
-    rawPacket.service_boiler_temperature_low_gain = int_to_triplet(smallService);
-    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(largeService);
-
+    // 3. SERVICE BOILER LEVEL
     rawPacket.service_boiler_level = int_to_triplet(parsed_packet.service_boiler_low ? 650 : 90);
-    rawPacket.checksum = calculate_checksum(reinterpret_cast<uint8_t*>(&rawPacket + 1), sizeof(rawPacket) - 2, 0x01);
+
+    // 4. FIXED CHECKSUM
+    // The checksum starts at byte 1 (flags) and ends at byte 16.
+    // rawPacket.checksum is byte 17.
+    rawPacket.checksum = calculate_checksum(raw + 1, 16, 0x01);
 
     return rawPacket;
 }

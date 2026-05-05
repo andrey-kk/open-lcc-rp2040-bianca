@@ -36,6 +36,9 @@ struct ControlBoardParsedPacket {
     bool service_boiler_low;
     float brew_boiler_temperature;
     float service_boiler_temperature;
+    bool standby_mode;
+    bool eco_mode;
+    bool sleep_mode;
 };
 
 uint16_t validate_raw_packet(ControlBoardRawPacket packet);
