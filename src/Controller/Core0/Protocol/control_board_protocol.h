@@ -1,5 +1,6 @@
 //
 // Created by Magnus Nordlander on 2021-06-27.
+// Revised for Bianca V3 Power Modes
 //
 
 #ifndef LCC_RELAY_CONTROL_BOARD_PROTOCOL_H
@@ -36,6 +37,11 @@ struct ControlBoardParsedPacket {
     bool service_boiler_low;
     float brew_boiler_temperature;
     float service_boiler_temperature;
+    
+    // --- Added for Lelit Bianca V3 Power Modes ---
+    bool standby_mode;
+    bool sleep_mode;
+    bool eco_mode;
 };
 
 uint16_t validate_raw_packet(ControlBoardRawPacket packet);
