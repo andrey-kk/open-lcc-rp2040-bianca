@@ -1,5 +1,6 @@
 //
 // Created by Magnus Nordlander on 2021-06-27.
+// Revised for Bianca V3 Power Modes
 //
 
 #include <cstdio>
@@ -115,32 +116,66 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     // Clear memory
     for(int i=0; i<18; i++) raw[i] = 0;
 
-    // Required V3 Keep-Alive (Untouched - no echos that break the pump)
+    // Required V3 Keep-Alive
     rawPacket.header = 0x81;
     raw[1] = 0x01; 
 
-    // 3. OUTGOING COMMANDS: Software pump block if tank is empty
+    // PUMP CONTROL
     if (parsed_packet.brew_switch && !parsed_packet.water_tank_empty) {
         raw[15] |= 0x20; // Pump ON
         raw[15] |= 0x04; // Solenoid OPEN
     }
 
-    // 4. REAL TARGETS
+    // REAL TARGETS
     float t_brew = parsed_packet.brew_boiler_temperature;
     float t_steam = parsed_packet.service_boiler_temperature;
 
-    // 5. ENFORCE SAFETY: We are the Master. If tank is empty, command the boilers to shut down.
+    // --- THE LELIT BIANCA V3 POWER STATE HIERARCHY ---
+    
+    // Priority 1: CRITICAL SAFETY (Tank Empty)
     if (parsed_packet.water_tank_empty) {
-        t_brew = 0.0f;
-        t_steam = 0.0f;
+        // Enforces Stand-by state to protect heating elements
+        rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(0);
+        rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(0);
+        rawPacket.service_boiler_temperature_high_gain = int_to_triplet(0);
+        rawPacket.service_boiler_temperature_low_gain = int_to_triplet(0);
+    } 
+    // Priority 2: STAND-BY MODE
+    else if (parsed_packet.standby_mode) {
+        // Hard shutdown: Both boilers completely OFF (0°C)
+        rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(0);
+        rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(0);
+        rawPacket.service_boiler_temperature_high_gain = int_to_triplet(0);
+        rawPacket.service_boiler_temperature_low_gain = int_to_triplet(0);
     }
-
-    // Send both High and Low gain ADCs back
-    rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(t_brew));
-    rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(t_brew));
-
-    rawPacket.service_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(t_steam));
-    rawPacket.service_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(t_steam));
+    // Priority 3: SLEEP MODE
+    else if (parsed_packet.sleep_mode) {
+        // Brew boiler drops to 70°C, Steam boiler OFF
+        float t_sleep = 70.0f;
+        rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(t_sleep));
+        rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(t_sleep));
+        
+        rawPacket.service_boiler_temperature_high_gain = int_to_triplet(0);
+        rawPacket.service_boiler_temperature_low_gain = int_to_triplet(0);
+    } 
+    // Priority 4: ECO-MODE
+    else if (parsed_packet.eco_mode) {
+        // Brew boiler stays NORMAL, Steam boiler OFF
+        rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(t_brew));
+        rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(t_brew));
+        
+        rawPacket.service_boiler_temperature_high_gain = int_to_triplet(0);
+        rawPacket.service_boiler_temperature_low_gain = int_to_triplet(0);
+    } 
+    // Priority 5: ALWAYS ON MODE
+    else {
+        // Both boilers NORMAL
+        rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(t_brew));
+        rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(t_brew));
+        
+        rawPacket.service_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(t_steam));
+        rawPacket.service_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(t_steam));
+    }
 
     rawPacket.checksum = calculate_checksum(raw + 1, 16, 0x01);
 
