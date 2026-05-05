@@ -1,5 +1,6 @@
 //
 // Created by Magnus Nordlander on 2021-08-20.
+//Edited by Andrey K. on 2026-05-05
 //
 
 #ifndef FIRMWARE_SYSTEMSETTINGS_H
