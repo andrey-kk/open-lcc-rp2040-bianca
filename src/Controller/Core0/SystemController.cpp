@@ -333,6 +333,9 @@ void SystemController::handleCommands() {
             case COMMAND_SET_SLEEP_MODE:
                 setSleepMode(command.bool1);
                 break;
+            case COMMAND_SET_STANDBY_MODE:
+                settings->setStandbyMode(command.bool1); 
+                break;
             case COMMAND_SET_AUTO_SLEEP_MINUTES:
                 setAutoSleepMinutes(command.float1);
                 break;
