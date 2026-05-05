@@ -24,9 +24,11 @@ public:
     void setBrewPidParameters(PidSettings params);
     void setServicePidParameters(PidSettings params);
     void setSleepMode(bool sleepMode);
+    void setStandbyMode(bool standbyMode);
 
     inline float getBrewTemperatureOffset() const { return currentSettings.brewTemperatureOffset; };
     inline bool getEcoMode() const { return currentSettings.ecoMode; };
+    inline bool getStandbyMode() const { return currentSettings.standbyMode; };
     inline bool getSleepMode() const { return currentSettings.sleepMode; };
     inline float getTargetBrewTemp() const { return currentSettings.brewTemperatureTarget; };
     inline uint16_t getAutoSleepMin() const { return currentSettings.autoSleepMin; };
