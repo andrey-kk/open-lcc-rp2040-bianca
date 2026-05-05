@@ -91,14 +91,14 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     ControlBoardParsedPacket packet = ControlBoardParsedPacket();
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(&raw_packet);
 
-    // 1. INCOMING SWITCHES (Byte 1)
+    // 1. INCOMING SWITCHES (Perfectly verified)
     uint8_t flags = raw[1];
     packet.brew_switch = ((flags & 0x02) != 0);
     
-    // Tank is empty if 0x40 is present (Alarm bit)
+    // Tank is empty when 0x40 is HIGH (Proven by Timer Hijack)
     packet.water_tank_empty = ((flags & 0x40) != 0); 
 
-    // 2. REAL TEMPERATURES
+    // 2. REAL TEMPERATURES (Perfectly verified)
     uint32_t bb_raw = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     uint32_t sb_raw = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
 
@@ -115,17 +115,12 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     // Clear memory
     for(int i=0; i<18; i++) raw[i] = 0;
 
+    // Required V3 Keep-Alive (Untouched - no echos that break the pump)
     rawPacket.header = 0x81;
-    raw[1] = 0x01; // Required V3 Keep-Alive
+    raw[1] = 0x01; 
 
-    // --- ONLY TANK CHANGE BELOW ---
-    if (parsed_packet.water_tank_empty) {
-        raw[1] |= 0x40; // Echo the alarm back to the Gicar
-    }
-    // ------------------------------
-
-    // 3. OUTGOING COMMANDS (Byte 15)
-    if (parsed_packet.brew_switch) {
+    // 3. OUTGOING COMMANDS: Software pump block if tank is empty
+    if (parsed_packet.brew_switch && !parsed_packet.water_tank_empty) {
         raw[15] |= 0x20; // Pump ON
         raw[15] |= 0x04; // Solenoid OPEN
     }
@@ -134,6 +129,13 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     float t_brew = parsed_packet.brew_boiler_temperature;
     float t_steam = parsed_packet.service_boiler_temperature;
 
+    // 5. ENFORCE SAFETY: We are the Master. If tank is empty, command the boilers to shut down.
+    if (parsed_packet.water_tank_empty) {
+        t_brew = 0.0f;
+        t_steam = 0.0f;
+    }
+
+    // Send both High and Low gain ADCs back
     rawPacket.brew_boiler_temperature_high_gain = int_to_triplet(float_to_high_gain_adc(t_brew));
     rawPacket.brew_boiler_temperature_low_gain = int_to_triplet(float_to_low_gain_adc(t_brew));
 
