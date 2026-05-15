@@ -100,6 +100,9 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     // Tank is empty when 0x40 is HIGH (Proven by Timer Hijack)
     packet.water_tank_empty = ((flags & 0x40) != 0); 
 
+// Если бит 0x04 равен 0, значит цепь разомкнута (ВОДЫ НЕТ).
+    packet.service_boiler_low = ((flags & 0x04) == 0);
+
     // 2. REAL TEMPERATURES (Perfectly verified)
     uint32_t bb_raw = triplet_to_int(raw_packet.brew_boiler_temperature_high_gain);
     uint32_t sb_raw = triplet_to_int(raw_packet.service_boiler_temperature_high_gain);
@@ -153,7 +156,7 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
     }
 
     // 3. SERVICE BOILER LEVEL
-    rawPacket.service_boiler_level = int_to_triplet(parsed_packet.service_boiler_low ? 650 : 90);
+    rawPacket.service_boiler_level = int_to_triplet(parsed_packet.service_boiler_low ? 90 : 650);
 
     // 4. FIXED CHECKSUM
     // The checksum starts at byte 1 (flags) and ends at byte 16.
