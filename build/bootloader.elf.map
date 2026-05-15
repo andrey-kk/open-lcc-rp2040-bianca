@@ -1103,9 +1103,9 @@ Discarded input sections
  .text          0x0000000000000000        0x0 CMakeFiles/bootloader.dir/Users/andreykislitsyn/pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RaspberryPi/RP2040/Source/system_RP2040.c.obj
  .data          0x0000000000000000        0x0 CMakeFiles/bootloader.dir/Users/andreykislitsyn/pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RaspberryPi/RP2040/Source/system_RP2040.c.obj
  .bss           0x0000000000000000        0x0 CMakeFiles/bootloader.dir/Users/andreykislitsyn/pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RaspberryPi/RP2040/Source/system_RP2040.c.obj
- .text          0x0000000000000000        0x0 /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccMYWOFU.o
- .data          0x0000000000000000        0x0 /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccMYWOFU.o
- .bss           0x0000000000000000        0x0 /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccMYWOFU.o
+ .text          0x0000000000000000        0x0 /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccQTYBNQ.o
+ .data          0x0000000000000000        0x0 /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccQTYBNQ.o
+ .bss           0x0000000000000000        0x0 /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccQTYBNQ.o
  .data          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp/libgcc.a(_thumb1_case_uqi.o)
  .bss           0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp/libgcc.a(_thumb1_case_uqi.o)
  .data          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
@@ -1311,7 +1311,7 @@ LOAD /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-no
 .boot2          0x0000000010000000      0x100
                 0x0000000010000000                __boot2_start__ = .
  *(.boot2)
- .boot2         0x0000000010000000      0x100 /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccMYWOFU.o
+ .boot2         0x0000000010000000      0x100 /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccQTYBNQ.o
                 0x0000000010000100                __boot2_end__ = .
                 0x0000000000000001                ASSERT (((__boot2_end__ - __boot2_start__) == 0x100), ERROR: Pico second stage bootloader must be 256 bytes in size)
 
@@ -2303,7 +2303,7 @@ LOAD CMakeFiles/bootloader.dir/Users/andreykislitsyn/pico-sdk/src/rp2_common/pic
 LOAD CMakeFiles/bootloader.dir/Users/andreykislitsyn/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
 LOAD CMakeFiles/bootloader.dir/Users/andreykislitsyn/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj
 LOAD CMakeFiles/bootloader.dir/Users/andreykislitsyn/pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RaspberryPi/RP2040/Source/system_RP2040.c.obj
-LOAD /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccMYWOFU.o
+LOAD /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccQTYBNQ.o
 LOAD /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libstdc++.a
 LOAD /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a
 START GROUP
@@ -2396,7 +2396,7 @@ OUTPUT(bootloader.elf elf32-littlearm)
  .ARM.attributes
                 0x00000000000005ce       0x2c CMakeFiles/bootloader.dir/Users/andreykislitsyn/pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RaspberryPi/RP2040/Source/system_RP2040.c.obj
  .ARM.attributes
-                0x00000000000005fa       0x22 /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccMYWOFU.o
+                0x00000000000005fa       0x22 /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccQTYBNQ.o
  .ARM.attributes
                 0x000000000000061c       0x1e /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp/libgcc.a(_thumb1_case_uqi.o)
  .ARM.attributes

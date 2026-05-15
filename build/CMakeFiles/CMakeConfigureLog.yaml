@@ -22,10 +22,10 @@ events:
     candidate_directories:
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
-      - "/opt/homebrew/bin/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
+      - "/opt/homebrew/bin/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -46,14 +46,15 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     searched_directories:
       - "/Users/andreykislitsyn/.local/bin/uname"
       - "/opt/homebrew/sbin/uname"
-      - "/Users/andreykislitsyn/.pyenv/shims/uname"
-      - "/opt/homebrew/bin/uname"
       - "/opt/anaconda3/bin/uname"
       - "/opt/anaconda3/condabin/uname"
+      - "/Users/andreykislitsyn/.pyenv/shims/uname"
+      - "/opt/homebrew/bin/uname"
       - "/opt/local/bin/uname"
       - "/opt/local/sbin/uname"
       - "/usr/local/bin/uname"
@@ -62,12 +63,9 @@ events:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -90,9 +88,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -121,12 +117,9 @@ events:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -149,9 +142,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -178,10 +169,10 @@ events:
     candidate_directories:
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
-      - "/opt/homebrew/bin/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
+      - "/opt/homebrew/bin/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -202,22 +193,22 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     searched_directories:
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc"
+      - "/opt/anaconda3/bin/arm-none-eabi-gcc"
+      - "/opt/anaconda3/condabin/arm-none-eabi-gcc"
       - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc"
     found: "/opt/homebrew/bin/arm-none-eabi-gcc"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -240,9 +231,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -271,12 +260,9 @@ events:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -299,9 +285,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -328,10 +312,10 @@ events:
     candidate_directories:
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
-      - "/opt/homebrew/bin/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
+      - "/opt/homebrew/bin/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -352,22 +336,22 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     searched_directories:
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-g++"
       - "/opt/homebrew/sbin/arm-none-eabi-g++"
+      - "/opt/anaconda3/bin/arm-none-eabi-g++"
+      - "/opt/anaconda3/condabin/arm-none-eabi-g++"
       - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-g++"
     found: "/opt/homebrew/bin/arm-none-eabi-g++"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -390,9 +374,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -421,12 +403,9 @@ events:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -449,9 +428,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -478,10 +455,10 @@ events:
     candidate_directories:
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
-      - "/opt/homebrew/bin/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
+      - "/opt/homebrew/bin/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -502,22 +479,22 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     searched_directories:
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-objcopy"
       - "/opt/homebrew/sbin/arm-none-eabi-objcopy"
+      - "/opt/anaconda3/bin/arm-none-eabi-objcopy"
+      - "/opt/anaconda3/condabin/arm-none-eabi-objcopy"
       - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-objcopy"
     found: "/opt/homebrew/bin/arm-none-eabi-objcopy"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -540,9 +517,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -571,12 +546,9 @@ events:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -599,9 +571,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -628,10 +598,10 @@ events:
     candidate_directories:
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
-      - "/opt/homebrew/bin/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
+      - "/opt/homebrew/bin/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -652,22 +622,22 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     searched_directories:
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-objdump"
       - "/opt/homebrew/sbin/arm-none-eabi-objdump"
+      - "/opt/anaconda3/bin/arm-none-eabi-objdump"
+      - "/opt/anaconda3/condabin/arm-none-eabi-objdump"
       - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-objdump"
     found: "/opt/homebrew/bin/arm-none-eabi-objdump"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -690,9 +660,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -727,10 +695,10 @@ events:
     candidate_directories:
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
-      - "/opt/homebrew/bin/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
+      - "/opt/homebrew/bin/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -751,22 +719,22 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     searched_directories:
       - "/Users/andreykislitsyn/.local/bin/gmake"
       - "/opt/homebrew/sbin/gmake"
+      - "/opt/anaconda3/bin/gmake"
+      - "/opt/anaconda3/condabin/gmake"
       - "/Users/andreykislitsyn/.pyenv/shims/gmake"
     found: "/opt/homebrew/bin/gmake"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -789,9 +757,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -826,12 +792,9 @@ events:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -854,9 +817,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -911,12 +872,9 @@ events:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -939,9 +897,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -992,9 +948,9 @@ events:
       - "/opt/homebrew/bin/"
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -1015,18 +971,16 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     found: "/opt/homebrew/bin/arm-none-eabi-ar"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -1049,9 +1003,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -1080,9 +1032,9 @@ events:
       - "/opt/homebrew/bin/"
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -1103,18 +1055,16 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     found: "/opt/homebrew/bin/arm-none-eabi-ranlib"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -1137,9 +1087,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -1168,9 +1116,9 @@ events:
       - "/opt/homebrew/bin/"
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -1191,18 +1139,16 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     found: "/opt/homebrew/bin/arm-none-eabi-strip"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -1225,9 +1171,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -1256,9 +1200,9 @@ events:
       - "/opt/homebrew/bin/"
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -1279,18 +1223,16 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     found: "/opt/homebrew/bin/arm-none-eabi-ld"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -1313,9 +1255,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -1344,9 +1284,9 @@ events:
       - "/opt/homebrew/bin/"
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -1367,18 +1307,16 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     found: "/opt/homebrew/bin/arm-none-eabi-nm"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -1401,9 +1339,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -1432,9 +1368,9 @@ events:
       - "/opt/homebrew/bin/"
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -1455,18 +1391,16 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     found: "/opt/homebrew/bin/arm-none-eabi-readelf"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -1489,9 +1423,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -1520,9 +1452,9 @@ events:
       - "/opt/homebrew/bin/"
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -1543,14 +1475,15 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     searched_directories:
       - "/opt/homebrew/bin/arm-none-eabi-dlltool"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-dlltool"
       - "/opt/homebrew/sbin/arm-none-eabi-dlltool"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-dlltool"
       - "/opt/anaconda3/bin/arm-none-eabi-dlltool"
       - "/opt/anaconda3/condabin/arm-none-eabi-dlltool"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-dlltool"
       - "/opt/local/bin/arm-none-eabi-dlltool"
       - "/opt/local/sbin/arm-none-eabi-dlltool"
       - "/usr/local/bin/arm-none-eabi-dlltool"
@@ -1571,13 +1504,14 @@ events:
       - "/opt/X11/bin/arm-none-eabi-dlltool"
       - "/Library/Apple/usr/bin/arm-none-eabi-dlltool"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-dlltool"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-dlltool"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-dlltool"
       - "/opt/homebrew/bin/dlltool"
       - "/Users/andreykislitsyn/.local/bin/dlltool"
       - "/opt/homebrew/sbin/dlltool"
-      - "/Users/andreykislitsyn/.pyenv/shims/dlltool"
       - "/opt/anaconda3/bin/dlltool"
       - "/opt/anaconda3/condabin/dlltool"
+      - "/Users/andreykislitsyn/.pyenv/shims/dlltool"
       - "/opt/local/bin/dlltool"
       - "/opt/local/sbin/dlltool"
       - "/usr/local/bin/dlltool"
@@ -1598,18 +1532,16 @@ events:
       - "/opt/X11/bin/dlltool"
       - "/Library/Apple/usr/bin/dlltool"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/dlltool"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/dlltool"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/dlltool"
     found: false
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -1632,9 +1564,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -1663,9 +1593,9 @@ events:
       - "/opt/homebrew/bin/"
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -1686,18 +1616,16 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     found: "/opt/homebrew/bin/arm-none-eabi-addr2line"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -1720,9 +1648,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -1751,9 +1677,9 @@ events:
       - "/opt/homebrew/bin/"
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -1774,14 +1700,15 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     searched_directories:
       - "/opt/homebrew/bin/arm-none-eabi-tapi"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-tapi"
       - "/opt/homebrew/sbin/arm-none-eabi-tapi"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-tapi"
       - "/opt/anaconda3/bin/arm-none-eabi-tapi"
       - "/opt/anaconda3/condabin/arm-none-eabi-tapi"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-tapi"
       - "/opt/local/bin/arm-none-eabi-tapi"
       - "/opt/local/sbin/arm-none-eabi-tapi"
       - "/usr/local/bin/arm-none-eabi-tapi"
@@ -1802,13 +1729,14 @@ events:
       - "/opt/X11/bin/arm-none-eabi-tapi"
       - "/Library/Apple/usr/bin/arm-none-eabi-tapi"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-tapi"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-tapi"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-tapi"
       - "/opt/homebrew/bin/tapi"
       - "/Users/andreykislitsyn/.local/bin/tapi"
       - "/opt/homebrew/sbin/tapi"
-      - "/Users/andreykislitsyn/.pyenv/shims/tapi"
       - "/opt/anaconda3/bin/tapi"
       - "/opt/anaconda3/condabin/tapi"
+      - "/Users/andreykislitsyn/.pyenv/shims/tapi"
       - "/opt/local/bin/tapi"
       - "/opt/local/sbin/tapi"
       - "/usr/local/bin/tapi"
@@ -1829,18 +1757,16 @@ events:
       - "/opt/X11/bin/tapi"
       - "/Library/Apple/usr/bin/tapi"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/tapi"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/tapi"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/tapi"
     found: false
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -1863,9 +1789,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -1896,9 +1820,9 @@ events:
       - "/opt/homebrew/bin/"
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -1919,14 +1843,15 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     searched_directories:
       - "/opt/homebrew/bin/arm-none-eabi-gcc-ar-8.3"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc-ar-8.3"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc-ar-8.3"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ar-8.3"
       - "/opt/anaconda3/bin/arm-none-eabi-gcc-ar-8.3"
       - "/opt/anaconda3/condabin/arm-none-eabi-gcc-ar-8.3"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ar-8.3"
       - "/opt/local/bin/arm-none-eabi-gcc-ar-8.3"
       - "/opt/local/sbin/arm-none-eabi-gcc-ar-8.3"
       - "/usr/local/bin/arm-none-eabi-gcc-ar-8.3"
@@ -1947,13 +1872,14 @@ events:
       - "/opt/X11/bin/arm-none-eabi-gcc-ar-8.3"
       - "/Library/Apple/usr/bin/arm-none-eabi-gcc-ar-8.3"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-gcc-ar-8.3"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-gcc-ar-8.3"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-gcc-ar-8.3"
       - "/opt/homebrew/bin/arm-none-eabi-gcc-ar-8"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc-ar-8"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc-ar-8"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ar-8"
       - "/opt/anaconda3/bin/arm-none-eabi-gcc-ar-8"
       - "/opt/anaconda3/condabin/arm-none-eabi-gcc-ar-8"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ar-8"
       - "/opt/local/bin/arm-none-eabi-gcc-ar-8"
       - "/opt/local/sbin/arm-none-eabi-gcc-ar-8"
       - "/usr/local/bin/arm-none-eabi-gcc-ar-8"
@@ -1974,13 +1900,14 @@ events:
       - "/opt/X11/bin/arm-none-eabi-gcc-ar-8"
       - "/Library/Apple/usr/bin/arm-none-eabi-gcc-ar-8"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-gcc-ar-8"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-gcc-ar-8"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-gcc-ar-8"
       - "/opt/homebrew/bin/arm-none-eabi-gcc-ar8"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc-ar8"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc-ar8"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ar8"
       - "/opt/anaconda3/bin/arm-none-eabi-gcc-ar8"
       - "/opt/anaconda3/condabin/arm-none-eabi-gcc-ar8"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ar8"
       - "/opt/local/bin/arm-none-eabi-gcc-ar8"
       - "/opt/local/sbin/arm-none-eabi-gcc-ar8"
       - "/usr/local/bin/arm-none-eabi-gcc-ar8"
@@ -2001,18 +1928,16 @@ events:
       - "/opt/X11/bin/arm-none-eabi-gcc-ar8"
       - "/Library/Apple/usr/bin/arm-none-eabi-gcc-ar8"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-gcc-ar8"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-gcc-ar8"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-gcc-ar8"
     found: "/opt/homebrew/bin/arm-none-eabi-gcc-ar"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -2035,9 +1960,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -2068,9 +1991,9 @@ events:
       - "/opt/homebrew/bin/"
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -2091,14 +2014,15 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     searched_directories:
       - "/opt/homebrew/bin/arm-none-eabi-gcc-ranlib-8.3"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc-ranlib-8.3"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc-ranlib-8.3"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ranlib-8.3"
       - "/opt/anaconda3/bin/arm-none-eabi-gcc-ranlib-8.3"
       - "/opt/anaconda3/condabin/arm-none-eabi-gcc-ranlib-8.3"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ranlib-8.3"
       - "/opt/local/bin/arm-none-eabi-gcc-ranlib-8.3"
       - "/opt/local/sbin/arm-none-eabi-gcc-ranlib-8.3"
       - "/usr/local/bin/arm-none-eabi-gcc-ranlib-8.3"
@@ -2119,13 +2043,14 @@ events:
       - "/opt/X11/bin/arm-none-eabi-gcc-ranlib-8.3"
       - "/Library/Apple/usr/bin/arm-none-eabi-gcc-ranlib-8.3"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-gcc-ranlib-8.3"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-gcc-ranlib-8.3"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-gcc-ranlib-8.3"
       - "/opt/homebrew/bin/arm-none-eabi-gcc-ranlib-8"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc-ranlib-8"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc-ranlib-8"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ranlib-8"
       - "/opt/anaconda3/bin/arm-none-eabi-gcc-ranlib-8"
       - "/opt/anaconda3/condabin/arm-none-eabi-gcc-ranlib-8"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ranlib-8"
       - "/opt/local/bin/arm-none-eabi-gcc-ranlib-8"
       - "/opt/local/sbin/arm-none-eabi-gcc-ranlib-8"
       - "/usr/local/bin/arm-none-eabi-gcc-ranlib-8"
@@ -2146,13 +2071,14 @@ events:
       - "/opt/X11/bin/arm-none-eabi-gcc-ranlib-8"
       - "/Library/Apple/usr/bin/arm-none-eabi-gcc-ranlib-8"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-gcc-ranlib-8"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-gcc-ranlib-8"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-gcc-ranlib-8"
       - "/opt/homebrew/bin/arm-none-eabi-gcc-ranlib8"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc-ranlib8"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc-ranlib8"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ranlib8"
       - "/opt/anaconda3/bin/arm-none-eabi-gcc-ranlib8"
       - "/opt/anaconda3/condabin/arm-none-eabi-gcc-ranlib8"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ranlib8"
       - "/opt/local/bin/arm-none-eabi-gcc-ranlib8"
       - "/opt/local/sbin/arm-none-eabi-gcc-ranlib8"
       - "/usr/local/bin/arm-none-eabi-gcc-ranlib8"
@@ -2173,18 +2099,16 @@ events:
       - "/opt/X11/bin/arm-none-eabi-gcc-ranlib8"
       - "/Library/Apple/usr/bin/arm-none-eabi-gcc-ranlib8"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-gcc-ranlib8"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-gcc-ranlib8"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-gcc-ranlib8"
     found: "/opt/homebrew/bin/arm-none-eabi-gcc-ranlib"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -2207,9 +2131,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -2244,12 +2166,9 @@ events:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -2272,9 +2191,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -2329,12 +2246,9 @@ events:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -2357,9 +2271,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -2412,9 +2324,9 @@ events:
       - "/opt/homebrew/bin/"
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -2435,14 +2347,15 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     searched_directories:
       - "/opt/homebrew/bin/arm-none-eabi-gcc-ar-8.3"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc-ar-8.3"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc-ar-8.3"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ar-8.3"
       - "/opt/anaconda3/bin/arm-none-eabi-gcc-ar-8.3"
       - "/opt/anaconda3/condabin/arm-none-eabi-gcc-ar-8.3"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ar-8.3"
       - "/opt/local/bin/arm-none-eabi-gcc-ar-8.3"
       - "/opt/local/sbin/arm-none-eabi-gcc-ar-8.3"
       - "/usr/local/bin/arm-none-eabi-gcc-ar-8.3"
@@ -2463,13 +2376,14 @@ events:
       - "/opt/X11/bin/arm-none-eabi-gcc-ar-8.3"
       - "/Library/Apple/usr/bin/arm-none-eabi-gcc-ar-8.3"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-gcc-ar-8.3"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-gcc-ar-8.3"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-gcc-ar-8.3"
       - "/opt/homebrew/bin/arm-none-eabi-gcc-ar-8"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc-ar-8"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc-ar-8"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ar-8"
       - "/opt/anaconda3/bin/arm-none-eabi-gcc-ar-8"
       - "/opt/anaconda3/condabin/arm-none-eabi-gcc-ar-8"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ar-8"
       - "/opt/local/bin/arm-none-eabi-gcc-ar-8"
       - "/opt/local/sbin/arm-none-eabi-gcc-ar-8"
       - "/usr/local/bin/arm-none-eabi-gcc-ar-8"
@@ -2490,13 +2404,14 @@ events:
       - "/opt/X11/bin/arm-none-eabi-gcc-ar-8"
       - "/Library/Apple/usr/bin/arm-none-eabi-gcc-ar-8"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-gcc-ar-8"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-gcc-ar-8"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-gcc-ar-8"
       - "/opt/homebrew/bin/arm-none-eabi-gcc-ar8"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc-ar8"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc-ar8"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ar8"
       - "/opt/anaconda3/bin/arm-none-eabi-gcc-ar8"
       - "/opt/anaconda3/condabin/arm-none-eabi-gcc-ar8"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ar8"
       - "/opt/local/bin/arm-none-eabi-gcc-ar8"
       - "/opt/local/sbin/arm-none-eabi-gcc-ar8"
       - "/usr/local/bin/arm-none-eabi-gcc-ar8"
@@ -2517,18 +2432,16 @@ events:
       - "/opt/X11/bin/arm-none-eabi-gcc-ar8"
       - "/Library/Apple/usr/bin/arm-none-eabi-gcc-ar8"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-gcc-ar8"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-gcc-ar8"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-gcc-ar8"
     found: "/opt/homebrew/bin/arm-none-eabi-gcc-ar"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -2551,9 +2464,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -2584,9 +2495,9 @@ events:
       - "/opt/homebrew/bin/"
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -2607,14 +2518,15 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     searched_directories:
       - "/opt/homebrew/bin/arm-none-eabi-gcc-ranlib-8.3"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc-ranlib-8.3"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc-ranlib-8.3"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ranlib-8.3"
       - "/opt/anaconda3/bin/arm-none-eabi-gcc-ranlib-8.3"
       - "/opt/anaconda3/condabin/arm-none-eabi-gcc-ranlib-8.3"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ranlib-8.3"
       - "/opt/local/bin/arm-none-eabi-gcc-ranlib-8.3"
       - "/opt/local/sbin/arm-none-eabi-gcc-ranlib-8.3"
       - "/usr/local/bin/arm-none-eabi-gcc-ranlib-8.3"
@@ -2635,13 +2547,14 @@ events:
       - "/opt/X11/bin/arm-none-eabi-gcc-ranlib-8.3"
       - "/Library/Apple/usr/bin/arm-none-eabi-gcc-ranlib-8.3"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-gcc-ranlib-8.3"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-gcc-ranlib-8.3"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-gcc-ranlib-8.3"
       - "/opt/homebrew/bin/arm-none-eabi-gcc-ranlib-8"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc-ranlib-8"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc-ranlib-8"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ranlib-8"
       - "/opt/anaconda3/bin/arm-none-eabi-gcc-ranlib-8"
       - "/opt/anaconda3/condabin/arm-none-eabi-gcc-ranlib-8"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ranlib-8"
       - "/opt/local/bin/arm-none-eabi-gcc-ranlib-8"
       - "/opt/local/sbin/arm-none-eabi-gcc-ranlib-8"
       - "/usr/local/bin/arm-none-eabi-gcc-ranlib-8"
@@ -2662,13 +2575,14 @@ events:
       - "/opt/X11/bin/arm-none-eabi-gcc-ranlib-8"
       - "/Library/Apple/usr/bin/arm-none-eabi-gcc-ranlib-8"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-gcc-ranlib-8"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-gcc-ranlib-8"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-gcc-ranlib-8"
       - "/opt/homebrew/bin/arm-none-eabi-gcc-ranlib8"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc-ranlib8"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc-ranlib8"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ranlib8"
       - "/opt/anaconda3/bin/arm-none-eabi-gcc-ranlib8"
       - "/opt/anaconda3/condabin/arm-none-eabi-gcc-ranlib8"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ranlib8"
       - "/opt/local/bin/arm-none-eabi-gcc-ranlib8"
       - "/opt/local/sbin/arm-none-eabi-gcc-ranlib8"
       - "/usr/local/bin/arm-none-eabi-gcc-ranlib8"
@@ -2689,18 +2603,16 @@ events:
       - "/opt/X11/bin/arm-none-eabi-gcc-ranlib8"
       - "/Library/Apple/usr/bin/arm-none-eabi-gcc-ranlib8"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-gcc-ranlib8"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-gcc-ranlib8"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-gcc-ranlib8"
     found: "/opt/homebrew/bin/arm-none-eabi-gcc-ranlib"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -2723,9 +2635,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -2739,8 +2649,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-LbXvpT"
-      binary: "/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-LbXvpT"
+      source: "/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-t1JsWW"
+      binary: "/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-t1JsWW"
     cmakeVariables:
       CMAKE_CXX_STDLIB_MODULES_JSON: ""
       CMAKE_C_FLAGS: "-mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A"
@@ -2751,21 +2661,21 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-LbXvpT'
+        Change Dir: '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-t1JsWW'
         
-        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_ec96e/fast
-        /opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_ec96e.dir/build.make CMakeFiles/cmTC_ec96e.dir/build
-        gmake[1]: Entering directory '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-LbXvpT'
-        Building C object CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj
-        /opt/homebrew/bin/arm-none-eabi-gcc   -mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A  -std=gnu11   -v -o CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj -c /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_93613/fast
+        /opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_93613.dir/build.make CMakeFiles/cmTC_93613.dir/build
+        gmake[1]: Entering directory '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-t1JsWW'
+        Building C object CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj
+        /opt/homebrew/bin/arm-none-eabi-gcc   -mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A  -std=gnu11   -v -o CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj -c /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c
         Using built-in specs.
         COLLECT_GCC=/opt/homebrew/bin/arm-none-eabi-gcc
         Target: arm-none-eabi
         Configured with: /tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/src/gcc/configure --target=arm-none-eabi --prefix=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native --libexecdir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/lib --infodir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/share/doc/gcc-arm-none-eabi/info --mandir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/share/doc/gcc-arm-none-eabi/man --htmldir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/share/doc/gcc-arm-none-eabi/html --pdfdir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/share/doc/gcc-arm-none-eabi/pdf --enable-languages=c,c++ --enable-plugins --disable-decimal-float --disable-libffi --disable-libgomp --disable-libmudflap --disable-libquadmath --disable-libssp --disable-libstdcxx-pch --disable-nls --disable-shared --disable-threads --disable-tls --with-gnu-as --with-gnu-ld --with-newlib --with-headers=yes --with-python-dir=share/gcc-arm-none-eabi --with-sysroot=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/arm-none-eabi --build=x86_64-apple-darwin10 --host=x86_64-apple-darwin10 --with-gmp=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-mpfr=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-mpc=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-isl=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-libelf=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-host-libstdcxx='-static-libgcc -Wl,-lstdc++ -lm' --with-pkgversion='GNU Tools for Arm Embedded Processors 8-2019-q3-update' --with-multilib-list=rmprofile
         Thread model: single
         gcc version 8.3.1 20190703 (release) [gcc-8-branch revision 273027] (GNU Tools for Arm Embedded Processors 8-2019-q3-update) 
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m'
-         /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/cc1 -quiet -v -imultilib thumb/v6-m/nofp -iprefix /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/ -isysroot /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi -D__USES_INITFINI__ -D HARDWARE_REVISION_OPENLCC_R2A /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -march=armv6s-m -auxbase-strip CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj -Wswitch-enum -Wall -Wextra -std=gnu11 -version -o /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccbYGf2s.s
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m'
+         /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/cc1 -quiet -v -imultilib thumb/v6-m/nofp -iprefix /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/ -isysroot /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi -D__USES_INITFINI__ -D HARDWARE_REVISION_OPENLCC_R2A /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -march=armv6s-m -auxbase-strip CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj -Wswitch-enum -Wall -Wextra -std=gnu11 -version -o /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//cclv1gmH.s
         GNU C11 (GNU Tools for Arm Embedded Processors 8-2019-q3-update) version 8.3.1 20190703 (release) [gcc-8-branch revision 273027] (arm-none-eabi)
         	compiled by GNU C version 4.2.1 Compatible Apple LLVM 9.0.0 (clang-900.0.39.2), GMP version 6.1.0, MPFR version 3.1.4, MPC version 1.0.3, isl version isl-0.18-GMP
         
@@ -2786,14 +2696,14 @@ events:
         
         GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
         Compiler executable checksum: ad799d09048718806684803ca675ef2d
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m'
-         /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/as -v -march=armv6s-m -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccbYGf2s.s
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m'
+         /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/as -v -march=armv6s-m -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//cclv1gmH.s
         GNU assembler version 2.32.0 (arm-none-eabi) using BFD version (GNU Tools for Arm Embedded Processors 8-2019-q3-update) 2.32.0.20190703
         COMPILER_PATH=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/
         LIBRARY_PATH=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m'
-        Linking C executable cmTC_ec96e.elf
-        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ec96e.dir/link.txt --verbose=1
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m'
+        Linking C executable cmTC_93613.elf
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_93613.dir/link.txt --verbose=1
         Using built-in specs.
         COLLECT_GCC=/opt/homebrew/bin/arm-none-eabi-gcc
         COLLECT_LTO_WRAPPER=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/lto-wrapper
@@ -2803,12 +2713,12 @@ events:
         gcc version 8.3.1 20190703 (release) [gcc-8-branch revision 273027] (GNU Tools for Arm Embedded Processors 8-2019-q3-update) 
         COMPILER_PATH=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/
         LIBRARY_PATH=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-nostdlib' '-v' '-o' 'cmTC_ec96e.elf' '-mfloat-abi=soft' '-march=armv6s-m'
-         /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/collect2 -plugin /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/liblto_plugin.so -plugin-opt=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/lto-wrapper -plugin-opt=-fresolution=/var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccIzHvto.res --sysroot=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi -X -o cmTC_ec96e.elf -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1 -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-nostdlib' '-v' '-o' 'cmTC_93613.elf' '-mfloat-abi=soft' '-march=armv6s-m'
+         /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/collect2 -plugin /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/liblto_plugin.so -plugin-opt=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/lto-wrapper -plugin-opt=-fresolution=/var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccQ4MHVO.res --sysroot=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi -X -o cmTC_93613.elf -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1 -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj
         /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/ld: warning: cannot find entry symbol _start; defaulting to 0000000000008000
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-nostdlib' '-v' '-o' 'cmTC_ec96e.elf' '-mfloat-abi=soft' '-march=armv6s-m'
-        /opt/homebrew/bin/arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A  -Wl,--build-id=none -nostdlib  -v CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj -o cmTC_ec96e.elf
-        gmake[1]: Leaving directory '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-LbXvpT'
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-nostdlib' '-v' '-o' 'cmTC_93613.elf' '-mfloat-abi=soft' '-march=armv6s-m'
+        /opt/homebrew/bin/arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A  -Wl,--build-id=none -nostdlib  -v CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj -o cmTC_93613.elf
+        gmake[1]: Leaving directory '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-t1JsWW'
         
       exitCode: 0
   -
@@ -2841,21 +2751,21 @@ events:
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-LbXvpT']
+        ignore line: [Change Dir: '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-t1JsWW']
         ignore line: []
-        ignore line: [Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_ec96e/fast]
-        ignore line: [/opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_ec96e.dir/build.make CMakeFiles/cmTC_ec96e.dir/build]
-        ignore line: [gmake[1]: Entering directory '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-LbXvpT']
-        ignore line: [Building C object CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj]
-        ignore line: [/opt/homebrew/bin/arm-none-eabi-gcc   -mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A  -std=gnu11   -v -o CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj -c /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c]
+        ignore line: [Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_93613/fast]
+        ignore line: [/opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_93613.dir/build.make CMakeFiles/cmTC_93613.dir/build]
+        ignore line: [gmake[1]: Entering directory '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-t1JsWW']
+        ignore line: [Building C object CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj]
+        ignore line: [/opt/homebrew/bin/arm-none-eabi-gcc   -mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A  -std=gnu11   -v -o CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj -c /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=/opt/homebrew/bin/arm-none-eabi-gcc]
         ignore line: [Target: arm-none-eabi]
         ignore line: [Configured with: /tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/src/gcc/configure --target=arm-none-eabi --prefix=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native --libexecdir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/lib --infodir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/share/doc/gcc-arm-none-eabi/info --mandir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/share/doc/gcc-arm-none-eabi/man --htmldir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/share/doc/gcc-arm-none-eabi/html --pdfdir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/share/doc/gcc-arm-none-eabi/pdf --enable-languages=c,c++ --enable-plugins --disable-decimal-float --disable-libffi --disable-libgomp --disable-libmudflap --disable-libquadmath --disable-libssp --disable-libstdcxx-pch --disable-nls --disable-shared --disable-threads --disable-tls --with-gnu-as --with-gnu-ld --with-newlib --with-headers=yes --with-python-dir=share/gcc-arm-none-eabi --with-sysroot=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/arm-none-eabi --build=x86_64-apple-darwin10 --host=x86_64-apple-darwin10 --with-gmp=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-mpfr=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-mpc=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-isl=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-libelf=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-host-libstdcxx='-static-libgcc -Wl,-lstdc++ -lm' --with-pkgversion='GNU Tools for Arm Embedded Processors 8-2019-q3-update' --with-multilib-list=rmprofile]
         ignore line: [Thread model: single]
         ignore line: [gcc version 8.3.1 20190703 (release) [gcc-8-branch revision 273027] (GNU Tools for Arm Embedded Processors 8-2019-q3-update) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m']
-        ignore line: [ /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/cc1 -quiet -v -imultilib thumb/v6-m/nofp -iprefix /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/ -isysroot /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi -D__USES_INITFINI__ -D HARDWARE_REVISION_OPENLCC_R2A /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -march=armv6s-m -auxbase-strip CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj -Wswitch-enum -Wall -Wextra -std=gnu11 -version -o /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccbYGf2s.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m']
+        ignore line: [ /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/cc1 -quiet -v -imultilib thumb/v6-m/nofp -iprefix /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/ -isysroot /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi -D__USES_INITFINI__ -D HARDWARE_REVISION_OPENLCC_R2A /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -march=armv6s-m -auxbase-strip CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj -Wswitch-enum -Wall -Wextra -std=gnu11 -version -o /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//cclv1gmH.s]
         ignore line: [GNU C11 (GNU Tools for Arm Embedded Processors 8-2019-q3-update) version 8.3.1 20190703 (release) [gcc-8-branch revision 273027] (arm-none-eabi)]
         ignore line: [	compiled by GNU C version 4.2.1 Compatible Apple LLVM 9.0.0 (clang-900.0.39.2)  GMP version 6.1.0  MPFR version 3.1.4  MPC version 1.0.3  isl version isl-0.18-GMP]
         ignore line: []
@@ -2876,14 +2786,14 @@ events:
         ignore line: []
         ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
         ignore line: [Compiler executable checksum: ad799d09048718806684803ca675ef2d]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m']
-        ignore line: [ /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/as -v -march=armv6s-m -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccbYGf2s.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m']
+        ignore line: [ /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/as -v -march=armv6s-m -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//cclv1gmH.s]
         ignore line: [GNU assembler version 2.32.0 (arm-none-eabi) using BFD version (GNU Tools for Arm Embedded Processors 8-2019-q3-update) 2.32.0.20190703]
         ignore line: [COMPILER_PATH=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/]
         ignore line: [LIBRARY_PATH=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m']
-        ignore line: [Linking C executable cmTC_ec96e.elf]
-        ignore line: [/opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ec96e.dir/link.txt --verbose=1]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu11' '-v' '-o' 'CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m']
+        ignore line: [Linking C executable cmTC_93613.elf]
+        ignore line: [/opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_93613.dir/link.txt --verbose=1]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=/opt/homebrew/bin/arm-none-eabi-gcc]
         ignore line: [COLLECT_LTO_WRAPPER=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/lto-wrapper]
@@ -2893,17 +2803,17 @@ events:
         ignore line: [gcc version 8.3.1 20190703 (release) [gcc-8-branch revision 273027] (GNU Tools for Arm Embedded Processors 8-2019-q3-update) ]
         ignore line: [COMPILER_PATH=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/]
         ignore line: [LIBRARY_PATH=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-nostdlib' '-v' '-o' 'cmTC_ec96e.elf' '-mfloat-abi=soft' '-march=armv6s-m']
-        link line: [ /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/collect2 -plugin /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/liblto_plugin.so -plugin-opt=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/lto-wrapper -plugin-opt=-fresolution=/var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccIzHvto.res --sysroot=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi -X -o cmTC_ec96e.elf -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1 -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-nostdlib' '-v' '-o' 'cmTC_93613.elf' '-mfloat-abi=soft' '-march=armv6s-m']
+        link line: [ /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/collect2 -plugin /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/liblto_plugin.so -plugin-opt=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/lto-wrapper -plugin-opt=-fresolution=/var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccQ4MHVO.res --sysroot=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi -X -o cmTC_93613.elf -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1 -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj]
           arg [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/collect2] ==> ignore
           arg [-plugin] ==> ignore
           arg [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/liblto_plugin.so] ==> ignore
           arg [-plugin-opt=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/lto-wrapper] ==> ignore
-          arg [-plugin-opt=-fresolution=/var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccIzHvto.res] ==> ignore
+          arg [-plugin-opt=-fresolution=/var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccQ4MHVO.res] ==> ignore
           arg [--sysroot=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi] ==> ignore
           arg [-X] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_ec96e.elf] ==> ignore
+          arg [cmTC_93613.elf] ==> ignore
           arg [-L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp] ==> dir [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp]
           arg [-L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp] ==> dir [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp]
           arg [-L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp] ==> dir [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp]
@@ -2912,12 +2822,12 @@ events:
           arg [-L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib] ==> dir [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib]
           arg [-L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib] ==> dir [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib]
           arg [--build-id=none] ==> ignore
-          arg [CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj] ==> ignore
+          arg [CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj] ==> ignore
         ignore line: [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/ld: warning: cannot find entry symbol _start]
         ignore line: [ defaulting to 0000000000008000]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-nostdlib' '-v' '-o' 'cmTC_ec96e.elf' '-mfloat-abi=soft' '-march=armv6s-m']
-        ignore line: [/opt/homebrew/bin/arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A  -Wl --build-id=none -nostdlib  -v CMakeFiles/cmTC_ec96e.dir/CMakeCCompilerABI.c.obj -o cmTC_ec96e.elf]
-        ignore line: [gmake[1]: Leaving directory '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-LbXvpT']
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-nostdlib' '-v' '-o' 'cmTC_93613.elf' '-mfloat-abi=soft' '-march=armv6s-m']
+        ignore line: [/opt/homebrew/bin/arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A  -Wl --build-id=none -nostdlib  -v CMakeFiles/cmTC_93613.dir/CMakeCCompilerABI.c.obj -o cmTC_93613.elf]
+        ignore line: [gmake[1]: Leaving directory '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-t1JsWW']
         ignore line: []
         ignore line: []
         collapse library dir [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp] ==> [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp]
@@ -2942,8 +2852,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-fM01P4"
-      binary: "/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-fM01P4"
+      source: "/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-5OEIzj"
+      binary: "/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-5OEIzj"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "-mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A"
       CMAKE_CXX_FLAGS_DEBUG: "-g2 -O0 -ggdb2"
@@ -2955,21 +2865,21 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-fM01P4'
+        Change Dir: '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-5OEIzj'
         
-        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_c4a96/fast
-        /opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_c4a96.dir/build.make CMakeFiles/cmTC_c4a96.dir/build
-        gmake[1]: Entering directory '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-fM01P4'
-        Building CXX object CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj
-        /opt/homebrew/bin/arm-none-eabi-g++   -mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A  -std=gnu++17   -v -o CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj -c /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_f134c/fast
+        /opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_f134c.dir/build.make CMakeFiles/cmTC_f134c.dir/build
+        gmake[1]: Entering directory '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-5OEIzj'
+        Building CXX object CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj
+        /opt/homebrew/bin/arm-none-eabi-g++   -mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A  -std=gnu++17   -v -o CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj -c /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp
         Using built-in specs.
         COLLECT_GCC=/opt/homebrew/bin/arm-none-eabi-g++
         Target: arm-none-eabi
         Configured with: /tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/src/gcc/configure --target=arm-none-eabi --prefix=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native --libexecdir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/lib --infodir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/share/doc/gcc-arm-none-eabi/info --mandir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/share/doc/gcc-arm-none-eabi/man --htmldir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/share/doc/gcc-arm-none-eabi/html --pdfdir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/share/doc/gcc-arm-none-eabi/pdf --enable-languages=c,c++ --enable-plugins --disable-decimal-float --disable-libffi --disable-libgomp --disable-libmudflap --disable-libquadmath --disable-libssp --disable-libstdcxx-pch --disable-nls --disable-shared --disable-threads --disable-tls --with-gnu-as --with-gnu-ld --with-newlib --with-headers=yes --with-python-dir=share/gcc-arm-none-eabi --with-sysroot=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/arm-none-eabi --build=x86_64-apple-darwin10 --host=x86_64-apple-darwin10 --with-gmp=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-mpfr=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-mpc=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-isl=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-libelf=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-host-libstdcxx='-static-libgcc -Wl,-lstdc++ -lm' --with-pkgversion='GNU Tools for Arm Embedded Processors 8-2019-q3-update' --with-multilib-list=rmprofile
         Thread model: single
         gcc version 8.3.1 20190703 (release) [gcc-8-branch revision 273027] (GNU Tools for Arm Embedded Processors 8-2019-q3-update) 
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m'
-         /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/cc1plus -quiet -v -imultilib thumb/v6-m/nofp -iprefix /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/ -isysroot /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi -D__USES_INITFINI__ -D HARDWARE_REVISION_OPENLCC_R2A /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -march=armv6s-m -auxbase-strip CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj -Wswitch-enum -Wall -Wextra -std=gnu++17 -version -o /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccHPdZUt.s
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m'
+         /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/cc1plus -quiet -v -imultilib thumb/v6-m/nofp -iprefix /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/ -isysroot /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi -D__USES_INITFINI__ -D HARDWARE_REVISION_OPENLCC_R2A /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -march=armv6s-m -auxbase-strip CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj -Wswitch-enum -Wall -Wextra -std=gnu++17 -version -o /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//cc0bjjNh.s
         GNU C++17 (GNU Tools for Arm Embedded Processors 8-2019-q3-update) version 8.3.1 20190703 (release) [gcc-8-branch revision 273027] (arm-none-eabi)
         	compiled by GNU C version 4.2.1 Compatible Apple LLVM 9.0.0 (clang-900.0.39.2), GMP version 6.1.0, MPFR version 3.1.4, MPC version 1.0.3, isl version isl-0.18-GMP
         
@@ -2996,14 +2906,14 @@ events:
         
         GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
         Compiler executable checksum: abc95bb7559b5ee5ecbff6da3be4e427
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m'
-         /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/as -v -march=armv6s-m -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccHPdZUt.s
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m'
+         /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/as -v -march=armv6s-m -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//cc0bjjNh.s
         GNU assembler version 2.32.0 (arm-none-eabi) using BFD version (GNU Tools for Arm Embedded Processors 8-2019-q3-update) 2.32.0.20190703
         COMPILER_PATH=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/
         LIBRARY_PATH=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m'
-        Linking CXX executable cmTC_c4a96.elf
-        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c4a96.dir/link.txt --verbose=1
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m'
+        Linking CXX executable cmTC_f134c.elf
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f134c.dir/link.txt --verbose=1
         Using built-in specs.
         COLLECT_GCC=/opt/homebrew/bin/arm-none-eabi-g++
         COLLECT_LTO_WRAPPER=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/lto-wrapper
@@ -3013,12 +2923,12 @@ events:
         gcc version 8.3.1 20190703 (release) [gcc-8-branch revision 273027] (GNU Tools for Arm Embedded Processors 8-2019-q3-update) 
         COMPILER_PATH=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/
         LIBRARY_PATH=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-nostdlib' '-v' '-o' 'cmTC_c4a96.elf' '-mfloat-abi=soft' '-march=armv6s-m'
-         /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/collect2 -plugin /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/liblto_plugin.so -plugin-opt=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/lto-wrapper -plugin-opt=-fresolution=/var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccVgLr4f.res --sysroot=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi -X -o cmTC_c4a96.elf -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1 -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-nostdlib' '-v' '-o' 'cmTC_f134c.elf' '-mfloat-abi=soft' '-march=armv6s-m'
+         /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/collect2 -plugin /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/liblto_plugin.so -plugin-opt=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/lto-wrapper -plugin-opt=-fresolution=/var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccOtzXMA.res --sysroot=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi -X -o cmTC_f134c.elf -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1 -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj
         /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/ld: warning: cannot find entry symbol _start; defaulting to 0000000000008000
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-nostdlib' '-v' '-o' 'cmTC_c4a96.elf' '-mfloat-abi=soft' '-march=armv6s-m'
-        /opt/homebrew/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A  -Wl,--build-id=none -nostdlib  -v CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_c4a96.elf
-        gmake[1]: Leaving directory '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-fM01P4'
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-nostdlib' '-v' '-o' 'cmTC_f134c.elf' '-mfloat-abi=soft' '-march=armv6s-m'
+        /opt/homebrew/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A  -Wl,--build-id=none -nostdlib  -v CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_f134c.elf
+        gmake[1]: Leaving directory '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-5OEIzj'
         
       exitCode: 0
   -
@@ -3057,21 +2967,21 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-fM01P4']
+        ignore line: [Change Dir: '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-5OEIzj']
         ignore line: []
-        ignore line: [Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_c4a96/fast]
-        ignore line: [/opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_c4a96.dir/build.make CMakeFiles/cmTC_c4a96.dir/build]
-        ignore line: [gmake[1]: Entering directory '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-fM01P4']
-        ignore line: [Building CXX object CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj]
-        ignore line: [/opt/homebrew/bin/arm-none-eabi-g++   -mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A  -std=gnu++17   -v -o CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj -c /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /opt/homebrew/bin/gmake -f Makefile cmTC_f134c/fast]
+        ignore line: [/opt/homebrew/bin/gmake  -f CMakeFiles/cmTC_f134c.dir/build.make CMakeFiles/cmTC_f134c.dir/build]
+        ignore line: [gmake[1]: Entering directory '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-5OEIzj']
+        ignore line: [Building CXX object CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj]
+        ignore line: [/opt/homebrew/bin/arm-none-eabi-g++   -mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A  -std=gnu++17   -v -o CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj -c /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=/opt/homebrew/bin/arm-none-eabi-g++]
         ignore line: [Target: arm-none-eabi]
         ignore line: [Configured with: /tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/src/gcc/configure --target=arm-none-eabi --prefix=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native --libexecdir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/lib --infodir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/share/doc/gcc-arm-none-eabi/info --mandir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/share/doc/gcc-arm-none-eabi/man --htmldir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/share/doc/gcc-arm-none-eabi/html --pdfdir=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/share/doc/gcc-arm-none-eabi/pdf --enable-languages=c,c++ --enable-plugins --disable-decimal-float --disable-libffi --disable-libgomp --disable-libmudflap --disable-libquadmath --disable-libssp --disable-libstdcxx-pch --disable-nls --disable-shared --disable-threads --disable-tls --with-gnu-as --with-gnu-ld --with-newlib --with-headers=yes --with-python-dir=share/gcc-arm-none-eabi --with-sysroot=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/install-native/arm-none-eabi --build=x86_64-apple-darwin10 --host=x86_64-apple-darwin10 --with-gmp=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-mpfr=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-mpc=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-isl=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-libelf=/tmp/jenkins-GCC-8-build-toolchain-mac_LSF-72_20190704_1562200948/build-native/host-libs/usr --with-host-libstdcxx='-static-libgcc -Wl,-lstdc++ -lm' --with-pkgversion='GNU Tools for Arm Embedded Processors 8-2019-q3-update' --with-multilib-list=rmprofile]
         ignore line: [Thread model: single]
         ignore line: [gcc version 8.3.1 20190703 (release) [gcc-8-branch revision 273027] (GNU Tools for Arm Embedded Processors 8-2019-q3-update) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m']
-        ignore line: [ /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/cc1plus -quiet -v -imultilib thumb/v6-m/nofp -iprefix /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/ -isysroot /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi -D__USES_INITFINI__ -D HARDWARE_REVISION_OPENLCC_R2A /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -march=armv6s-m -auxbase-strip CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj -Wswitch-enum -Wall -Wextra -std=gnu++17 -version -o /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccHPdZUt.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m']
+        ignore line: [ /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/cc1plus -quiet -v -imultilib thumb/v6-m/nofp -iprefix /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/ -isysroot /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi -D__USES_INITFINI__ -D HARDWARE_REVISION_OPENLCC_R2A /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -march=armv6s-m -auxbase-strip CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj -Wswitch-enum -Wall -Wextra -std=gnu++17 -version -o /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//cc0bjjNh.s]
         ignore line: [GNU C++17 (GNU Tools for Arm Embedded Processors 8-2019-q3-update) version 8.3.1 20190703 (release) [gcc-8-branch revision 273027] (arm-none-eabi)]
         ignore line: [	compiled by GNU C version 4.2.1 Compatible Apple LLVM 9.0.0 (clang-900.0.39.2)  GMP version 6.1.0  MPFR version 3.1.4  MPC version 1.0.3  isl version isl-0.18-GMP]
         ignore line: []
@@ -3098,14 +3008,14 @@ events:
         ignore line: []
         ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
         ignore line: [Compiler executable checksum: abc95bb7559b5ee5ecbff6da3be4e427]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m']
-        ignore line: [ /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/as -v -march=armv6s-m -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccHPdZUt.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m']
+        ignore line: [ /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/as -v -march=armv6s-m -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj /var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//cc0bjjNh.s]
         ignore line: [GNU assembler version 2.32.0 (arm-none-eabi) using BFD version (GNU Tools for Arm Embedded Processors 8-2019-q3-update) 2.32.0.20190703]
         ignore line: [COMPILER_PATH=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/]
         ignore line: [LIBRARY_PATH=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m']
-        ignore line: [Linking CXX executable cmTC_c4a96.elf]
-        ignore line: [/opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c4a96.dir/link.txt --verbose=1]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-std=gnu++17' '-v' '-o' 'CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-march=armv6s-m']
+        ignore line: [Linking CXX executable cmTC_f134c.elf]
+        ignore line: [/opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f134c.dir/link.txt --verbose=1]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=/opt/homebrew/bin/arm-none-eabi-g++]
         ignore line: [COLLECT_LTO_WRAPPER=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/lto-wrapper]
@@ -3115,17 +3025,17 @@ events:
         ignore line: [gcc version 8.3.1 20190703 (release) [gcc-8-branch revision 273027] (GNU Tools for Arm Embedded Processors 8-2019-q3-update) ]
         ignore line: [COMPILER_PATH=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/]
         ignore line: [LIBRARY_PATH=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/:/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-nostdlib' '-v' '-o' 'cmTC_c4a96.elf' '-mfloat-abi=soft' '-march=armv6s-m']
-        link line: [ /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/collect2 -plugin /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/liblto_plugin.so -plugin-opt=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/lto-wrapper -plugin-opt=-fresolution=/var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccVgLr4f.res --sysroot=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi -X -o cmTC_c4a96.elf -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1 -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-nostdlib' '-v' '-o' 'cmTC_f134c.elf' '-mfloat-abi=soft' '-march=armv6s-m']
+        link line: [ /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/collect2 -plugin /opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/liblto_plugin.so -plugin-opt=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/lto-wrapper -plugin-opt=-fresolution=/var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccOtzXMA.res --sysroot=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi -X -o cmTC_f134c.elf -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1 -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib -L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj]
           arg [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/collect2] ==> ignore
           arg [-plugin] ==> ignore
           arg [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/liblto_plugin.so] ==> ignore
           arg [-plugin-opt=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/lto-wrapper] ==> ignore
-          arg [-plugin-opt=-fresolution=/var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccVgLr4f.res] ==> ignore
+          arg [-plugin-opt=-fresolution=/var/folders/d5/hf9cnrfj7nq9m0mpx7_wqtpw0000gn/T//ccOtzXMA.res] ==> ignore
           arg [--sysroot=/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi] ==> ignore
           arg [-X] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_c4a96.elf] ==> ignore
+          arg [cmTC_f134c.elf] ==> ignore
           arg [-L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp] ==> dir [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp]
           arg [-L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp] ==> dir [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp]
           arg [-L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp] ==> dir [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib/thumb/v6-m/nofp]
@@ -3134,12 +3044,12 @@ events:
           arg [-L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib] ==> dir [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib]
           arg [-L/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib] ==> dir [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../arm-none-eabi/lib]
           arg [--build-id=none] ==> ignore
-          arg [CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
+          arg [CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
         ignore line: [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/bin/ld: warning: cannot find entry symbol _start]
         ignore line: [ defaulting to 0000000000008000]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-nostdlib' '-v' '-o' 'cmTC_c4a96.elf' '-mfloat-abi=soft' '-march=armv6s-m']
-        ignore line: [/opt/homebrew/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A  -Wl --build-id=none -nostdlib  -v CMakeFiles/cmTC_c4a96.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_c4a96.elf]
-        ignore line: [gmake[1]: Leaving directory '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-fM01P4']
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-Wswitch-enum' '-Wall' '-Wextra' '-D' 'HARDWARE_REVISION_OPENLCC_R2A' '-nostdlib' '-v' '-o' 'cmTC_f134c.elf' '-mfloat-abi=soft' '-march=armv6s-m']
+        ignore line: [/opt/homebrew/bin/arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A  -Wl --build-id=none -nostdlib  -v CMakeFiles/cmTC_f134c.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_f134c.elf]
+        ignore line: [gmake[1]: Leaving directory '/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/CMakeFiles/CMakeScratch/TryCompile-5OEIzj']
         ignore line: []
         ignore line: []
         collapse library dir [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp] ==> [/opt/homebrew/Cellar/arm-gcc-bin@8/8-2019-q3-update_3/lib/gcc/arm-none-eabi/8.3.1/thumb/v6-m/nofp]
@@ -3194,9 +3104,9 @@ events:
       - "/opt/homebrew/bin/"
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -3217,14 +3127,15 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     searched_directories:
       - "/opt/homebrew/bin/arm-none-eabi-gcc-ar-"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc-ar-"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc-ar-"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ar-"
       - "/opt/anaconda3/bin/arm-none-eabi-gcc-ar-"
       - "/opt/anaconda3/condabin/arm-none-eabi-gcc-ar-"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ar-"
       - "/opt/local/bin/arm-none-eabi-gcc-ar-"
       - "/opt/local/sbin/arm-none-eabi-gcc-ar-"
       - "/usr/local/bin/arm-none-eabi-gcc-ar-"
@@ -3245,13 +3156,14 @@ events:
       - "/opt/X11/bin/arm-none-eabi-gcc-ar-"
       - "/Library/Apple/usr/bin/arm-none-eabi-gcc-ar-"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-gcc-ar-"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-gcc-ar-"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-gcc-ar-"
       - "/opt/homebrew/bin/arm-none-eabi-gcc-ar-"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc-ar-"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc-ar-"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ar-"
       - "/opt/anaconda3/bin/arm-none-eabi-gcc-ar-"
       - "/opt/anaconda3/condabin/arm-none-eabi-gcc-ar-"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ar-"
       - "/opt/local/bin/arm-none-eabi-gcc-ar-"
       - "/opt/local/sbin/arm-none-eabi-gcc-ar-"
       - "/usr/local/bin/arm-none-eabi-gcc-ar-"
@@ -3272,18 +3184,16 @@ events:
       - "/opt/X11/bin/arm-none-eabi-gcc-ar-"
       - "/Library/Apple/usr/bin/arm-none-eabi-gcc-ar-"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-gcc-ar-"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-gcc-ar-"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-gcc-ar-"
     found: "/opt/homebrew/bin/arm-none-eabi-gcc-ar"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -3306,9 +3216,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -3340,9 +3248,9 @@ events:
       - "/opt/homebrew/bin/"
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -3363,14 +3271,15 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
     searched_directories:
       - "/opt/homebrew/bin/arm-none-eabi-gcc-ranlib-"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc-ranlib-"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc-ranlib-"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ranlib-"
       - "/opt/anaconda3/bin/arm-none-eabi-gcc-ranlib-"
       - "/opt/anaconda3/condabin/arm-none-eabi-gcc-ranlib-"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ranlib-"
       - "/opt/local/bin/arm-none-eabi-gcc-ranlib-"
       - "/opt/local/sbin/arm-none-eabi-gcc-ranlib-"
       - "/usr/local/bin/arm-none-eabi-gcc-ranlib-"
@@ -3391,13 +3300,14 @@ events:
       - "/opt/X11/bin/arm-none-eabi-gcc-ranlib-"
       - "/Library/Apple/usr/bin/arm-none-eabi-gcc-ranlib-"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-gcc-ranlib-"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-gcc-ranlib-"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-gcc-ranlib-"
       - "/opt/homebrew/bin/arm-none-eabi-gcc-ranlib-"
       - "/Users/andreykislitsyn/.local/bin/arm-none-eabi-gcc-ranlib-"
       - "/opt/homebrew/sbin/arm-none-eabi-gcc-ranlib-"
-      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ranlib-"
       - "/opt/anaconda3/bin/arm-none-eabi-gcc-ranlib-"
       - "/opt/anaconda3/condabin/arm-none-eabi-gcc-ranlib-"
+      - "/Users/andreykislitsyn/.pyenv/shims/arm-none-eabi-gcc-ranlib-"
       - "/opt/local/bin/arm-none-eabi-gcc-ranlib-"
       - "/opt/local/sbin/arm-none-eabi-gcc-ranlib-"
       - "/usr/local/bin/arm-none-eabi-gcc-ranlib-"
@@ -3418,18 +3328,16 @@ events:
       - "/opt/X11/bin/arm-none-eabi-gcc-ranlib-"
       - "/Library/Apple/usr/bin/arm-none-eabi-gcc-ranlib-"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/arm-none-eabi-gcc-ranlib-"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/arm-none-eabi-gcc-ranlib-"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/arm-none-eabi-gcc-ranlib-"
     found: "/opt/homebrew/bin/arm-none-eabi-gcc-ranlib"
     search_context:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -3452,9 +3360,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -3529,12 +3435,9 @@ events:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -3557,9 +3460,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -3607,12 +3508,9 @@ events:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -3635,9 +3533,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -3766,22 +3662,6 @@ events:
         mode: "cps"
         reason: "no_exist"
       -
-        path: "/Users/andreykislitsyn/.pyenv/shims/pico-sdk-toolsConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "/Users/andreykislitsyn/.pyenv/shims/pico-sdk-tools-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "/Users/andreykislitsyn/.pyenv/shims/lib/cps/pico-sdk-tools.cps"
-        mode: "cps"
-        reason: "no_exist"
-      -
-        path: "/Users/andreykislitsyn/.pyenv/shims/share/cps/pico-sdk-tools.cps"
-        mode: "cps"
-        reason: "no_exist"
-      -
         path: "/opt/anaconda3/pico-sdk-toolsConfig.cmake"
         mode: "config"
         reason: "no_exist"
@@ -3819,6 +3699,22 @@ events:
         reason: "no_exist"
       -
         path: "/opt/anaconda3/condabin/share/cps/pico-sdk-tools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/Users/andreykislitsyn/.pyenv/shims/pico-sdk-toolsConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/Users/andreykislitsyn/.pyenv/shims/pico-sdk-tools-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/Users/andreykislitsyn/.pyenv/shims/lib/cps/pico-sdk-tools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/Users/andreykislitsyn/.pyenv/shims/share/cps/pico-sdk-tools.cps"
         mode: "cps"
         reason: "no_exist"
       -
@@ -3982,6 +3878,22 @@ events:
         mode: "cps"
         reason: "no_exist"
       -
+        path: "/Applications/iTerm.app/Contents/Resources/utilities/pico-sdk-toolsConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/Applications/iTerm.app/Contents/Resources/utilities/pico-sdk-tools-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/Applications/iTerm.app/Contents/Resources/utilities/lib/cps/pico-sdk-tools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/Applications/iTerm.app/Contents/Resources/utilities/share/cps/pico-sdk-tools.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
         path: "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/pico-sdk-toolsConfig.cmake"
         mode: "config"
         reason: "no_exist"
@@ -4002,12 +3914,9 @@ events:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -4030,9 +3939,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -4060,10 +3967,10 @@ events:
     candidate_directories:
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
-      - "/opt/homebrew/bin/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
+      - "/opt/homebrew/bin/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -4084,6 +3991,7 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
       - "/Applications/Doxygen.app/Contents/Resources/"
       - "/Applications/Doxygen.app/Contents/MacOS/"
@@ -4092,10 +4000,10 @@ events:
     searched_directories:
       - "/Users/andreykislitsyn/.local/bin/doxygen"
       - "/opt/homebrew/sbin/doxygen"
-      - "/Users/andreykislitsyn/.pyenv/shims/doxygen"
-      - "/opt/homebrew/bin/doxygen"
       - "/opt/anaconda3/bin/doxygen"
       - "/opt/anaconda3/condabin/doxygen"
+      - "/Users/andreykislitsyn/.pyenv/shims/doxygen"
+      - "/opt/homebrew/bin/doxygen"
       - "/opt/local/bin/doxygen"
       - "/opt/local/sbin/doxygen"
       - "/usr/local/bin/doxygen"
@@ -4116,6 +4024,7 @@ events:
       - "/opt/X11/bin/doxygen"
       - "/Library/Apple/usr/bin/doxygen"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/doxygen"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/doxygen"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/doxygen"
       - "/Applications/Doxygen.app/Contents/Resources/doxygen"
       - "/Applications/Doxygen.app/Contents/MacOS/doxygen"
@@ -4126,12 +4035,9 @@ events:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -4154,9 +4060,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -4184,10 +4088,10 @@ events:
     candidate_directories:
       - "/Users/andreykislitsyn/.local/bin/"
       - "/opt/homebrew/sbin/"
-      - "/Users/andreykislitsyn/.pyenv/shims/"
-      - "/opt/homebrew/bin/"
       - "/opt/anaconda3/bin/"
       - "/opt/anaconda3/condabin/"
+      - "/Users/andreykislitsyn/.pyenv/shims/"
+      - "/opt/homebrew/bin/"
       - "/opt/local/bin/"
       - "/opt/local/sbin/"
       - "/usr/local/bin/"
@@ -4208,6 +4112,7 @@ events:
       - "/opt/X11/bin/"
       - "/Library/Apple/usr/bin/"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/"
       - "/ATT/Graphviz/bin/"
       - "C:/Program Files/ATT/Graphviz/bin/"
@@ -4220,10 +4125,10 @@ events:
     searched_directories:
       - "/Users/andreykislitsyn/.local/bin/dot"
       - "/opt/homebrew/sbin/dot"
-      - "/Users/andreykislitsyn/.pyenv/shims/dot"
-      - "/opt/homebrew/bin/dot"
       - "/opt/anaconda3/bin/dot"
       - "/opt/anaconda3/condabin/dot"
+      - "/Users/andreykislitsyn/.pyenv/shims/dot"
+      - "/opt/homebrew/bin/dot"
       - "/opt/local/bin/dot"
       - "/opt/local/sbin/dot"
       - "/usr/local/bin/dot"
@@ -4244,6 +4149,7 @@ events:
       - "/opt/X11/bin/dot"
       - "/Library/Apple/usr/bin/dot"
       - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/dot"
+      - "/Applications/iTerm.app/Contents/Resources/utilities/dot"
       - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools/dot"
       - "/ATT/Graphviz/bin/dot"
       - "C:/Program Files/ATT/Graphviz/bin/dot"
@@ -4258,12 +4164,9 @@ events:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -4286,9 +4189,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
@@ -4480,12 +4381,9 @@ events:
       ENV{PATH}:
         - "/Users/andreykislitsyn/.local/bin"
         - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
         - "/opt/anaconda3/bin"
         - "/opt/anaconda3/condabin"
+        - "/Users/andreykislitsyn/.pyenv/shims"
         - "/opt/homebrew/bin"
         - "/opt/local/bin"
         - "/opt/local/sbin"
@@ -4508,418 +4406,7 @@ events:
         - "/opt/X11/bin"
         - "/Library/Apple/usr/bin"
         - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
-      CMAKE_INSTALL_PREFIX: "/usr/local"
-      CMAKE_FIND_ROOT_PATH: "/opt/homebrew"
-...
-
----
-events:
-  -
-    kind: "find-v1"
-    backtrace:
-      - "/opt/homebrew/share/cmake/Modules/FindPython/Support.cmake:2249 (find_program)"
-      - "/opt/homebrew/share/cmake/Modules/FindPython3.cmake:671 (include)"
-      - "/Users/andreykislitsyn/pico-sdk/src/rp2_common/boot_stage2/CMakeLists.txt:63 (find_package)"
-      - "/Users/andreykislitsyn/pico-sdk/src/rp2_common/boot_stage2/CMakeLists.txt:101 (pico_define_boot_stage2)"
-    mode: "program"
-    variable: "_Python3_EXECUTABLE"
-    description: "Path to a program."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: false
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: false
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: false
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "python3.15mu"
-      - "python3.15m"
-      - "python3.15u"
-      - "python3.15"
-      - "python3.15dmu"
-      - "python3.15dm"
-      - "python3.15du"
-      - "python3.15d"
-      - "python3"
-      - "python"
-    candidate_directories:
-      - "/opt/anaconda3/bin/"
-      - "/opt/anaconda3/Scripts/"
-      - "/opt/anaconda3/"
-    searched_directories:
-      - "/opt/anaconda3/bin/python3.15mu"
-      - "/opt/anaconda3/bin/python3.15m"
-      - "/opt/anaconda3/bin/python3.15u"
-      - "/opt/anaconda3/bin/python3.15"
-      - "/opt/anaconda3/bin/python3.15dmu"
-      - "/opt/anaconda3/bin/python3.15dm"
-      - "/opt/anaconda3/bin/python3.15du"
-      - "/opt/anaconda3/bin/python3.15d"
-      - "/opt/anaconda3/bin/python3"
-      - "/opt/anaconda3/bin/python"
-      - "/opt/anaconda3/Scripts/python3.15mu"
-      - "/opt/anaconda3/Scripts/python3.15m"
-      - "/opt/anaconda3/Scripts/python3.15u"
-      - "/opt/anaconda3/Scripts/python3.15"
-      - "/opt/anaconda3/Scripts/python3.15dmu"
-      - "/opt/anaconda3/Scripts/python3.15dm"
-      - "/opt/anaconda3/Scripts/python3.15du"
-      - "/opt/anaconda3/Scripts/python3.15d"
-      - "/opt/anaconda3/Scripts/python3"
-      - "/opt/anaconda3/Scripts/python"
-      - "/opt/anaconda3/python3.15mu"
-      - "/opt/anaconda3/python3.15m"
-      - "/opt/anaconda3/python3.15u"
-      - "/opt/anaconda3/python3.15"
-      - "/opt/anaconda3/python3.15dmu"
-      - "/opt/anaconda3/python3.15dm"
-      - "/opt/anaconda3/python3.15du"
-      - "/opt/anaconda3/python3.15d"
-      - "/opt/anaconda3/python3"
-      - "/opt/anaconda3/python"
-    found: false
-    search_context:
-      ENV{PATH}:
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
-        - "/opt/anaconda3/bin"
-        - "/opt/anaconda3/condabin"
-        - "/opt/homebrew/bin"
-        - "/opt/local/bin"
-        - "/opt/local/sbin"
-        - "/usr/local/bin"
-        - "/usr/bin"
-        - "/bin"
-        - "/usr/sbin"
-        - "/sbin"
-        - "/Users/andreykislitsyn"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew"
-        - "/Users/andreykislitsyn/Library/Python/3.9/lib/python/site-packages"
-        - "/Users/andreykislitsyn/Library/Python"
-        - "/Users/andreykislitsyn/Library/Python/3.9/bin"
-        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
-        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
-        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pkg/env/active/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
-      CMAKE_INSTALL_PREFIX: "/usr/local"
-      CMAKE_FIND_ROOT_PATH: "/opt/homebrew"
-  -
-    kind: "find-v1"
-    backtrace:
-      - "/opt/homebrew/share/cmake/Modules/FindPython/Support.cmake:2270 (find_program)"
-      - "/opt/homebrew/share/cmake/Modules/FindPython3.cmake:671 (include)"
-      - "/Users/andreykislitsyn/pico-sdk/src/rp2_common/boot_stage2/CMakeLists.txt:63 (find_package)"
-      - "/Users/andreykislitsyn/pico-sdk/src/rp2_common/boot_stage2/CMakeLists.txt:101 (pico_define_boot_stage2)"
-    mode: "program"
-    variable: "_Python3_EXECUTABLE"
-    description: "Path to a program."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: false
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: false
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: false
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "python3.14mu"
-      - "python3.14m"
-      - "python3.14u"
-      - "python3.14"
-      - "python3.14dmu"
-      - "python3.14dm"
-      - "python3.14du"
-      - "python3.14d"
-      - "python3"
-      - "python"
-    candidate_directories:
-      - "/opt/homebrew/Frameworks/Python.framework/Versions/3.14/bin/"
-      - "/opt/homebrew/Frameworks/Python.framework/Versions/3.14/Scripts/"
-      - "/opt/homebrew/Frameworks/Python.framework/Versions/3.14/"
-    searched_directories:
-      - "/opt/homebrew/Frameworks/Python.framework/Versions/3.14/bin/python3.14mu"
-      - "/opt/homebrew/Frameworks/Python.framework/Versions/3.14/bin/python3.14m"
-      - "/opt/homebrew/Frameworks/Python.framework/Versions/3.14/bin/python3.14u"
-    found: "/opt/homebrew/Frameworks/Python.framework/Versions/3.14/bin/python3.14"
-    search_context:
-      ENV{PATH}:
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
-        - "/opt/anaconda3/bin"
-        - "/opt/anaconda3/condabin"
-        - "/opt/homebrew/bin"
-        - "/opt/local/bin"
-        - "/opt/local/sbin"
-        - "/usr/local/bin"
-        - "/usr/bin"
-        - "/bin"
-        - "/usr/sbin"
-        - "/sbin"
-        - "/Users/andreykislitsyn"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew"
-        - "/Users/andreykislitsyn/Library/Python/3.9/lib/python/site-packages"
-        - "/Users/andreykislitsyn/Library/Python"
-        - "/Users/andreykislitsyn/Library/Python/3.9/bin"
-        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
-        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
-        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pkg/env/active/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
-      CMAKE_INSTALL_PREFIX: "/usr/local"
-      CMAKE_FIND_ROOT_PATH: "/opt/homebrew"
-  -
-    kind: "find-v1"
-    backtrace:
-      - "/opt/homebrew/share/cmake/Modules/FindPython/Support.cmake:2127 (find_program)"
-      - "/opt/homebrew/share/cmake/Modules/FindPython3.cmake:671 (include)"
-      - "CMakeLists.txt:71 (find_package)"
-      - "CMakeLists.txt:83 (bootloader_define_library)"
-    mode: "program"
-    variable: "_Python3_EXECUTABLE"
-    description: "Path to a program."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: false
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: false
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: false
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "python3.15mu"
-      - "python3.15m"
-      - "python3.15u"
-      - "python3.15"
-      - "python3.15dmu"
-      - "python3.15dm"
-      - "python3.15du"
-      - "python3.15d"
-      - "python3.14mu"
-      - "python3.14m"
-      - "python3.14u"
-      - "python3.14"
-      - "python3.14dmu"
-      - "python3.14dm"
-      - "python3.14du"
-      - "python3.14d"
-      - "python3.13mu"
-      - "python3.13m"
-      - "python3.13u"
-      - "python3.13"
-      - "python3.13dmu"
-      - "python3.13dm"
-      - "python3.13du"
-      - "python3.13d"
-      - "python3.12mu"
-      - "python3.12m"
-      - "python3.12u"
-      - "python3.12"
-      - "python3.12dmu"
-      - "python3.12dm"
-      - "python3.12du"
-      - "python3.12d"
-      - "python3.11mu"
-      - "python3.11m"
-      - "python3.11u"
-      - "python3.11"
-      - "python3.11dmu"
-      - "python3.11dm"
-      - "python3.11du"
-      - "python3.11d"
-      - "python3.10mu"
-      - "python3.10m"
-      - "python3.10u"
-      - "python3.10"
-      - "python3.10dmu"
-      - "python3.10dm"
-      - "python3.10du"
-      - "python3.10d"
-      - "python3.9mu"
-      - "python3.9m"
-      - "python3.9u"
-      - "python3.9"
-      - "python3.9dmu"
-      - "python3.9dm"
-      - "python3.9du"
-      - "python3.9d"
-      - "python3.8mu"
-      - "python3.8m"
-      - "python3.8u"
-      - "python3.8"
-      - "python3.8dmu"
-      - "python3.8dm"
-      - "python3.8du"
-      - "python3.8d"
-      - "python3.7mu"
-      - "python3.7m"
-      - "python3.7u"
-      - "python3.7"
-      - "python3.7dmu"
-      - "python3.7dm"
-      - "python3.7du"
-      - "python3.7d"
-      - "python3.6mu"
-      - "python3.6m"
-      - "python3.6u"
-      - "python3.6"
-      - "python3.6dmu"
-      - "python3.6dm"
-      - "python3.6du"
-      - "python3.6d"
-      - "python3.5mu"
-      - "python3.5m"
-      - "python3.5u"
-      - "python3.5"
-      - "python3.5dmu"
-      - "python3.5dm"
-      - "python3.5du"
-      - "python3.5d"
-      - "python3.4mu"
-      - "python3.4m"
-      - "python3.4u"
-      - "python3.4"
-      - "python3.4dmu"
-      - "python3.4dm"
-      - "python3.4du"
-      - "python3.4d"
-      - "python3.3mu"
-      - "python3.3m"
-      - "python3.3u"
-      - "python3.3"
-      - "python3.3dmu"
-      - "python3.3dm"
-      - "python3.3du"
-      - "python3.3d"
-      - "python3.2mu"
-      - "python3.2m"
-      - "python3.2u"
-      - "python3.2"
-      - "python3.2dmu"
-      - "python3.2dm"
-      - "python3.2du"
-      - "python3.2d"
-      - "python3.1mu"
-      - "python3.1m"
-      - "python3.1u"
-      - "python3.1"
-      - "python3.1dmu"
-      - "python3.1dm"
-      - "python3.1du"
-      - "python3.1d"
-      - "python3.0mu"
-      - "python3.0m"
-      - "python3.0u"
-      - "python3.0"
-      - "python3.0dmu"
-      - "python3.0dm"
-      - "python3.0du"
-      - "python3.0d"
-      - "python3"
-      - "python"
-    candidate_directories:
-      - "/opt/anaconda3/bin/"
-      - "/opt/anaconda3/Scripts/"
-      - "/opt/anaconda3/"
-    searched_directories:
-      - "/opt/anaconda3/bin/python3.15mu"
-      - "/opt/anaconda3/bin/python3.15m"
-      - "/opt/anaconda3/bin/python3.15u"
-      - "/opt/anaconda3/bin/python3.15"
-      - "/opt/anaconda3/bin/python3.15dmu"
-      - "/opt/anaconda3/bin/python3.15dm"
-      - "/opt/anaconda3/bin/python3.15du"
-      - "/opt/anaconda3/bin/python3.15d"
-      - "/opt/anaconda3/bin/python3.14mu"
-      - "/opt/anaconda3/bin/python3.14m"
-      - "/opt/anaconda3/bin/python3.14u"
-      - "/opt/anaconda3/bin/python3.14"
-      - "/opt/anaconda3/bin/python3.14dmu"
-      - "/opt/anaconda3/bin/python3.14dm"
-      - "/opt/anaconda3/bin/python3.14du"
-      - "/opt/anaconda3/bin/python3.14d"
-      - "/opt/anaconda3/bin/python3.13mu"
-      - "/opt/anaconda3/bin/python3.13m"
-      - "/opt/anaconda3/bin/python3.13u"
-      - "/opt/anaconda3/bin/python3.13"
-      - "/opt/anaconda3/bin/python3.13dmu"
-      - "/opt/anaconda3/bin/python3.13dm"
-      - "/opt/anaconda3/bin/python3.13du"
-      - "/opt/anaconda3/bin/python3.13d"
-      - "/opt/anaconda3/bin/python3.12mu"
-      - "/opt/anaconda3/bin/python3.12m"
-      - "/opt/anaconda3/bin/python3.12u"
-    found: "/opt/anaconda3/bin/python3.12"
-    search_context:
-      ENV{PATH}:
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
-        - "/Users/andreykislitsyn/.pyenv/shims"
-        - "/opt/homebrew/bin"
-        - "/Users/andreykislitsyn/.local/bin"
-        - "/opt/homebrew/sbin"
-        - "/opt/anaconda3/bin"
-        - "/opt/anaconda3/condabin"
-        - "/opt/homebrew/bin"
-        - "/opt/local/bin"
-        - "/opt/local/sbin"
-        - "/usr/local/bin"
-        - "/usr/bin"
-        - "/bin"
-        - "/usr/sbin"
-        - "/sbin"
-        - "/Users/andreykislitsyn"
-        - "/opt/homebrew/bin"
-        - "/opt/homebrew"
-        - "/Users/andreykislitsyn/Library/Python/3.9/lib/python/site-packages"
-        - "/Users/andreykislitsyn/Library/Python"
-        - "/Users/andreykislitsyn/Library/Python/3.9/bin"
-        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
-        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
-        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pkg/env/active/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "~/Library/Android/sdk/platform-tools"
-        - "~/Library/Android/sdk/platform-tools"
-        - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
+        - "/Applications/iTerm.app/Contents/Resources/utilities"
         - "~/Library/Android/sdk/platform-tools"
         - "~/Library/Android/sdk/platform-tools"
         - "/Users/andreykislitsyn/Library/Android/sdk/platform-tools"
