@@ -52,6 +52,9 @@ void Automations::onBrewStarted() {
     }
 
     resetPlannedSleep();
+
+    // Автоматически запускаем профиль предсмачивания (Шаг 1) при каждом поднятии рычага
+    moveToAutomationStep(1);
 }
 
 Automations::Automations(SettingsManager *settingsManager, PicoQueue<SystemControllerCommand> *commandQueue): settingsManager(settingsManager), commandQueue(commandQueue) {
@@ -178,5 +181,3 @@ void Automations::unloadRoutine() {
     currentAutomationStep = 0;
     currentStepStartedAt.reset();
 }
-
-

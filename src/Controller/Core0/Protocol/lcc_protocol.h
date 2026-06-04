@@ -30,7 +30,7 @@ typedef enum : uint8_t {
 
 typedef enum : uint8_t {
     LCC_SHIFT_REGISTER_2_SERVICE_BOILER_RELAY = 1 << 0,
-    LCC_SHIFT_REGISTER_2_PUMP_RELAY = 1 << 4,
+    LCC_SHIFT_REGISTER_2_PUMP_RELAY = 1 << 4, // 0x10 - Оригинальный разъем насоса
     LCC_SHIFT_REGISTER_2_FA9 = 1 << 5, // Unpopulated on at least the V2 control board
 } LccShiftRegister2Flags;
 

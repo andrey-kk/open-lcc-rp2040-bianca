@@ -94,6 +94,7 @@ struct __attribute__((packed)) ESPSystemStatusMessage {
     ESPSystemInternalState internalState;
     ESPSystemRunState runState;
     ESPSystemCoalescedState coalescedState;
+    uint8_t flowMode;
     float brewBoilerTemperature;
     float brewBoilerSetPoint;
     float serviceBoilerTemperature;
@@ -114,7 +115,6 @@ struct __attribute__((packed)) ESPSystemStatusMessage {
     float externalTemperature1;
     float externalTemperature2;
     float externalTemperature3;
-    uint8_t flowMode;
     bool brewBoilerOn;
     bool serviceBoilerOn;
     uint16_t loadedRoutine;
