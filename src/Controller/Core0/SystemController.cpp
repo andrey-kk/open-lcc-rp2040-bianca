@@ -167,16 +167,16 @@ void SystemController::sendLccPacket() {
 void SystemController::updateForFlowMode(LccParsedPacket *parsedPacket) {
     if (flowMode == PUMP_ON_SOLENOID_OPEN) {
         parsedPacket->pump_on = true;
-        parsedPacket->water_line_solenoid_open = true;
+        parsedPacket->water_line_solenoid_open = false; // V3 is Normally Open. False (0V) = Open (Full Flow)
     } else if (flowMode == PUMP_OFF_SOLENOID_OPEN) {
         parsedPacket->pump_on = false;
-        parsedPacket->water_line_solenoid_open = true;
+        parsedPacket->water_line_solenoid_open = false;
     } else if (flowMode == PUMP_ON_SOLENOID_CLOSED) {
         parsedPacket->pump_on = true;
-        parsedPacket->water_line_solenoid_open = false;
+        parsedPacket->water_line_solenoid_open = true;  // True (220V) = Closed (Low Flow)
     } else { // flowMode == PUMP_OFF_SOLENOID_CLOSED
         parsedPacket->pump_on = false;
-        parsedPacket->water_line_solenoid_open = false;
+        parsedPacket->water_line_solenoid_open = true;
     }
 }
 
@@ -200,7 +200,6 @@ LccParsedPacket SystemController::handleControlBoardPacket(ControlBoardParsedPac
                 onBrewStarted();
             } else if (serviceBoilerLowLatch.get()) {
                 lcc.pump_on = true;
-                lcc.water_line_solenoid_open = true;
                 lcc.service_boiler_solenoid_open = true;
             }
         }
