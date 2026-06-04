@@ -180,7 +180,6 @@ bool EspFirmware::sendStatus(
             
             // --- THESE MUST BE IN THIS EXACT ORDER ---
             .sleepMode = systemControllerStatusMessage->sleepMode,
-            .standbyMode = systemControllerStatusMessage->standbyMode,
             .waterTankLow = systemControllerStatusMessage->waterTankLow,
             // -----------------------------------------
 
@@ -198,6 +197,7 @@ bool EspFirmware::sendStatus(
             .serviceBoilerOn = systemControllerStatusMessage->serviceSSRActive,
             .loadedRoutine = currentRoutine,
             .currentRoutineStep = currentRoutineStep,
+            .standbyMode = systemControllerStatusMessage->standbyMode,
     };
 
     ringbuffer.consumerClear();

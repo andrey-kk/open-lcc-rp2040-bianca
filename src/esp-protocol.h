@@ -104,7 +104,6 @@ struct __attribute__((packed)) ESPSystemStatusMessage {
     bool currentlyFillingServiceBoiler;
     bool ecoMode;
     bool sleepMode;
-    bool standbyMode;
     bool waterTankLow;
     uint16_t plannedAutoSleepInSeconds;
     float rp2040Temperature;
@@ -120,6 +119,7 @@ struct __attribute__((packed)) ESPSystemStatusMessage {
     bool serviceBoilerOn;
     uint16_t loadedRoutine;
     uint16_t currentRoutineStep;
+    bool standbyMode;
     /*
      * To add:
      * Pid settings and pid parameters
