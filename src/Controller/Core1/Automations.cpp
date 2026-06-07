@@ -53,8 +53,8 @@ void Automations::onBrewStarted() {
 
     resetPlannedSleep();
 
-    // Автоматически запускаем профиль предсмачивания (Шаг 1) при каждом поднятии рычага
-    moveToAutomationStep(1);
+    // Disabled auto-start. Routine is now dynamically triggered by ESPHome toggle.
+    // moveToAutomationStep(1);
 }
 
 Automations::Automations(SettingsManager *settingsManager, PicoQueue<SystemControllerCommand> *commandQueue): settingsManager(settingsManager), commandQueue(commandQueue) {
@@ -65,12 +65,12 @@ Automations::Automations(SettingsManager *settingsManager, PicoQueue<SystemContr
 
     auto fullFlow = SystemControllerCommand{
             .type = COMMAND_SET_FLOW_MODE,
-            .int1 = PUMP_ON_SOLENOID_OPEN,
+            .int1 = PUMP_OFF_SOLENOID_OPEN,
     };
 
     auto lowFlow = SystemControllerCommand{
             .type = COMMAND_SET_FLOW_MODE,
-            .int1 = PUMP_OFF_SOLENOID_OPEN,
+            .int1 = PUMP_ON_SOLENOID_OPEN,
     };
 
     RoutineStep step1 = RoutineStep();
@@ -78,17 +78,18 @@ Automations::Automations(SettingsManager *settingsManager, PicoQueue<SystemContr
     currentRoutine.push_back(step1);
 
     RoutineStep step2 = RoutineStep();
-    step2.entryCommands.push_back(fullFlow);
-    step2.exitConditions.emplace_back(BREW_TIME_ABSOLUTE, 4, 3);
+    step2.entryCommands.push_back(lowFlow);
+    step2.exitConditions.emplace_back(BREW_TIME_ABSOLUTE, 6, 3);
     currentRoutine.push_back(step2);
 
     RoutineStep step3 = RoutineStep();
-    step3.entryCommands.push_back(lowFlow);
-    step3.exitConditions.emplace_back(STEP_TIME, 10, 4);
+    step3.entryCommands.push_back(fullFlow);
+    step3.exitConditions.emplace_back(STEP_TIME, 14, 4);
     currentRoutine.push_back(step3);
 
     RoutineStep step4 = RoutineStep();
-    step4.entryCommands.push_back(fullFlow);
+    step4.entryCommands.push_back(lowFlow);
+    // No exit condition required; stays in low flow taper until the brew lever is closed
     currentRoutine.push_back(step4);
 }
 
