@@ -65,12 +65,12 @@ Automations::Automations(SettingsManager *settingsManager, PicoQueue<SystemContr
 
     auto fullFlow = SystemControllerCommand{
             .type = COMMAND_SET_FLOW_MODE,
-            .int1 = PUMP_OFF_SOLENOID_OPEN,
+            .int1 = PUMP_ON_SOLENOID_OPEN,
     };
 
     auto lowFlow = SystemControllerCommand{
             .type = COMMAND_SET_FLOW_MODE,
-            .int1 = PUMP_ON_SOLENOID_OPEN,
+            .int1 = PUMP_ON_SOLENOID_CLOSED,
     };
 
     RoutineStep step1 = RoutineStep();

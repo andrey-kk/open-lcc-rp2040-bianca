@@ -167,16 +167,16 @@ void SystemController::sendLccPacket() {
 void SystemController::updateForFlowMode(LccParsedPacket *parsedPacket) {
     if (flowMode == PUMP_ON_SOLENOID_OPEN) {
         parsedPacket->pump_on = true;
-        parsedPacket->water_line_solenoid_open = false; // V3 is Normally Open. False (0V) = Open (Full Flow)
+        parsedPacket->water_line_solenoid_open = true; // Inverted: True = Open (Full Flow)
     } else if (flowMode == PUMP_OFF_SOLENOID_OPEN) {
         parsedPacket->pump_on = true;  // Адаптация для V3: Насос должен работать
-        parsedPacket->water_line_solenoid_open = true; // Замыкаем катушку EV3 для ограничения потока
+        parsedPacket->water_line_solenoid_open = false; // Closed (Low Flow)
     } else if (flowMode == PUMP_ON_SOLENOID_CLOSED) {
         parsedPacket->pump_on = true;
-        parsedPacket->water_line_solenoid_open = true;  // True (220V) = Closed (Low Flow)
+        parsedPacket->water_line_solenoid_open = false;  // Closed (Low Flow)
     } else { // flowMode == PUMP_OFF_SOLENOID_CLOSED
         parsedPacket->pump_on = false;
-        parsedPacket->water_line_solenoid_open = true;
+        parsedPacket->water_line_solenoid_open = false; // Closed (Low Flow)
     }
 }
 
