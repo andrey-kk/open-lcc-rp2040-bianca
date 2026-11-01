@@ -115,6 +115,10 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     return packet;
 }
 
+// NOT USED: nothing calls convert_parsed_control_board_packet() (it was unused in the
+// original firmware too). The real heater cut-off for Standby / empty tank is at the end
+// of SystemController::handleControlBoardPacket(). Kept here, disabled, for reference.
+#if 0
 ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPacket parsed_packet) {
     ControlBoardRawPacket rawPacket = ControlBoardRawPacket();
     uint8_t* raw = reinterpret_cast<uint8_t*>(&rawPacket);
@@ -167,3 +171,4 @@ ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPack
 
     return rawPacket;
 }
+#endif // NOT USED

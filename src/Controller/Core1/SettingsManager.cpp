@@ -133,10 +133,8 @@ void SettingsManager::setSleepMode(bool sleepMode)
 void SettingsManager::initialize() {
     readSettings();
 
-    // If we've reset due to the watchdog or for some other reason, use the previous sleep mode setting, otherwise reset it to false
-    if (currentSettings.sleepMode && !watchdog_enable_caused_reboot() && to_ms_since_boot(get_absolute_time()) < 20000) {
-        currentSettings.sleepMode = false;
-    }
+    // Sleep and Standby are both restored from flash as they were before the
+    // reboot or power cut (the original firmware cleared Sleep on a cold boot).
 
     sendAllSettings();
 }

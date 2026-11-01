@@ -37,13 +37,15 @@ struct ControlBoardParsedPacket {
     bool service_boiler_low;
     float brew_boiler_temperature;
     float service_boiler_temperature;
-    bool standby_mode;
-    bool eco_mode;
-    bool sleep_mode;
+    // NOT USED: only read by the disabled convert_parsed_control_board_packet().
+    // bool standby_mode;
+    // bool eco_mode;
+    // bool sleep_mode;
 };
 
 uint16_t validate_raw_packet(ControlBoardRawPacket packet);
 ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket raw_packet);
-ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPacket parsed_packet);
+// NOT USED (disabled in control_board_protocol.cpp):
+// ControlBoardRawPacket convert_parsed_control_board_packet(ControlBoardParsedPacket parsed_packet);
 
 #endif //LCC_RELAY_CONTROL_BOARD_PROTOCOL_H

@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/Users/andreykislitsyn/Documents/GitHub/open-lcc-rp2040-bianca/build/pioasm/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
