@@ -4,11 +4,19 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
-set(CMAKE_CXX_FLAGS "-mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A")
+# Hardware revision: R1A, R2A or R2B (cmake -DHW_REV=R2B ..)
+set(HW_REV "R2A" CACHE STRING "OpenLCC hardware revision")
+set_property(CACHE HW_REV PROPERTY STRINGS R1A R2A R2B)
+if(NOT HW_REV MATCHES "^(R1A|R2A|R2B)$")
+    message(FATAL_ERROR "HW_REV must be R1A, R2A or R2B (got '${HW_REV}')")
+endif()
+message(STATUS "OpenLCC hardware revision: ${HW_REV}")
+
+set(CMAKE_CXX_FLAGS "-mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_${HW_REV}")
 set(CMAKE_CXX_FLAGS_DEBUG "-g2 -O0 -ggdb2")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
-set(CMAKE_C_FLAGS "-mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_R2A")
+set(CMAKE_C_FLAGS "-mcpu=cortex-m0plus -mthumb -Wswitch-enum -Wall -Wextra -DHARDWARE_REVISION_OPENLCC_${HW_REV}")
 set(CMAKE_C_FLAGS_DEBUG "-g2 -O0 -ggdb2")
 set(CMAKE_C_FLAGS_RELEASE "-O3")
 
