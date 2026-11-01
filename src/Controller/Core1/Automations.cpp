@@ -61,12 +61,17 @@ Automations::Automations(SettingsManager *settingsManager, PicoQueue<SystemContr
     previouslyAsleep = settingsManager->getSleepMode();
     previousAutosleepMinutes = settingsManager->getAutoSleepMin();
 
-    currentRoutine.emplace_back(); // Step 0
-
     auto fullFlow = SystemControllerCommand{
             .type = COMMAND_SET_FLOW_MODE,
             .int1 = PUMP_ON_SOLENOID_OPEN,
     };
+
+    // Step 0 = no routine loaded. Entering it (brew ended or routine cancelled)
+    // restores full flow, so the low-flow taper of step 4 never carries over
+    // into the next brew.
+    RoutineStep step0 = RoutineStep();
+    step0.entryCommands.push_back(fullFlow);
+    currentRoutine.push_back(step0);
 
     auto lowFlow = SystemControllerCommand{
             .type = COMMAND_SET_FLOW_MODE,
