@@ -101,8 +101,8 @@ ControlBoardParsedPacket convert_raw_control_board_packet(ControlBoardRawPacket 
     packet.water_tank_empty = ((flags & 0x40) != 0); 
 
     uint32_t sb_level_raw = triplet_to_int(raw_packet.service_boiler_level);
-    // Если ADC высокое (обычно ~650) -> контакт разомкнут -> бойлер пуст.
-    // Если ADC низкое (обычно ~90) -> контакт в воде -> бойлер полон.
+    // If the ADC reading is high (typically ~650) -> probe contact is open -> boiler is low.
+    // If the ADC reading is low (typically ~90) -> probe is in water -> boiler is full.
     packet.service_boiler_low = (sb_level_raw > 400);
 
     // 2. REAL TEMPERATURES (Perfectly verified)

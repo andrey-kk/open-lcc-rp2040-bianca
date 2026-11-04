@@ -169,7 +169,7 @@ void SystemController::updateForFlowMode(LccParsedPacket *parsedPacket) {
         parsedPacket->pump_on = true;
         parsedPacket->water_line_solenoid_open = true; // Inverted: True = Open (Full Flow)
     } else if (flowMode == PUMP_OFF_SOLENOID_OPEN) {
-        parsedPacket->pump_on = true;  // Адаптация для V3: Насос должен работать
+        parsedPacket->pump_on = true;  // V3 adaptation: the pump must run
         parsedPacket->water_line_solenoid_open = false; // Closed (Low Flow)
     } else if (flowMode == PUMP_ON_SOLENOID_CLOSED) {
         parsedPacket->pump_on = true;
