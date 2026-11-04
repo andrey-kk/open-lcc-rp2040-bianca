@@ -11,7 +11,6 @@ Try the UnicodeFilenames example.  Here is output from ls:
 Type any character to begin
 ls:
          0 😀/
-          20 россиянин
           17 très élégant
            9 狗.txt
 </pre>
