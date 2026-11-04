@@ -133,8 +133,13 @@ void SettingsManager::setSleepMode(bool sleepMode)
 void SettingsManager::initialize() {
     readSettings();
 
-    // Sleep and Standby are both restored from flash as they were before the
-    // reboot or power cut (the original firmware cleared Sleep on a cold boot).
+    // Sleep and Standby survive a crash reset (watchdog), so a glitch never wakes
+    // the machine by itself. On a real power-on (main switch / power cut) both are
+    // cleared, so the machine always starts heating normally when switched on.
+    if (!watchdog_enable_caused_reboot() && to_ms_since_boot(get_absolute_time()) < 20000) {
+        currentSettings.sleepMode = false;
+        currentSettings.standbyMode = false;
+    }
 
     sendAllSettings();
 }

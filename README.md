@@ -26,7 +26,7 @@ As I do not have a native V3 machine, this firmware was developed and tested on 
 
 ### State Machine & Boot Logic
 * **Cold-Start Heat-Up (unchanged from the original firmware)**: If the brew set point is above 80 °C and the brew boiler is below 65 °C at start-up, the firmware still runs the original two-stage heat-up: Stage 1 heats the brew boiler towards 130 °C with the service boiler off; once it passes 128 °C, Stage 2 holds 130 °C for 4 minutes with the service boiler heating normally; then it switches to the normal set points (`RUN_STATE_NORMAL`). A warm start (brew boiler at or above 65 °C) goes straight to normal operation. The Fast Heat-Up bypass is **not** implemented in this firmware.
-* **Sleep & Standby Persistence**: Sleep and Standby are saved to the settings flash and restored after a reboot or power cut. The original firmware cleared Sleep on a cold boot.
+* **Sleep & Standby at Start-up**: Sleep and Standby are saved to the settings flash and kept after a crash reset (watchdog). On a real power-on (main switch or power cut) both are cleared, so the machine always starts heating normally.
 
 ### Low-Flow Pre-infusion Routine
 * Triggered from ESPHome (`open_lcc.bianca.enqueue_routine`) when a brew starts and the "Low Flow Pre-infusion" switch is on.
